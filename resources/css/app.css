@@ -29,3 +29,15 @@
 }
 
 
+@layer components {
+.hero-bg {
+@apply bg-cover bg-center bg-no-repeat rounded-xl;
+
+background-image:
+    linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.6)),
+    url("https://lh3.googleusercontent.com/aida-public/AB6AXuAtlxbsoUuOX7rIjXOL5lTMkTlaw0Kw5c_xpi057ol8G1ooZtX5ADecvWrIuRU7d6j9ZCkfW3yr5nSOlpzgqHzLY1-itAhgcZmPL7k3dF2185wMicNsR05FnREMxbDFWhVfggg01Wan6Ty3SwOc5N9u1S7D3l2k7HKxshUMF4obXPvsvTb49pnArWz0tIATu3fyoAubCVGX1kP46OA4hB6fNfeI81MJ165Qiu2XSqC2BUWrtgazrZvp54s93emrlPUiZeZXgDsnPqs");
+}
+}
+
+
+

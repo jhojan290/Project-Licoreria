@@ -6,7 +6,7 @@ use App\Http\Controllers\SumaController;
 use App\Http\Controllers\ProductoController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('inicio');
 });
 
 

@@ -13,6 +13,7 @@
     <body class="bg-background-light dark:bg-background-dark font-display">
         <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
             <x-navbar />
+            @yield('content')
         </div>
     </body>
 </html>
