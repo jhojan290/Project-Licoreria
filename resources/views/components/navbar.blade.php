@@ -32,7 +32,7 @@
                         Inicio
                     </a>
                     <a class="text-sm font-medium text-zinc-600 dark:text-zinc-300 hover:text-primary dark:hover:text-primary transition-colors" 
-                    href="#">
+                    href="/productos/catalogo">
                         Catálogo
                     </a>
                     <a class="text-sm font-medium text-zinc-600 dark:text-zinc-300 hover:text-primary dark:hover:text-primary transition-colors" 

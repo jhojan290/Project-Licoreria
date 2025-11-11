@@ -15,6 +15,15 @@ Route::get('/inicio', function(){
 });
 
 
+Route::get('/productos/catalogo', function(){
+    return view('productos.catalogo');
+});
+
+Route::get('/productos/details', function(){
+    return view('productos.details');
+});
+
+
 /*Route::get('/suma', function (){
     return view('suma');
 });*/
@@ -32,4 +41,4 @@ Route::get('/suma', [SumaController::class, 'index']);
 
 Route::post('/suma', [SumaController::class, 'suma']);
 
-Route::get('/productos', [ProductoController::class, 'index']);
+/*Route::get('/productos', [ProductoController::class, 'index']);*/
