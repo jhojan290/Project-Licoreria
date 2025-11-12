@@ -9,7 +9,8 @@
     /*Tokens de diseño*/
 --color-primary: #f9c31f;
 --color-background-light: #f8f8f5;
---color-background-dark: #231e0f;
+--color-background-dark: #1a1a1a;
+--color-background-shadow: #000000;
 
 --font-display: "Plus Jakarta Sans", sans-serif;
 
@@ -30,7 +31,7 @@
         url("/public/fonts/Plu/publicsJakartaSans-Regular.ttf") format("truetype");
         font-weight: 400;
         font-style: normal;
-        font-display: swap;
+        font-display: swap; /*hace que el texto sea visible inmediatamente, usando una fuente temporal del navegador hasta que la fuente final cargue.*/
     }
 
     @font-face {
@@ -61,13 +62,6 @@
         font-weight: 800;
         font-style: normal;
         font-display: swap;
-    }
-
-    :root {
-        --color-background: var(--color-background-light);
-    }
-    .dark {
-        --color-background: var(--color-background-dark);
     }
 }
 

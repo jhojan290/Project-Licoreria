@@ -18,10 +18,10 @@
             <div>
                 <h3 class="font-bold text-gray-900 dark:text-white mb-4">Navegación</h3>
                 <ul class="space-y-2">
-                <li><a href="/inicio" class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary">Inicio</a></li>
-                <li><a href="/productos/catalogo" class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary">Catálogo</a></li>
-                <li><a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary">Sobre Nosotros</a></li>
-                <li><a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary">Contacto</a></li>
+                    <li><a href="/inicio" class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary">Inicio</a></li>
+                    <li><a href="/productos/catalogo" class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary">Catálogo</a></li>
+                    <li><a href="/contact" class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary">Contacto</a></li>
+                    <li><a href="/about" class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary">Sobre Nosotros</a></li>
                 </ul>
             </div>
 
@@ -29,10 +29,10 @@
             <div>
                 <h3 class="font-bold text-gray-900 dark:text-white mb-4">Ayuda</h3>
                 <ul class="space-y-2">
-                <li><a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary">Información de Envío</a></li>
-                <li><a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary">Devoluciones</a></li>
-                <li><a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary">Preguntas Frecuentes</a></li>
-                <li><a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary">Términos y Condiciones</a></li>
+                    <li><a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary">Información de Envío</a></li>
+                    <li><a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary">Devoluciones</a></li>
+                    <li><a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary">Preguntas Frecuentes</a></li>
+                    <li><a href="#" class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary">Términos y Condiciones</a></li>
                 </ul>
             </div>
 

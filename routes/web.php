@@ -23,6 +23,17 @@ Route::get('/productos/details', function(){
     return view('productos.details');
 });
 
+Route::get('/productos/details', function(){
+    return view('productos.details');
+});
+
+Route::get('/contact', function(){
+    return view('contact');
+});
+
+Route::get('/about', function(){
+    return view('about');
+});
 
 /*Route::get('/suma', function (){
     return view('suma');
