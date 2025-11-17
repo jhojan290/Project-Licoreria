@@ -12,9 +12,11 @@
     <body class="bg-background-dark font-display text-white">
         <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
             <x-navbar />
-            <x-sidebar />
             @yield('content')
             <x-footer />
         </div>
     </body>
+    <x-sidebar.base :title="$sidebarTitle ?? ''">
+        {!! $sidebarContent ?? '' !!}
+    </x-sidebar.base>   
 </html>

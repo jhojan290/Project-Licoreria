@@ -14,7 +14,6 @@ Route::get('/inicio', function(){
     return view('inicio');
 });
 
-
 Route::get('/productos/catalogo', function(){
     return view('productos.catalogo');
 });
@@ -34,6 +33,14 @@ Route::get('/contact', function(){
 Route::get('/about', function(){
     return view('about');
 });
+
+Route::get('/sidebar/cart', function () {
+    return view('sidebar.cart')->render();
+})->name('sidebar.cart.content');
+
+Route::get('/sidebar/login', function () {
+    return view('sidebar.login')->render();
+})->name('sidebar.login.content');
 
 /*Route::get('/suma', function (){
     return view('suma');

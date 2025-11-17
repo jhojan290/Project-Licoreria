@@ -27,7 +27,7 @@
 
 <div class="layout-container flex h-full grow flex-col">
     <main class="flex flex-1 justify-center py-5">
-        <div class="layout-content-container flex flex-col w-full max-w-6xl px-4 md:px-8">
+        <div class="layout-content-container flex flex-col w-full max-w-[83vw] px-4 md:px-8">
 
             <!-- Section: Categorías Rápidas -->
             <section class="w-full py-8 md:py-12">
@@ -187,6 +187,28 @@
                             </div>
                         </div>
                         <!-- Card 4 -->
+                        <div class="flex h-full flex-col gap-4 rounded-xl bg-white/50 dark:bg-white/5 shadow-sm min-w-64 md:min-w-72 group">
+                            <div
+                            class="w-full bg-center bg-no-repeat aspect-square bg-contain bg-white dark:bg-zinc-800 rounded-lg flex flex-col p-4 transition-transform duration-300 group-hover:scale-105 bg-prod-tequila"
+                            data-alt="A bottle of Don Julio Reposado tequila">
+                            </div>
+
+                            <div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-4">
+                                <div>
+                                    <p class="text-slate-900 dark:text-white text-base font-bold leading-normal">
+                                    Don Julio Reposado
+                                    </p>
+                                    <p class="text-slate-600 dark:text-slate-400 text-sm leading-normal">
+                                    Tequila - $65.00
+                                    </p>
+                                </div>
+
+                                <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary text-slate-900 text-sm font-bold tracking-wide transition-colors hover:bg-primary/90">
+                                    <span class="truncate">Add to Cart</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 5 -->
                         <div class="flex h-full flex-col gap-4 rounded-xl bg-white/50 dark:bg-white/5 shadow-sm min-w-64 md:min-w-72 group">
                             <div
                             class="w-full bg-center bg-no-repeat aspect-square bg-contain bg-white dark:bg-zinc-800 rounded-lg flex flex-col p-4 transition-transform duration-300 group-hover:scale-105 bg-prod-tequila"

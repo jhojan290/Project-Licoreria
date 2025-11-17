@@ -38,11 +38,11 @@
                 <!-- Profile + Cart + CTA -->
                 <div class="flex items-center gap-2">
 
-                    <button class="flex h-10 w-10 items-center justify-center rounded-lg text-zinc-300 hover:bg-white/10 hover:text-primary transition-colors cursor-pointer">
+                    <button onclick="openDynamicSidebar('Iniciar Sesión', '{{ route('sidebar.login.content') }}')"  class="flex h-10 w-10 items-center justify-center rounded-lg text-zinc-300 hover:bg-white/10 hover:text-primary transition-colors cursor-pointer">
                         <span class="material-symbols-outlined text-2xl">person</span>
                     </button>
 
-                    <button id="openSidebar" class="relative flex h-10 w-10 items-center justify-center rounded-lg text-zinc-300 hover:bg-white/10 hover:text-primary transition-colors cursor-pointer">
+                    <button onclick="openDynamicSidebar('Tu carrito', '{{ route('sidebar.cart.content') }}')" class="relative flex h-10 w-10 items-center justify-center rounded-lg text-zinc-300 hover:bg-white/10 hover:text-primary transition-colors cursor-pointer">
                         <span class="material-symbols-outlined text-2xl">shopping_cart</span>
                     </button>
 
