@@ -42,7 +42,7 @@
                         <span class="material-symbols-outlined text-2xl">person</span>
                     </button>
 
-                    <button onclick="openDynamicSidebar('Tu carrito', '{{ route('sidebar.cart.content') }}')" class="relative flex h-10 w-10 items-center justify-center rounded-lg text-zinc-300 hover:bg-white/10 hover:text-primary transition-colors cursor-pointer">
+                    <button wire:click="$dispatch('openSidebar', { title: 'Tu carrito', partial: 'cart' })" class="relative flex h-10 w-10 items-center justify-center rounded-lg text-zinc-300 hover:bg-white/10 hover:text-primary transition-colors cursor-pointer">
                         <span class="material-symbols-outlined text-2xl">shopping_cart</span>
                     </button>
 
