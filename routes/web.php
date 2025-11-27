@@ -1,35 +1,52 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use App\Http\Controllers\SumaController;
-use App\Http\Controllers\ProductoController;
-
-Route::get('/', function () {
-    return view('welcome');
-});
+use Illuminate\Support\Facades\Auth;
+use App\Livewire\User\Pages\HomePage;
 
 
-Route::get('/inicio', function(){
-    return view('inicio');
-});
+Route::get('/', HomePage::class)->name('login');
+/*
+|--------------------------------------------------------------------------
+|  LOGOUT
+|--------------------------------------------------------------------------
+| Puedes dejar esto aquí directo, es muy corto para tener un archivo aparte.
+*/
+Route::get('/logout', function () {
+    Auth::logout();
+    session()->invalidate();
+    session()->regenerateToken();
+    return redirect('/');
+})->name('logout');
 
 
-/*Route::get('/suma', function (){
-    return view('suma');
-});*/
-
-Route::get('/suma', [SumaController::class, 'index']);
-
-/*Route::post('/suma', function (Request $request) {
-    $num1 = $request->input('num1');
-    $num2 = $request->input('num2');
-    $resultado = $num1 + $num2;
-
-    return view('suma', ['res' => $resultado]);
+/*
+|--------------------------------------------------------------------------
+|  RUTAS DE ADMINISTRADOR (Protegidas)
+|--------------------------------------------------------------------------
+| Aquí envolvemos tus archivos existentes con el Middleware.
+| Solo quien sea 'admin' podrá acceder a las rutas que están dentro
+| de 'admin/products.php'.
+*/
+Route::middleware(['auth', 'role:admin'])->group(function () {
     
-});*/
+    require __DIR__.'/admin/products.php';
+    
+    // Si tienes más archivos de admin, cárgalos aquí dentro.
+});
 
-Route::post('/suma', [SumaController::class, 'suma']);
 
-Route::get('/productos', [ProductoController::class, 'index']);
+/*
+|--------------------------------------------------------------------------
+| RUTAS DE USUARIO (Protegidas)
+|--------------------------------------------------------------------------
+| Lo mismo para el usuario normal.
+*/
+Route::middleware(['auth', 'role:user'])->group(function () {
+    
+    require __DIR__.'/user/home.php';
+    require __DIR__.'/user/products.php';
+    require __DIR__.'/user/info.php';
+    require __DIR__.'/user/cart.php';
+    
+});

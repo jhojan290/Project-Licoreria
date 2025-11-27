@@ -6,9 +6,10 @@
 @source '../**/*.js';
 
 @theme {
+    /*Tokens de diseño*/
 --color-primary: #f9c31f;
 --color-background-light: #f8f8f5;
---color-background-dark: #231e0f;
+--color-background-dark: #1a1a1a;
 
 --font-display: "Plus Jakarta Sans", sans-serif;
 
@@ -18,14 +19,167 @@
 --radius-full: 9999px;
 }
 
-/* Opcional: aplicar dark mode por clase igual que antes */
+
 @layer base {
-:root {
-    --color-background: var(--color-background-light);
+/*estilos globales que afectarán todo el proyecto*/
+
+    @font-face {
+        font-family: 'Plus Jakarta Sans';
+        src: url("/public/fonts/PlusJakartaSans-Regular.woff2") format("woff2"),
+        url("/public/fonts/PlusJakartaSans-Regular.woff") format("woff"),
+        url("/public/fonts/Plu/publicsJakartaSans-Regular.ttf") format("truetype");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap; /*hace que el texto sea visible inmediatamente, usando una fuente temporal del navegador hasta que la fuente final cargue.*/
+    }
+
+    @font-face {
+        font-family: 'Plus Jakarta Sans';
+        src: url("/public/fonts/PlusJakartaSans-Medium.woff2") format("woff2"),
+        url("/public/fonts/PlusJakartaSans-Medium.woff") format("woff"),
+        url("/public/fonts/PlusJakartaSans-Medium.ttf") format("truetype");
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Plus Jakarta Sans';
+        src: url("/public/fonts/PlusJakartaSans-Bold.woff2") format("woff2"),
+        url("/public/fonts/PlusJakartaSans-Bold.woff") format("woff"),
+        url("/public/fonts/PlusJakartaSans-Bold.ttf") format("truetype");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Plus Jakarta Sans';
+        src: url("/public/fonts/PlusJakartaSans-ExtraBold.woff2") format("woff2"),
+        url("/public/fonts/PlusJakartaSans-ExtraBold.woff") format("woff"),
+        url("/public/fonts/PlusJakartaSans-ExtraBold.ttf") format("truetype");
+        font-weight: 800;
+        font-style: normal;
+        font-display: swap;
+    }
 }
-.dark {
-    --color-background: var(--color-background-dark);
+
+
+@layer components {
+    /*clases reutilizables para componentes*/
+    .hero-bg {
+        @apply bg-cover bg-center bg-no-repeat rounded-xl;
+        background-image:
+            linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.6)),
+            url("https://lh3.googleusercontent.com/aida-public/AB6AXuAtlxbsoUuOX7rIjXOL5lTMkTlaw0Kw5c_xpi057ol8G1ooZtX5ADecvWrIuRU7d6j9ZCkfW3yr5nSOlpzgqHzLY1-itAhgcZmPL7k3dF2185wMicNsR05FnREMxbDFWhVfggg01Wan6Ty3SwOc5N9u1S7D3l2k7HKxshUMF4obXPvsvTb49pnArWz0tIATu3fyoAubCVGX1kP46OA4hB6fNfeI81MJ165Qiu2XSqC2BUWrtgazrZvp54s93emrlPUiZeZXgDsnPqs");
+    }
+
+    .bg-cat-whisky {
+        @apply absolute inset-0 bg-cover bg-center;
+        background-image:
+            linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+            url("https://lh3.googleusercontent.com/aida-public/AB6AXuCsz-fNkcPBFj2Wd7i7cbzhS2Qrwyoy6skejrAD6Nvl7KFg7bPu8Lo5Zv5JZKDQWGOwLziwe_sRJvg7FC_nEQce8kydtOWvAII0rPV67Ci9zKArIKVXuOBsfGg55MfyYRTJNWh5c2G2cR_aqfMcjaTFMNiByzq-T_NNWmzENmE6NX5cfDiyYEJMfbYVge3-A0ROyVpQiafuySxHJeUT3mAHeP8Xd82RqjWIyZcrlbUQ85spkO3fYMVtFPR2UlQxmOfqYm_-J6xPPFk");
+    }
+
+    /* RON */
+    .bg-cat-ron {
+        @apply absolute inset-0 bg-cover bg-center;
+        background-image:
+            linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+            url("https://lh3.googleusercontent.com/aida-public/AB6AXuBjTCEagqlj6CfI2a0naplno_7hST6jXhx4hTevGZD6DVScNyp-lXvEesM7tQ2SWkMXqX0f79rJPJ9TsSbHPO9ox8tRBtuSm32n-38ZRozWo-Q_tHY47-gOPCNeaAtGmI9gtuL8ZzCFsOMrpLl7d68_Y_Lr4zSkzyMlXNXmD_-btxXbYBKXI9FlLSrokOGrZOGVF2yKxTRR2FBxpXO_04hGJ1bwyqZuOGLW8yWC0w4fsPN076pG7Arjj9tfVNXwHDFky--AC14Ey3k");
+    }
+
+    /* GIN */
+    .bg-cat-gin {
+        @apply absolute inset-0 bg-cover bg-center;
+        background-image:
+            linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+            url("https://lh3.googleusercontent.com/aida-public/AB6AXuD_zmJJbXC0lDv23tWfiLQI7lwv-xPsABDfB0yy6cksNruz5Dq0AlATgY3sLrA53r_y8hayqVoATF5K30IFGX6DHW2XFNtktyNxQH6ggqt-l07S1O3mYddqxajl7CpBqdhMgldm8nyaerkfW8uteqNpjXFyNQuShZtDTygLkj-vXSGeLwGQ5ubSL7SdIQyOzJ_fWxr-xZRAcBYkexzmrPTcDV1V0J5206ylbqctBYhfxsw2UBRI7JxAFdGreRO1iajWZEIoWfp8_mg");
+    }
+
+    /* TEQUILA */
+    .bg-cat-tequila {
+        @apply absolute inset-0 bg-cover bg-center;
+        background-image:
+            linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+            url("https://lh3.googleusercontent.com/aida-public/AB6AXuDzr-kEuNBnTvTp_Vhee-ArKZiSrOxnwdhSMUo9lHOyuaZJdALpD_jie6ceGDa0gyfzuQdBrzVObIWEz-7E_knCJwBA8nweLVCimvAoc_OphNmnZxw0RzIr_uQPGgiHdjZqC7BNDHzJbo2dlGpscA9JiPdVRtiBkC1Tg3tUKP_DSwk8TlzqexLCLHjJdvKXnQzKrGFhqA_riSooUQE_KpaFE3lcFd_XudFUmI89o8ORfbURJ8owufbMWwfPcafkMT_SpwpAirdaYS8");
+    }
+
+    /* VINO */
+    .bg-cat-vino {
+        @apply absolute inset-0 bg-cover bg-center;
+        background-image:
+            linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+            url("https://lh3.googleusercontent.com/aida-public/AB6AXuBrmht44HLekYjVaze_-kf0cwzD6vX0eejTL7ulegx53aXhnTWLZW4_wil6oN_SWMlYmuxdp2FSI3iPyGINcS3-RU9uJBymGMs2-9Sx8AlpLhq8atoWVGaatd8F5a5oltpBIxqZcNQT9NMkEdvL0fvBg0ev6idqPk__XNMUYVefjKdoB0U7WM1oiXCb5FnvuKkM2T0nQ1QjIlzGv-U7jDve74OkPaZNq_HMbgqrza6pJ_9O8AFda4_MJEH5X9pNrJ37zuSrG98AHY4");
+    }
+
+    /* CERVEZA */
+    .bg-cat-cerveza {
+        @apply absolute inset-0 bg-cover bg-center;
+        background-image:
+            linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+            url("https://lh3.googleusercontent.com/aida-public/AB6AXuCjEQ8604aKanTjt1C7Wt_lWed6eihrXJmExY9Wf8z5p-H8hLIHw3XdopbHWNfzshQ5FBmjB4xYzqt-AQlWtkcJvTGUJN_2jJlS-pfG_HgL0QaCD5N_Kt9-HgnQ2NeYPDPckA4WtIX9II3E-fkgYOHOsdBGhTQZoi6ooC1lPJgdMg0is2JFbKS5Wo5bGQccqLYlEWS6btkly2CI-kCYdrDwUSWWtBgkuYQa5H01p8C50cZV0e0xuTo-xXyM1XykQPflkJJ_aj7nlzE");
+    }
+
+    /*Seccion licores recomendados*/
+
+    .bg-prod-whisky {
+    background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCzv_wkHrIIr-LLeQ96cw6Zv3njh_b2vG6__Q-aLbkRBV5CQ44X8xCwIW1Hdsq_ujNkvPS0ofOC6LvIAFcG7VjPla2zwnclmpnS4qsY_bBgeW7gk0aG3ty16oRi9Iis6ctXRaW8iS51hnyIps4UXUhlkRtuXuI6eGP1IIAeVemNBHbQDR8q83VG6J1vhztGoZt3lNNjIQW5Ios3klMdYMQtPzUU86ZMaZp2suhAyMkbHK2i4dSMxmmIVoPyWqXPFKH3yjxv4hk5wFU");
+    }
+
+    .bg-prod-ron {
+        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCq9Vb7cDSyOmPi5pYqEqW42p1FR9c1CM3xNBMNTLqto0Qy-yKmEvOgzZ6QrkpAkJyBNfrQ6_MujDNSVbsN8WPQA8XYalYxSpII2KfeU9ERUz7vAzBoL6ZLPg3hb4fkNfEerp4mb1T2R2vTDkCbpnIKL2aMlW4_hDdDn30GwuLG4aQSKUvD4mg3mDc8VmBosQzoFk92O-xEL9PEay-3aKNcm_2fa-J8OkKhDovwyxKKw4NY74c-tdbkSkR4t6yzK7KCPTQcLhI0EDY");
+    }
+
+    .bg-prod-gin {
+        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBbSN7myzxZsenCIjMhAvYJskz10Fl8ffXquBLRiXVPR2wW9bZ88jeIvvw6VNOIe8QoIPgxxRefNLQOHD6563LSkYsptN5lPJJ6LtB2Jaubs0tgN4xxpvMnWX2PGKxI0Rx0Ic_AUegMRj-EMl82pE8v5kzrRclAkigW7T8-wUgfk6peyHSgeunPNyG8W0GZzLTmZA0xFg_aWKi4A_uwKPer9-G-YKDyH2kazgLevxv7r_psbP3rtIztviPmeH02z1QPF_QLGxswLk0");
+    }
+
+    .bg-prod-tequila {
+        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBYzvyZ-Y1qOlGlg3gZXF2053O0ZKEq6F-JxH1_5cDES3z8y0l17dmhEIpna7oVX0zu676q67Pk9DGEJbRJUclhGfy7cErzz7pJtqO2VbmVdcnII_A0sCIG31wr5qCTFa5umH4P3YB_ZJrGekJmKVj9LEPMke16GoC4cayJVOdXijiuRwjpDLPTXlreGfuES_RneNHm1RwWHSnAglHeWmruO6Lnbv_RO-0zPP3Nm6hPkTSyyk-YobNTInK4kWxCT3Ku6NTER_HVk7Q");
+    }
+
+    /* Catálogo - Fondos de producto */
+    .img-hendricks-gin {
+        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBsd9EzqeX6dNc0Wt07ajVLr_8j2cQ1eNjdaZkSa294BttBIS1gVC9wYahEBKU6nuW7yAvshOtdTgy8m2sOj0o-HZmE5QNLQRvW1TDLag4o7Ckv_-vhSu_DVmvG43zVH6G9ci5V5GnKsT5TTBGgzvGfCudyZKJnjcnN8rss3nLNSXCCDFTuqrs4N_lekpPcx_vri1rcBf72LZuRv4VRzJDHaSyf9EZv0scMkS2pGg7Dk6kgxGweThf033nkLAIAyGQ8I2GGNPBM5aA");
+    }
+
+    .img-jameson {
+        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCO-GfCY3TmLEuSwoYRTF3YGruj8mJAzHfK_UaC5dBp0lAXy4rE0IQXqUOaNJXQltrHE8699lLdmh5rggrNCfv6WQmzSY-tLqXCeEc4u_oFCIOCoaCD8ZYYYdFzFFtL7PzhqlukpWninciRKLRC3j3IGaFz8NkQCp0xmWXMYZD1AerIVUNLyD2-asSaMZi44k88MjgSSVx0yOsXmxWZDyJI_kkQ_qfnBNlQZ1bYLOHNqRKRdxUeFh5n8ud3XbSF9YCB-vAReBugR8w");
+    }
+
+    .img-casamigos {
+        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB4_2LqXRgVOA9NdfH8cQ9lHy_-PGpL3xC8Usci9GYMFuOZnoFS0QUZXGTHFrcavjI76n1doVkXMR0qaR7mf7iie_48tzWNvSCrfkHV27gT08T3zE-aZNQTXRsO0-tlUS5DXGcMoj1Gx9n0XPxSERF2FZP5LQTCCb6mTXPH9DaSeW7V4gnP3aipDZNBwVVZITjj1vjWqwZ6Lehoov7zzBQ2EgXYGDXltOXO_IHZmeim8MJE8LkcTz9Qhi3woURK3CbdVAOAUdELcbg");
+    }
+
+    .img-ketelone {
+        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCoyROk8S1IJcMHacC2FJt6VCa-ZUFbcmM0K_i1bBew8FwomyQyNl3gJkvEooPafq9hX58zxTJJjh1L_c0KbmDIewbqXaJDSvtRy-DV9fDOllt_S75yUG_lIpcrMHDZ53Pcb96pd1YwmwxGKfrdk1fCqnEFrwRkRyAe24kIiQJkfSbtaYgUSsFsaKx93SQqMYOj5IanRucuowRPq5K-ZL6fis4KFWz6IwPau3E5xcZ4wHc9NFNqe9a4sWtogV_RJkQPKZsrNsLkvHQ");
+    }
+
+    .img-bulleit {
+        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAOaF85GzQUH3GdlHWmn8IEYWL3qvsrdoKuu5q88EEb-e-u2PNWdr0iK-5sfzNRt_OLu94nZnFSydjCRY7-dTKuETCK33Yiu1Fltt32dYZCNak75vm6vxZr-zyh3lpTcjn1xnqJDzuUdrJWjNrLlp30574qndyYR0gug2HtHJGZJgYzovLTVJeSwYNMWXJvNVG0F3suWZ5zQrxV2gltmdhZFO62ixCVR7aBLW-Fu1zYc6t8HyT_3OGB4mY9QO9uc_mT-7rsPIeNPhw");
+    }
+
+    .img-donjulio {
+        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBflfMpT0Po-O8R-FFa-vL1OxeaRmnkKXqHCE69qUZwrE02yCESKGLcTPtJCDjjluoJJnGlDUClMvxaAoOZAP9J6DD0QJaYHXz3tfCeZtf1oKLIcfMe396dEri7S-labsR5z9Veoz--ToSmbfNjdhb7sDwSXnBF9FkAZNVSD5Z71tAa9yv6Hxgwy9JzkJOJNOmbmG6Pw17OHbkfBqRRgj5FprHqCiPkqRJHkTAkrH4W8SwAqSAKX0XJWpJZmqhxijIJPB0xYoHyTjM");
+    }
+
+    .img-macallan {
+        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuARK-Qn_TrUNUvlKtk9UCzKO36C-rajD5kNhbNgRYpZmxG-pGVVdE-RPVl-QmvaC2rvWvwKxcW-e1rffyVexFvNXvnmN_jKWP0qFMe78ctpgOWuzue8sTgT1hcv_ZJYOeRRg69HNlsd6--2pZaLtZAvv-8bP6wEzAzKwpQHtT04c8D9_KgkQDh3rtb4G6-YyrUK5v4G48nKVm68dhnn_fLiTBRkKYnmj5t-e6LEEdt0Mi78SbJhGJGso-2cld1pKS-UUdANLKXlE0w");
+    }
+
+    .img-patron {
+        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAo2AA0S9eeIYNL4VkSyV_FTQMD4pder03bF-w09EyfYTfMmjCTTD1hgdbSniMEY1-p9KNICA33MsaFy1M2msU0xiDrXx9AGi_Rxr25Tm323A8eF-j73KndEoRgWgq0WVixTBF6hrByt1NEdaD1orr7J6PSZ7rsrEPdDc62jAkJgmqvArAy593dsXOUWF45PaSckjhATa2zYq7ZYgwoh1ZKHMNZj9sBzSNHHR328geAJhhNf4tg1pwJyNINtUJoX3D8oxJD2LJZIb0");
+    }
+
+    .img-greygoose {
+        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD23jBbdaUhR8LmlU-pqq3S8Vki_nLZl28gpESkfy2kRNTEhHj945p067jnrpG72c70a4QuE5dYaTQeV7bfMZTcmkisru9ngVwLbnrtZO27aa3yCzW1FWWcit328pyGbBuoSUr7xziNYbSBT_ZFAhxYLeViK10sxf11_X6d3huZblkLr3w9ZYwBhQfNsxkYX4gO-3lf0NL_emSmoyAdhZu3ZIDRV6GfqgEjl-sxdLAQ8kRRqMePDpSfwEAnuH6TTz7BWiRqpU6CYsk");
+    }
+
+    .img-johnniewalker {
+        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDancMxe15qc67b_NQMYmaJIGJ9_A0w7pCiIQQLXaEGwVRgzcja3kDMsTRfR45-TxaorX_Gb6oR_7yWiSCQDafrTmI1lkFUsiJ5wPu_iJLbc13apeFB0NwKnCdOO1ct8arDZgzB1edY1aLomdvBdEN_Xmu6bGpSza7IArXypSdJT2wERmt8q8dKgS2p6-xdHV9H_V4ZHRpiuJCj_B1WbvUzetBsiXfy6hFou7gVySdW_8TPgxsbTZ9XthU6vqs0QmJnLCqMbQE8uE8");
+    }
 }
-}
+
 
 
