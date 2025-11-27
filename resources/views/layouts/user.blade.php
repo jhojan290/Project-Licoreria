@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-        <title>@yield('title', 'Inventario')</title>
+        <title>@yield('title', 'Licoreria')</title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <link href="https://fonts.googleapis.com" rel="preconnect"/>
         <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -12,8 +12,10 @@
     </head>
     <body class="bg-background-dark font-display text-white">
         <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+            <livewire:user.elements.navbar />
             @yield('content')
-            <livewire:admin.products.modal-product-create />
+            <livewire:user.elements.sidebar />
+            <livewire:user.elements.footer />
         </div>
         @livewireScripts
     </body>
