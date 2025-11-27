@@ -13,7 +13,7 @@ class Login extends Component
 
     public function login(AuthService $authService)
     {
-        $this->validate(['email' => 'required|email', 'password' => 'required']);
+        $this->validate(['email' => 'required|email', 'password' => 'required'],['email.required' => 'El campo email es obligatorio', 'password.required' => 'El campo contraseña es obligatorio']);
 
         if ($authService->login($this->email, $this->password)) {
             session()->regenerate();
