@@ -69,10 +69,13 @@
             </label>
         </div>
 
-        <a href="#" class="text-sm text-right font-medium text-text-secondary-light dark:text-text-secondary-dark
-                        hover:text-primary transition-colors -mt-2">
+        <button
+            type="button"
+            x-data
+            wire:click="$dispatch('open-reset-modal')" class="text-sm text-right font-medium text-text-secondary-light dark:text-text-secondary-dark hover:text-primary transition-colors -mt-2 bg-transparent border-none cursor-pointer"
+            >
             ¿Olvidaste tu contraseña?
-        </a>
+        </button>
 
         <button
             type="submit"

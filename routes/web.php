@@ -50,3 +50,6 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     require __DIR__.'/user/cart.php';
     
 });
+
+Route::get('/reset-password/{token}', App\Livewire\Auth\ResetPasswordForm::class)
+    ->name('password.reset');

@@ -6,7 +6,11 @@
             <!-- Logo + Nav -->
             <div class="flex items-center gap-8">
                 <a href="/inicio" class="flex items-center gap-2.5 text-white">
-                    <span class="material-symbols-outlined text-primary text-3xl">sports_bar</span>
+                    <img 
+                        src="{{ asset('img/logoFondo.png') }}" 
+                        alt="Logo Liquor Store" 
+                        class="h-9 w-auto object-contain"
+                    >
                     <h2 class="text-xl font-bold tracking-tight">Liquor Store</h2>
                 </a>
 
