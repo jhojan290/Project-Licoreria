@@ -14,7 +14,7 @@
                 <span class="material-symbols-outlined text-2xl">close</span>
             </button>
 
-            <div class="hidden md:block w-1/2 bg-cover bg-center relative" style="background-image: url('/ruta-a-tu-imagen-de-botellas-imagen6.jpg')">
+            <div class="hidden md:block w-1/2 bg-cover bg-center relative hero-password">
                 <div class="absolute inset-0 bg-black/30"></div>
             </div>
 
@@ -25,7 +25,7 @@
                         <h2 class="text-3xl font-bold mb-2">Restablecer Contraseña</h2>
                         <p class="text-gray-400 mb-8 text-sm">Ingresa tu correo para recibir un enlace de restablecimiento.</p>
 
-                        <form wire:submit="sendLink" class="flex flex-col gap-4">
+                        <form wire:submit.prevent="sendLink" class="flex flex-col gap-4">
                             <label class="flex flex-col gap-1">
                                 <input
                                     wire:model="email"

@@ -44,12 +44,13 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 */
 Route::middleware(['auth', 'role:user'])->group(function () {
     
-    require __DIR__.'/user/home.php';
-    require __DIR__.'/user/products.php';
-    require __DIR__.'/user/info.php';
     require __DIR__.'/user/cart.php';
-    
 });
 
 Route::get('/reset-password/{token}', App\Livewire\Auth\ResetPasswordForm::class)
     ->name('password.reset');
+
+
+require __DIR__.'/user/home.php';
+require __DIR__.'/user/products.php';
+require __DIR__.'/user/info.php';

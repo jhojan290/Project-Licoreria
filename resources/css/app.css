@@ -78,6 +78,10 @@
         background-image: url("../../public/img/barriles.png")
     }
 
+    .hero-password{
+        background-image: url("../../public/img/fondo_password.png")
+    }
+
     .bg-cat-whisky {
         @apply absolute inset-0 bg-cover bg-center;
         background-image:

@@ -1,12 +1,44 @@
 @props(['url'])
 <tr>
-<td class="header">
-<a href="{{ $url }}" style="display: inline-block;">
-@if (trim($slot) === 'Laravel')
-<img src="https://laravel.com/img/notification-logo.png" class="logo" alt="Laravel Logo">
-@else
-{!! $slot !!}
-@endif
-</a>
-</td>
+    <td class="header" style="padding: 25px 0; text-align: center;">
+        <a href="{{ $url }}" style="display: inline-block; text-decoration: none;">
+            {{-- Tabla interna para alineación --}}
+            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="margin: 0 auto; border-collapse: collapse;">
+                <tr>
+                    {{-- CELDA 1: EL LOGO --}}
+                    {{-- Aumentamos el padding-right a 20px para dar espacio a la línea --}}
+                    <td style="vertical-align: middle; padding-right: 20px;">
+                        <img 
+                            src="https://i.imgur.com/lZtqX77.png"
+                            alt="LicUp Logo" 
+                            width="55" 
+                            height="auto"
+                            style="display: block; width: 55px; height: auto; border: 0;"
+                        >
+                    </td>
+
+                    {{-- CELDA 2: EL TEXTO + LÍNEA SEPARADORA --}}
+                    {{-- 
+                        AQUÍ ESTÁ LA MAGIA:
+                        1. border-left: 2px solid #d4af37; -> Crea la línea vertical dorada.
+                        2. padding-left: 20px; -> Separa el texto de la línea.
+                        3. height: 45px; -> Fuerza una altura mínima para que la línea se vea alta y elegante.
+                    --}}
+                    <td style="vertical-align: middle; padding-left: 20px; border-left: 2px solid #d4af37; height: 45px;">
+                        <span style="
+                            font-family: 'Times New Roman', Times, serif;
+                            font-size: 30px; 
+                            font-weight: bold; 
+                            color: #d4af37; 
+                            letter-spacing: 2px;
+                            line-height: 1;
+                            display: block; /* Asegura que el texto se centre verticalmente bien con la línea */
+                        ">
+                            LicUp
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </a>
+    </td>
 </tr>

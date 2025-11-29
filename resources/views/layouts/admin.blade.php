@@ -4,7 +4,7 @@
         <meta charset="utf-8"/>
         <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
         <title>@yield('title', 'Inventario')</title>
-        <link rel="icon" href="{{ asset('img/logoFondo.png') }}" type="image/png">
+        <link rel="icon" href="{{ asset('img/LicUp.png') }}" type="image/png">
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <link href="https://fonts.googleapis.com" rel="preconnect"/>
         <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
