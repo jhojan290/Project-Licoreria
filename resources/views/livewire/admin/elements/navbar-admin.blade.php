@@ -12,8 +12,13 @@
     </div>
     <div class="flex flex-1 justify-end gap-4 md:gap-8">
         <div class="hidden md:flex items-center gap-9">
-            <a class="text-gray-800 dark:text-white text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" href="#">
-            Dashboard
+            <a class="text-gray-800 dark:text-white text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" 
+                href="{{ route('admin.products') }}">
+                Inventario
+            </a>
+            <a class="text-gray-800 dark:text-white text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" 
+                href="{{ route('admin.orders') }}">
+                Ordenes
             </a>
         </div>
         @auth
@@ -67,14 +72,7 @@
                                 Ir a Inventario
                             </a>
                         @endif
-
-                        {{-- NUEVO: Enlace a Órdenes --}}
-                        <a href="{{ route('admin.orders') }}" 
-                            class="flex items-center gap-3 px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-primary transition-colors">
-                            <span class="material-symbols-outlined text-lg">receipt_long</span>
-                            Órdenes
-                        </a>
-
+                        
                         {{-- Separador visual --}}
                         <div class="border-t border-white/10 my-1"></div>
                     @endif

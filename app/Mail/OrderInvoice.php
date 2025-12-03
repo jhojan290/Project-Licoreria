@@ -31,7 +31,7 @@ class OrderInvoice extends Mailable
     {
         return new Content(
             // ↓↓↓ ESTO DEBE COINCIDIR CON EL NOMBRE DEL ARCHIVO QUE CREASTE ↓↓↓
-            markdown: 'mail.order-invoice', 
+            markdown: 'mail.order-invoice'
         );
     }
 }

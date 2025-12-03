@@ -1,4 +1,7 @@
-<header class="sticky top-0 z-50 w-full backdrop-blur-sm border-b border-white/10">
+<header 
+    x-data="{ mobileMenuOpen: false }" 
+    class="sticky top-0 z-50 w-full bg-[#121212]/95 backdrop-blur-md border-b border-white/10 transition-all duration-300"
+>
     <div class="container mx-auto px-4">
 
         <div class="flex items-center justify-between py-4">
@@ -8,41 +11,44 @@
                     <img 
                         src="{{ asset('img/licUp.png') }}" 
                         alt="Logo LicUp" 
-                        class="h-12 w-auto object-contain"
+                        class="h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
                     >
-                    <div class="h-12 w-[2px] bg-licup rounded-full opacity-80"></div>
+                    <div class="h-12 w-[2px] bg-licup rounded-full opacity-80 hidden sm:block"></div>
 
-                    <h2 class="text-2xl font-bold tracking-tight font-licup text-licup">LicUp</h2>
+                    <h2 class="hidden sm:block text-2xl font-bold tracking-tight font-licup text-licup">LicUp</h2>
                 </a>
 
-                <nav class="hidden md:flex items-center gap-8">
-                    <a href="/inicio" class="text-sm font-medium text-zinc-300 hover:text-primary transition-colors">Inicio</a>
-                    <a href="/productos/catalogo" class="text-sm font-medium text-zinc-300 hover:text-primary transition-colors">Catálogo</a>
-                    <a href="/contact" class="text-sm font-medium text-zinc-300 hover:text-primary transition-colors">Contacto</a>
-                    <a href="/about" class="text-sm font-medium text-zinc-300 hover:text-primary transition-colors">Sobre Nosotros</a>
+                <nav class="hidden md:flex items-center gap-6 lg:gap-8">
+                    <a href="/inicio" class="text-sm font-bold uppercase tracking-wider text-zinc-400 hover:text-[#D4AF37] transition-colors {{ request()->is('inicio') ? 'text-white' : '' }}">
+                        Inicio
+                    </a>
+                    <a href="{{ route('catalog') }}" class="text-sm font-bold uppercase tracking-wider text-zinc-400 hover:text-[#D4AF37] transition-colors {{ request()->routeIs('catalog') ? 'text-white' : '' }}">
+                        Catálogo
+                    </a>
+                    <a href="/contact" class="text-sm font-bold uppercase tracking-wider text-zinc-400 hover:text-[#D4AF37] transition-colors">
+                        Contacto
+                    </a>
+                    <a href="/about" class="text-sm font-bold uppercase tracking-wider text-zinc-400 hover:text-[#D4AF37] transition-colors">
+                        Sobre Nosotros
+                    </a>
                 </nav>
             </div>
 
-            <div class="flex flex-1 items-center justify-end gap-4">
+            <div class="flex flex-1 items-center justify-end gap-3 md:gap-4">
 
                 <div class="flex items-center gap-2">
 
-                    {{-- ========================================== --}}
-                    {{-- A. USUARIO LOGUEADO: Nombre + Dropdown     --}}
-                    {{-- ========================================== --}}
+                    {{-- LÓGICA DE USUARIO LOGUEADO (INTACTA) --}}
                     @auth
                         <div x-data="{ open: false }" class="relative">
-                            
-                            <button @click="open = !open" 
+                            <button @click="open = !open" @click.outside="open = false"
                                 class="flex h-10 w-full items-center gap-2 px-3 rounded-lg bg-primary text-background-dark hover:bg-white/10 hover:text-primary transition-colors cursor-pointer border border-transparent focus:outline-none">
-                                
-                                <span class="text-sm font-bold capitalize">
-                                    {{-- Cambié 'Bienvenid@' por 'Hola' para que sea más corto y quepa mejor --}}
+                                <span class="text-sm font-bold capitalize hidden sm:block">
                                     Bienvenid@, {{ explode(' ', auth()->user()->name)[0] }}
                                 </span>
+                                <span class="sm:hidden material-symbols-outlined text-xl">person</span>
                                 
-                                <span class="material-symbols-outlined text-xl transition-transform duration-200" 
-                                    :class="{'rotate-180': open}">
+                                <span class="material-symbols-outlined text-xl transition-transform duration-200" :class="{'rotate-180': open}">
                                     expand_more
                                 </span>
                             </button>
@@ -54,82 +60,99 @@
                                 x-transition:leave="transition ease-in duration-75"
                                 x-transition:leave-start="opacity-100 scale-100"
                                 x-transition:leave-end="opacity-0 scale-95"
-                                @click.away="open = false"
-                                x-cloak
-                                class="absolute top-full right-0 mt-2 w-full rounded-lg bg-[#121212] border border-white/10 shadow-xl py-2 z-50">
+                                class="absolute top-full right-0 mt-2 w-56 rounded-lg bg-[#121212] border border-white/10 shadow-xl py-2 z-50"
+                                style="display: none;">
                                 
                                 <div class="px-4 py-2 border-b border-white/10 mb-2">
                                     <p class="text-xs text-gray-500">Cuenta</p>
                                     <p class="text-sm font-bold text-white truncate">{{ auth()->user()->email }}</p>
                                 </div>
 
-                                {{-- ↓↓↓↓↓ LÓGICA DEL BOTÓN CAMBIANTE PARA ADMIN ↓↓↓↓↓ --}}
                                 @if(auth()->user()->isAdmin())
-                                    
-                                    {{-- CASO 1: Si estoy en rutas de Admin -> Botón para ir a la Tienda --}}
                                     @if(request()->routeIs('admin.*'))
-                                        <a href="{{ route('user.home') }}" 
-                                        class="flex items-center gap-3 px-4 py-2 text-sm text-yellow-400 hover:bg-white/5 hover:text-yellow-300 transition-colors font-bold">
-                                            <span class="material-symbols-outlined text-lg">storefront</span>
-                                            Ir a la Tienda
+                                        <a href="{{ route('user.home') }}" class="flex items-center gap-3 px-4 py-2 text-sm text-yellow-400 hover:bg-white/5 hover:text-yellow-300 transition-colors font-bold">
+                                            <span class="material-symbols-outlined text-lg">storefront</span> Ir a la Tienda
                                         </a>
-                                    
-                                    {{-- CASO 2: Si estoy en la Tienda -> Botón para ir a Inventario --}}
                                     @else
-                                        <a href="{{ route('admin.products') }}" 
-                                        class="flex items-center gap-3 px-4 py-2 text-sm text-yellow-400 hover:bg-white/5 hover:text-yellow-300 transition-colors font-bold">
-                                            <span class="material-symbols-outlined text-lg">inventory_2</span>
-                                            Ir a Inventario
+                                        <a href="{{ route('admin.products') }}" class="flex items-center gap-3 px-4 py-2 text-sm text-yellow-400 hover:bg-white/5 hover:text-yellow-300 transition-colors font-bold">
+                                            <span class="material-symbols-outlined text-lg">inventory_2</span> Ir a Inventario
                                         </a>
                                     @endif
-
-                                    {{-- Separador visual --}}
                                     <div class="border-t border-white/10 my-1"></div>
                                 @endif
-                                {{-- ↑↑↑↑↑ FIN DE LA LÓGICA DE ADMIN ↑↑↑↑↑ --}}
 
-                                <a href="{{ route('logout') }}" 
-                                    class="flex items-center gap-3 px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-primary transition-colors">
-                                    <span class="material-symbols-outlined text-lg">logout</span>
-                                    Cerrar Sesión
+                                <a href="{{ route('logout') }}" class="flex items-center gap-3 px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-lg">logout</span> Cerrar Sesión
                                 </a>
                             </div>
                         </div>
                     @endauth
 
-                    {{-- ========================================== --}}
-                    {{-- B. INVITADO: Icono Login                   --}}
-                    {{-- ========================================== --}}
+                    {{-- INVITADO (Icono Login) --}}
                     @guest
                         <button wire:click="$dispatch('openSidebar', { title: 'Iniciar Sesión', partial: 'login' })" 
-                            class="flex h-10 w-10 items-center justify-center rounded-lg text-zinc-300 hover:bg-white/10 hover:text-primary transition-colors cursor-pointer"
+                            class="flex h-10 w-10 items-center justify-center rounded-lg text-zinc-300 hover:bg-white/10 hover:text-[#D4AF37] transition-colors cursor-pointer"
                             title="Iniciar Sesión">
                             <span class="material-symbols-outlined text-2xl">person</span>
                         </button>
                     @endguest
 
-                    {{-- ========================================== --}}
-                    {{-- C. SIEMPRE VISIBLE: Carrito                --}}
-                    {{-- ========================================== --}}
+                    {{-- CARRITO (Siempre Visible) --}}
                     <button wire:click="$dispatch('openSidebar', { title: 'Tu carrito', partial: 'cart' })" 
-                        class="relative flex h-10 w-10 items-center justify-center rounded-lg text-zinc-300 hover:bg-white/10 hover:text-primary transition-colors cursor-pointer"
+                        class="relative flex h-10 w-10 items-center justify-center rounded-lg text-zinc-300 hover:bg-white/10 hover:text-[#D4AF37] transition-colors cursor-pointer"
                         title="Ver Carrito">
                         <span class="material-symbols-outlined text-2xl">shopping_cart</span>
                     </button>
 
-                    {{-- ========================================== --}}
-                    {{-- D. INVITADO: Botón Crear Cuenta            --}}
-                    {{-- ========================================== --}}
+                    {{-- INVITADO (Botón Crear Cuenta - Solo Desktop) --}}
                     @guest
                         <button wire:click="$dispatch('openSidebar', { title: 'Crear Cuenta', partial: 'createUser' })" 
-                            class="hidden lg:flex h-10 min-w-[84px] max-w-[480px] items-center justify-center rounded-lg px-4 bg-primary text-background-dark text-sm font-bold tracking-wide leading-normal overflow-hidden truncate hover:bg-yellow-400 transition-colors focus:outline-none focus:ring-4 focus:ring-primary/30 cursor-pointer">
+                            class="hidden lg:flex h-10 items-center justify-center rounded-lg px-4 bg-[#D4AF37] text-[#121212] text-sm font-bold hover:bg-white transition-all shadow-lg shadow-[#D4AF37]/10 ml-2">
                             Crear Cuenta
                         </button>
                     @endguest
 
+                    <button 
+                        @click="mobileMenuOpen = !mobileMenuOpen" 
+                        class="md:hidden flex items-center justify-center h-10 w-10 text-gray-300 hover:text-[#D4AF37] focus:outline-none ml-2"
+                    >
+                        <span class="material-symbols-outlined text-3xl" x-text="mobileMenuOpen ? 'close' : 'menu'"></span>
+                    </button>
+
                 </div>
             </div>
+        </div>
+    </div>
 
+    <div 
+        x-show="mobileMenuOpen" 
+        x-collapse 
+        @click.outside="mobileMenuOpen = false"
+        class="md:hidden bg-[#121212] border-t border-white/10 shadow-2xl overflow-hidden"
+        style="display: none;"
+    >
+        <div class="flex flex-col p-4 space-y-2">
+            <a href="/inicio" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors font-medium">
+                <span class="material-symbols-outlined text-[#D4AF37]">home</span> Inicio
+            </a>
+            <a href="{{ route('catalog') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors font-medium">
+                <span class="material-symbols-outlined text-[#D4AF37]">storefront</span> Catálogo
+            </a>
+            <a href="/contact" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors font-medium">
+                <span class="material-symbols-outlined text-[#D4AF37]">mail</span> Contacto
+            </a>
+            <a href="/about" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors font-medium">
+                <span class="material-symbols-outlined text-[#D4AF37]">info</span> Sobre Nosotros
+            </a>
+            
+            @guest
+                <div class="border-t border-white/10 my-2 pt-4 px-2">
+                    <button wire:click="$dispatch('openSidebar', { title: 'Crear Cuenta', partial: 'createUser' }); mobileMenuOpen = false" 
+                        class="w-full py-3 rounded-xl bg-[#D4AF37] text-[#121212] font-bold hover:bg-white transition-colors text-center shadow-lg">
+                        Crear Cuenta
+                    </button>
+                </div>
+            @endguest
         </div>
     </div>
 </header>

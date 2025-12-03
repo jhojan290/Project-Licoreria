@@ -26,6 +26,10 @@ class CheckoutPage extends Component
         $preSelected = session()->get('checkout_selected_ids', []);
         $cartContent = $cartService->getContent();
 
+        if (!is_array($preSelected)) {
+            $preSelected = [];
+        }
+
         if (empty($cartContent)) {
             return redirect()->route('catalog');
         }
@@ -95,6 +99,39 @@ class CheckoutPage extends Component
         // Limpiar carrito (solo lo pagado) y mostrar éxito
         $cartService->removeMultiple($this->selected);
         $this->success = true;
+    }
+
+    public function removeSelection()
+    {
+        if (!empty($this->selected)) {
+            // 1. Borramos usando el servicio
+            $cartService = app(CartService::class);
+            $cartService->removeMultiple($this->selected);
+            
+            // 2. Limpiamos la selección
+            $this->selected = [];
+
+            // 3. Si el carrito queda vacío, redirigir al catálogo
+            if (empty($cartService->getContent())) {
+                return redirect()->route('catalogo');
+            }
+            
+            // 4. Avisar al sidebar que se actualice (por si el usuario abre el sidebar después)
+            $this->dispatch('cart-updated');
+        }
+    }
+
+    public function toggleSelectAll()
+    {
+        $cartService = app(CartService::class);
+        $allItems = array_keys($cartService->getContent());
+        
+        // Si ya están todos seleccionados, vaciamos. Si no, llenamos.
+        if (count($this->selected) === count($allItems)) {
+            $this->selected = [];
+        } else {
+            $this->selected = array_map('strval', $allItems);
+        }
     }
 
     public function render()
