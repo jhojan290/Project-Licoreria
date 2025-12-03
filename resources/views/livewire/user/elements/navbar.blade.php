@@ -4,37 +4,26 @@
         <div class="flex items-center justify-between py-4">
 
             <div class="flex items-center gap-8">
-                <a href="/inicio" class="flex items-center gap-3 text-white hover:opacity-90 transition-opacity">
+                <a href="/inicio" class="flex items-center gap-4 text-white hover:opacity-90 transition-opacity group">
                     <img 
                         src="{{ asset('img/licUp.png') }}" 
                         alt="Logo LicUp" 
-                        class="h-9 w-auto object-contain"
+                        class="h-12 w-auto object-contain"
                     >
-                    <h2 class="text-xl font-bold tracking-tight">LicUp-Licoreria</h2>
+                    <div class="h-12 w-[2px] bg-licup rounded-full opacity-80"></div>
+
+                    <h2 class="text-2xl font-bold tracking-tight font-licup text-licup">LicUp</h2>
                 </a>
 
                 <nav class="hidden md:flex items-center gap-8">
                     <a href="/inicio" class="text-sm font-medium text-zinc-300 hover:text-primary transition-colors">Inicio</a>
                     <a href="/productos/catalogo" class="text-sm font-medium text-zinc-300 hover:text-primary transition-colors">Catálogo</a>
                     <a href="/contact" class="text-sm font-medium text-zinc-300 hover:text-primary transition-colors">Contacto</a>
+                    <a href="/about" class="text-sm font-medium text-zinc-300 hover:text-primary transition-colors">Sobre Nosotros</a>
                 </nav>
             </div>
 
             <div class="flex flex-1 items-center justify-end gap-4">
-
-                <div class="hidden sm:block w-full max-w-[180px]">
-                    <label class="relative">
-                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500">
-                            search
-                        </span>
-                        <input
-                            type="text"
-                            name="buscar"
-                            placeholder="Buscar licores..."
-                            class="form-input w-full h-10 rounded-lg bg-white/5 border-white/10 pl-10 text-sm text-white placeholder:text-zinc-500 focus:border-primary focus:ring-primary/50"
-                        />
-                    </label>
-                </div>
 
                 <div class="flex items-center gap-2">
 
@@ -48,7 +37,8 @@
                                 class="flex h-10 w-full items-center gap-2 px-3 rounded-lg bg-primary text-background-dark hover:bg-white/10 hover:text-primary transition-colors cursor-pointer border border-transparent focus:outline-none">
                                 
                                 <span class="text-sm font-bold capitalize">
-                                    Bienvenido, {{ explode(' ', auth()->user()->name)[0] }}
+                                    {{-- Cambié 'Bienvenid@' por 'Hola' para que sea más corto y quepa mejor --}}
+                                    Bienvenid@, {{ explode(' ', auth()->user()->name)[0] }}
                                 </span>
                                 
                                 <span class="material-symbols-outlined text-xl transition-transform duration-200" 
@@ -72,6 +62,31 @@
                                     <p class="text-xs text-gray-500">Cuenta</p>
                                     <p class="text-sm font-bold text-white truncate">{{ auth()->user()->email }}</p>
                                 </div>
+
+                                {{-- ↓↓↓↓↓ LÓGICA DEL BOTÓN CAMBIANTE PARA ADMIN ↓↓↓↓↓ --}}
+                                @if(auth()->user()->isAdmin())
+                                    
+                                    {{-- CASO 1: Si estoy en rutas de Admin -> Botón para ir a la Tienda --}}
+                                    @if(request()->routeIs('admin.*'))
+                                        <a href="{{ route('user.home') }}" 
+                                        class="flex items-center gap-3 px-4 py-2 text-sm text-yellow-400 hover:bg-white/5 hover:text-yellow-300 transition-colors font-bold">
+                                            <span class="material-symbols-outlined text-lg">storefront</span>
+                                            Ir a la Tienda
+                                        </a>
+                                    
+                                    {{-- CASO 2: Si estoy en la Tienda -> Botón para ir a Inventario --}}
+                                    @else
+                                        <a href="{{ route('admin.products') }}" 
+                                        class="flex items-center gap-3 px-4 py-2 text-sm text-yellow-400 hover:bg-white/5 hover:text-yellow-300 transition-colors font-bold">
+                                            <span class="material-symbols-outlined text-lg">inventory_2</span>
+                                            Ir a Inventario
+                                        </a>
+                                    @endif
+
+                                    {{-- Separador visual --}}
+                                    <div class="border-t border-white/10 my-1"></div>
+                                @endif
+                                {{-- ↑↑↑↑↑ FIN DE LA LÓGICA DE ADMIN ↑↑↑↑↑ --}}
 
                                 <a href="{{ route('logout') }}" 
                                     class="flex items-center gap-3 px-4 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-primary transition-colors">

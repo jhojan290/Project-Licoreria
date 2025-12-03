@@ -10,6 +10,7 @@
 --color-primary: #f9c31f;
 --color-background-light: #f8f8f5;
 --color-background-dark: #1a1a1a;
+--color-licup: #E6C256;
 
 --font-display: "Plus Jakarta Sans", sans-serif;
 
@@ -22,6 +23,34 @@
 
 @layer base {
 /*estilos globales que afectarán todo el proyecto*/
+
+    /* 1. El riel (track) */
+    ::-webkit-scrollbar {
+        width: 5px;  /* Antes era 8px, ahora 5px (Más delgada) */
+        height: 5px; /* Para el scroll horizontal */
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #121212; /* Fondo igual al de la página (Invisible) */
+    }
+
+    /* 2. La barra (thumb) */
+    ::-webkit-scrollbar-thumb {
+        background-color: #3f3f46; /* Gris oscuro (Zinc-700) */
+        border-radius: 10px;       /* Bordes completamente redondos */
+    }
+
+    /* 3. Efecto Hover (Solo al pasar el mouse) */
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #D4AF37; /* Dorado brillante */
+        cursor: pointer;
+    }
+
+    /* 4. Soporte para Firefox */
+    html {
+        scrollbar-width: thin; /* Fuerza la versión delgada en Firefox */
+        scrollbar-color: #3f3f46 #121212;
+    }
 
     @font-face {
         font-family: 'Plus Jakarta Sans';
@@ -62,11 +91,28 @@
         font-style: normal;
         font-display: swap;
     }
+
+    @font-face {
+        font-family: 'Yesteryear';
+        src:url("/public/fonts/Yesteryear-Regular.woff2") format("woff2"),
+        url("/public/fonts/Yesteryear-Regular.woff") format("woff"),
+        url("/public/fonts/Yesteryear-Regular.ttf") format("truetype");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
+}
+
+/* Soporte para Firefox (que usa otra sintaxis) */
+.custom-scrollbar {
+    scrollbar-width: thin;          /* Delgado */
+    scrollbar-color: #3f3f46 transparent; /* Thumb Track */
 }
 
 
 @layer components {
     /*clases reutilizables para componentes*/
+
     .hero-bg {
         @apply bg-cover bg-center bg-no-repeat rounded-xl;
         background-image:
@@ -81,6 +127,43 @@
     .hero-password{
         background-image: url("../../public/img/fondo_password.png")
     }
+
+    .font-licup{
+        font-family: 'Yesteryear', sans-serif;
+    }
+
+
+    /* 1. El riel (track) - Invisible o muy sutil */
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;               /* Ancho vertical */
+        height: 6px;              /* Alto horizontal */
+        background-color: transparent; /* Fondo transparente */
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background-color: rgba(255, 255, 255, 0.02); /* Casi invisible */
+        border-radius: 10px;
+    }
+
+    /* 2. El pulgar (thumb) - La barrita que se mueve */
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: #3f3f46; /* Gris oscuro (Zinc-700) */
+        border-radius: 10px;       /* Bordes redondos */
+        border: 1px solid transparent; /* Truco para dar margen interno */
+        background-clip: content-box;  /* Hace que se vea más delgado */
+    }
+
+    /* 3. Hover - Cuando pasas el mouse por encima */
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: #52525b; /* Gris un poco más claro (Zinc-600) */
+    }
+
+    /* Opcional: Si quieres que sea dorado al hacer hover (muy premium) */
+    /*
+    .custom-scrollbar::-webkit-scrollbar-thumb:active {
+        background-color: #D4AF37; 
+    }
+    */
 
     .bg-cat-whisky {
         @apply absolute inset-0 bg-cover bg-center;
@@ -146,47 +229,14 @@
     .bg-prod-tequila {
         background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBYzvyZ-Y1qOlGlg3gZXF2053O0ZKEq6F-JxH1_5cDES3z8y0l17dmhEIpna7oVX0zu676q67Pk9DGEJbRJUclhGfy7cErzz7pJtqO2VbmVdcnII_A0sCIG31wr5qCTFa5umH4P3YB_ZJrGekJmKVj9LEPMke16GoC4cayJVOdXijiuRwjpDLPTXlreGfuES_RneNHm1RwWHSnAglHeWmruO6Lnbv_RO-0zPP3Nm6hPkTSyyk-YobNTInK4kWxCT3Ku6NTER_HVk7Q");
     }
+    
+}
 
-    /* Catálogo - Fondos de producto */
-    .img-hendricks-gin {
-        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBsd9EzqeX6dNc0Wt07ajVLr_8j2cQ1eNjdaZkSa294BttBIS1gVC9wYahEBKU6nuW7yAvshOtdTgy8m2sOj0o-HZmE5QNLQRvW1TDLag4o7Ckv_-vhSu_DVmvG43zVH6G9ci5V5GnKsT5TTBGgzvGfCudyZKJnjcnN8rss3nLNSXCCDFTuqrs4N_lekpPcx_vri1rcBf72LZuRv4VRzJDHaSyf9EZv0scMkS2pGg7Dk6kgxGweThf033nkLAIAyGQ8I2GGNPBM5aA");
-    }
 
-    .img-jameson {
-        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCO-GfCY3TmLEuSwoYRTF3YGruj8mJAzHfK_UaC5dBp0lAXy4rE0IQXqUOaNJXQltrHE8699lLdmh5rggrNCfv6WQmzSY-tLqXCeEc4u_oFCIOCoaCD8ZYYYdFzFFtL7PzhqlukpWninciRKLRC3j3IGaFz8NkQCp0xmWXMYZD1AerIVUNLyD2-asSaMZi44k88MjgSSVx0yOsXmxWZDyJI_kkQ_qfnBNlQZ1bYLOHNqRKRdxUeFh5n8ud3XbSF9YCB-vAReBugR8w");
-    }
-
-    .img-casamigos {
-        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB4_2LqXRgVOA9NdfH8cQ9lHy_-PGpL3xC8Usci9GYMFuOZnoFS0QUZXGTHFrcavjI76n1doVkXMR0qaR7mf7iie_48tzWNvSCrfkHV27gT08T3zE-aZNQTXRsO0-tlUS5DXGcMoj1Gx9n0XPxSERF2FZP5LQTCCb6mTXPH9DaSeW7V4gnP3aipDZNBwVVZITjj1vjWqwZ6Lehoov7zzBQ2EgXYGDXltOXO_IHZmeim8MJE8LkcTz9Qhi3woURK3CbdVAOAUdELcbg");
-    }
-
-    .img-ketelone {
-        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCoyROk8S1IJcMHacC2FJt6VCa-ZUFbcmM0K_i1bBew8FwomyQyNl3gJkvEooPafq9hX58zxTJJjh1L_c0KbmDIewbqXaJDSvtRy-DV9fDOllt_S75yUG_lIpcrMHDZ53Pcb96pd1YwmwxGKfrdk1fCqnEFrwRkRyAe24kIiQJkfSbtaYgUSsFsaKx93SQqMYOj5IanRucuowRPq5K-ZL6fis4KFWz6IwPau3E5xcZ4wHc9NFNqe9a4sWtogV_RJkQPKZsrNsLkvHQ");
-    }
-
-    .img-bulleit {
-        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAOaF85GzQUH3GdlHWmn8IEYWL3qvsrdoKuu5q88EEb-e-u2PNWdr0iK-5sfzNRt_OLu94nZnFSydjCRY7-dTKuETCK33Yiu1Fltt32dYZCNak75vm6vxZr-zyh3lpTcjn1xnqJDzuUdrJWjNrLlp30574qndyYR0gug2HtHJGZJgYzovLTVJeSwYNMWXJvNVG0F3suWZ5zQrxV2gltmdhZFO62ixCVR7aBLW-Fu1zYc6t8HyT_3OGB4mY9QO9uc_mT-7rsPIeNPhw");
-    }
-
-    .img-donjulio {
-        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBflfMpT0Po-O8R-FFa-vL1OxeaRmnkKXqHCE69qUZwrE02yCESKGLcTPtJCDjjluoJJnGlDUClMvxaAoOZAP9J6DD0QJaYHXz3tfCeZtf1oKLIcfMe396dEri7S-labsR5z9Veoz--ToSmbfNjdhb7sDwSXnBF9FkAZNVSD5Z71tAa9yv6Hxgwy9JzkJOJNOmbmG6Pw17OHbkfBqRRgj5FprHqCiPkqRJHkTAkrH4W8SwAqSAKX0XJWpJZmqhxijIJPB0xYoHyTjM");
-    }
-
-    .img-macallan {
-        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuARK-Qn_TrUNUvlKtk9UCzKO36C-rajD5kNhbNgRYpZmxG-pGVVdE-RPVl-QmvaC2rvWvwKxcW-e1rffyVexFvNXvnmN_jKWP0qFMe78ctpgOWuzue8sTgT1hcv_ZJYOeRRg69HNlsd6--2pZaLtZAvv-8bP6wEzAzKwpQHtT04c8D9_KgkQDh3rtb4G6-YyrUK5v4G48nKVm68dhnn_fLiTBRkKYnmj5t-e6LEEdt0Mi78SbJhGJGso-2cld1pKS-UUdANLKXlE0w");
-    }
-
-    .img-patron {
-        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAo2AA0S9eeIYNL4VkSyV_FTQMD4pder03bF-w09EyfYTfMmjCTTD1hgdbSniMEY1-p9KNICA33MsaFy1M2msU0xiDrXx9AGi_Rxr25Tm323A8eF-j73KndEoRgWgq0WVixTBF6hrByt1NEdaD1orr7J6PSZ7rsrEPdDc62jAkJgmqvArAy593dsXOUWF45PaSckjhATa2zYq7ZYgwoh1ZKHMNZj9sBzSNHHR328geAJhhNf4tg1pwJyNINtUJoX3D8oxJD2LJZIb0");
-    }
-
-    .img-greygoose {
-        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD23jBbdaUhR8LmlU-pqq3S8Vki_nLZl28gpESkfy2kRNTEhHj945p067jnrpG72c70a4QuE5dYaTQeV7bfMZTcmkisru9ngVwLbnrtZO27aa3yCzW1FWWcit328pyGbBuoSUr7xziNYbSBT_ZFAhxYLeViK10sxf11_X6d3huZblkLr3w9ZYwBhQfNsxkYX4gO-3lf0NL_emSmoyAdhZu3ZIDRV6GfqgEjl-sxdLAQ8kRRqMePDpSfwEAnuH6TTz7BWiRqpU6CYsk");
-    }
-
-    .img-johnniewalker {
-        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDancMxe15qc67b_NQMYmaJIGJ9_A0w7pCiIQQLXaEGwVRgzcja3kDMsTRfR45-TxaorX_Gb6oR_7yWiSCQDafrTmI1lkFUsiJ5wPu_iJLbc13apeFB0NwKnCdOO1ct8arDZgzB1edY1aLomdvBdEN_Xmu6bGpSza7IArXypSdJT2wERmt8q8dKgS2p6-xdHV9H_V4ZHRpiuJCj_B1WbvUzetBsiXfy6hFou7gVySdW_8TPgxsbTZ9XthU6vqs0QmJnLCqMbQE8uE8");
-    }
+/* Soporte para Firefox (que usa otra sintaxis) */
+.custom-scrollbar {
+    scrollbar-width: thin;          /* Delgado */
+    scrollbar-color: #3f3f46 transparent; /* Thumb Track */
 }
 
 

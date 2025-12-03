@@ -14,13 +14,13 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        if (!User::where('email', 'jdagudeloadm@gmail.com')->exists()) {
-            User::create([
-                'name' => 'Super Admin',
-                'email' => 'jdagudeloadm@gmail.com', // Este será tu usuario
-                'password' => Hash::make('devadmprue2854#.'), // Esta será tu contraseña
-                'role' => 'admin', // <--- Importante: Rol Admin
-            ]);
-        }
+        User::updateOrCreate(
+            ['email' => 'jdagudeloadm@gmail.com'], // 1. Busca por este campo
+            [
+                'name' => 'Admin', // <--- AQUÍ CAMBIAS EL NOMBRE
+                'password' => Hash::make('devadmprue2854#.'), // Se actualiza la contraseña (o se deja la misma)
+                'role' => 'admin',
+            ]
+        );
     }
 }

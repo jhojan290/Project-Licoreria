@@ -20,8 +20,14 @@
         @else
             <div class="text-center md:text-left">
                 <div class="flex justify-center md:justify-start items-center gap-2 mb-6 opacity-70">
-                    <span class="material-symbols-outlined text-primary">liquor</span>
-                    <span class="font-bold text-sm tracking-widest">LIQUOR STORE</span>
+                    <img 
+                        src="{{ asset('img/licUp.png') }}" 
+                        alt="Logo LicUp" 
+                        class="h-12 w-auto object-contain"
+                    >
+                    <div class="h-12 w-[2px] bg-licup rounded-full opacity-80"></div>
+
+                    <h2 class="text-2xl font-bold tracking-tight font-licup text-licup">LicUp</h2>
                 </div>
 
                 <h2 class="text-2xl font-bold mb-2">Establecer Nueva Contraseña</h2>

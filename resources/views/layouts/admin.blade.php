@@ -13,8 +13,9 @@
     </head>
     <body class="bg-background-dark font-display text-white">
         <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+            <livewire:admin.elements.navbar-admin />
             @yield('content')
-            <livewire:admin.products.modal-product-create />
+            <livewire:admin.elements.footer-admin />
         </div>
         @livewireScripts
     </body>

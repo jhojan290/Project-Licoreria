@@ -4,24 +4,23 @@ namespace App\Livewire\User\Elements\Sidebar;
 
 use Livewire\Component;
 use App\Services\Auth\AuthService;
-use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Auth; // <-- YA NO NECESITAS ESTO AQUÍ
 
 class CreateUser extends Component
 {
     public $name;
     public $email;
     public $password;
-    public $password_confirmation; // <--- Obligatorio para verificar contraseña
+    public $password_confirmation;
 
     public function register(AuthService $authService)
     {
-        // 1. Validaciones
+        // 1. Validaciones (Igual que antes)
         $this->validate([
             'name' => 'required|min:3',
-            'email' => 'required|email|unique:users,email', // Verifica que no exista ya
-            'password' => 'required|min:8|confirmed', // 'confirmed' busca que coincida con password_confirmation
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:8|confirmed',
         ], [
-            // Mensajes personalizados (opcional)
             'name.min' => 'El nombre debe tener mínimo 3 caracteres',
             'name.required' => 'El campo nombre es obligatorio',
             'email.unique' => 'Este correo ya está registrado.',
@@ -30,19 +29,16 @@ class CreateUser extends Component
             'password.required' => 'El campo contraseña es obligatorio'
         ]);
 
-        // 2. Crear el usuario usando el servicio
-        $user = $authService->register([
+        // 2. Crear el usuario (Igual que antes)
+        $authService->register([
             'name' => $this->name,
             'email' => $this->email,
             'password' => $this->password
         ]);
 
-        // 3. Loguear automáticamente al nuevo usuario
-        Auth::login($user);
-        session()->regenerate();
-
-        // 4. Redirigir al inicio del usuario
-        return redirect()->route('user.home');
+        
+        // Disparamos el evento que ya configuramos en tu Sidebar para cambiar de vista
+        $this->dispatch('openSidebar', partial: 'login', title: 'Iniciar Sesión', message:'¡Cuenta creada con éxito! Por favor inicia sesión');
     }
 
     public function render()

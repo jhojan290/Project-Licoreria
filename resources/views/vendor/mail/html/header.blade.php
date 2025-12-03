@@ -13,7 +13,7 @@
                             alt="LicUp Logo" 
                             width="55" 
                             height="auto"
-                            style="display: block; width: 55px; height: auto; border: 0;"
+                            style="display: block; border: 0;"
                         >
                     </td>
 
@@ -24,18 +24,14 @@
                         2. padding-left: 20px; -> Separa el texto de la línea.
                         3. height: 45px; -> Fuerza una altura mínima para que la línea se vea alta y elegante.
                     --}}
-                    <td style="vertical-align: middle; padding-left: 20px; border-left: 2px solid #d4af37; height: 45px;">
-                        <span style="
-                            font-family: 'Times New Roman', Times, serif;
-                            font-size: 30px; 
-                            font-weight: bold; 
-                            color: #d4af37; 
-                            letter-spacing: 2px;
-                            line-height: 1;
-                            display: block; /* Asegura que el texto se centre verticalmente bien con la línea */
-                        ">
-                            LicUp
-                        </span>
+                    <td style="vertical-align: middle; padding-left: 20px; border-left: 2px solid #d4af37; height: 30px;">
+                        <img 
+                            src="https://i.imgur.com/UvcF59K.png" 
+                            alt="LicUp Titulo" 
+                            width="55" 
+                            height="auto"
+                            style="display: block; border: 0;"
+                        >
                     </td>
                 </tr>
             </table>

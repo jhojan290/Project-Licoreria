@@ -3,25 +3,26 @@
 namespace App\Livewire\Admin\Products;
 
 use Livewire\Component;
-use Livewire\Attributes\On; // <--- Importante: Importar el atributo
+use Livewire\Attributes\On;
 
 class ModalProductCreate extends Component
 {
-    public $open = false;      
+    public $open = false;
     public $view = null;
+    public $productId = null; // Guardamos el ID si es edición
 
-    // Eliminamos $listeners = ['openModal']; y usamos el atributo:
-
-    #[On('open-modal')] // <--- Escucha el evento 'open-modal' globalmente
-    public function openModal($view)
+    #[On('open-modal')]
+    public function openModal($view, $productId = null)
     {
         $this->view = $view;
+        $this->productId = $productId; // Si es null, será crear. Si tiene ID, será editar.
         $this->open = true;
     }
 
+    #[On('close-modal')]
     public function closeModal()
     {
-        $this->reset(['open', 'view']); // Buena práctica: limpiar el estado al cerrar
+        $this->reset(['open', 'view', 'productId']);
     }
 
     public function render()

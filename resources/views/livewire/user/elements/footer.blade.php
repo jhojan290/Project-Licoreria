@@ -4,14 +4,23 @@
         <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
 
             <!-- Logo y descripción -->
-            <div class="col-span-2 md:col-span-1">
-                <a href="#" class="flex items-center gap-3 text-gray-900 dark:text-white mb-4">
-                <span class="material-symbols-outlined text-primary text-3xl">liquor</span>
-                <h2 class="text-xl font-bold">Liquor Store</h2>
+            <div class="col-span-2 md:col-span-1 flex flex-col items-start">
+    
+                <a href="/inicio" class="flex items-center gap-4 text-white hover:opacity-90 transition-opacity group">
+                    <img 
+                        src="{{ asset('img/licUp.png') }}" 
+                        alt="Logo LicUp" 
+                        class="h-12 w-auto object-contain"
+                    >
+                    <div class="h-12 w-[2px] bg-licup rounded-full opacity-80"></div>
+
+                    <h2 class="text-2xl font-bold tracking-tight font-licup text-licup">LicUp</h2>
                 </a>
-                <p class="text-sm text-gray-500 dark:text-gray-400">
-                Tu tienda de licores premium de confianza.
+
+                <p class="text-sm text-gray-500 dark:text-gray-400 mt-4 pl-1">
+                    Tu tienda de licores premium de confianza.
                 </p>
+
             </div>
 
             <!-- Navegación -->
@@ -69,7 +78,7 @@
 
         <!-- Derechos -->
         <div class="mt-8 border-t border-gray-200 dark:border-white/10 pt-8 text-center text-sm text-gray-500 dark:text-gray-400">
-            <p>© 2024 Liquor Store. Todos los derechos reservados.</p>
+            <p>© 2025 LicUp. Todos los derechos reservados.</p>
         </div>
 
     </div>

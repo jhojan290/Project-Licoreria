@@ -1,9 +1,7 @@
 <?php
 
-use App\Livewire\User\Pages\ProductsUser\CatalogPage;
-use App\Livewire\User\Pages\ProductsUser\ProductDetailsPage;
+use App\Livewire\User\Pages\ListCatalog;
+use App\Livewire\User\Pages\ProductDetailsPage;
 
-Route::get('/productos/catalogo', CatalogPage::class)->name('catalog');
-/*Route::get('/productos/detalles/{id}', ProductDetailsPage::class)->name('product.details');*/
-
-Route::get('/productos/detalles', ProductDetailsPage::class)->name('product.details');
+Route::get('/productos/catalogo',ListCatalog::class)->name('catalog');
+Route::get('/producto/{id}', ProductDetailsPage::class)->name('product.detail');

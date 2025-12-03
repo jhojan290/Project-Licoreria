@@ -25,7 +25,9 @@
                         <h2 class="text-3xl font-bold mb-2">Restablecer Contraseña</h2>
                         <p class="text-gray-400 mb-8 text-sm">Ingresa tu correo para recibir un enlace de restablecimiento.</p>
 
-                        <form wire:submit.prevent="sendLink" class="flex flex-col gap-4">
+                        {{-- CORRECCIÓN AQUÍ: Agregado .prevent --}}
+                        <form @submit.prevent="$wire.sendLink()" class="flex flex-col gap-4">
+            
                             <label class="flex flex-col gap-1">
                                 <input
                                     wire:model="email"
@@ -46,7 +48,8 @@
                             </button>
                         </form>
 
-                        <button wire:click="close" class="w-full text-center text-gray-400 text-sm mt-6 hover:text-white transition">
+                        {{-- RECOMENDACIÓN EXTRA: Agrega type="button" aquí para evitar que este botón active el form por error en algunos navegadores --}}
+                        <button type="button" wire:click="close" class="w-full text-center text-gray-400 text-sm mt-6 hover:text-white transition">
                             Volver al Inicio de Sesión
                         </button>
                     </div>

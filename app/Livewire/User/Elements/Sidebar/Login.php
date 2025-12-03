@@ -5,11 +5,14 @@ namespace App\Livewire\User\Elements\Sidebar;
 use Livewire\Component;
 use App\Services\Auth\AuthService;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Reactive;
 
 class Login extends Component
 {
     public $email;
     public $password;
+    #[Reactive]
+    public $status = '';
 
     public function login(AuthService $authService)
     {

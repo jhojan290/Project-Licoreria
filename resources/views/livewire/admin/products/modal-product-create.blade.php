@@ -42,11 +42,10 @@
 
                 <div class="px-6 pb-6 pt-8">
                     @if($view === 'create-prod')
-                        <livewire:admin.products.modal.create-prod />
-                    @endif
-
-                    @if($view === 'edit-prod')
-                        <livewire:admin.products.modal.edit-prod />
+                        <livewire:admin.products.modal.create-prod 
+                            :productId="$productId" 
+                            wire:key="prod-{{ $productId ?? 'new' }}" 
+                        />
                     @endif
                 </div>
             </div>

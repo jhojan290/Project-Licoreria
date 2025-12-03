@@ -9,15 +9,17 @@ class Sidebar extends Component
     public $open = false;
     public $title = '';
     public $partial = null;
+    public $statusMessage = '';
 
     protected $listeners = [
         'openSidebar' => 'open'
     ];
 
-    public function open($title, $partial)
+    public function open($title, $partial, $message = '')
     {
         $this->title = $title;
         $this->partial = $partial;
+        $this->statusMessage = $message;
         $this->open = true;
     }
 
