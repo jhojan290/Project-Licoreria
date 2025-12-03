@@ -179,7 +179,13 @@
     .animate-float { animation: float 6s ease-in-out infinite; }
     .animate-pulse-slow { animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
 
-    
+    @keyframes infinite-scroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); }
+    }
+    .animate-infinite-scroll {
+        animation: infinite-scroll 20s linear infinite; /* Ajusta 20s para más rápido o más lento */
+    }
 
     .bg-cat-whisky {
         @apply absolute inset-0 bg-cover bg-center;

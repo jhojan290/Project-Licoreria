@@ -13,6 +13,8 @@ class Login extends Component
     public $password;
     #[Reactive]
     public $status = '';
+    #[Reactive]
+    public $type = 'success';
 
     public function login(AuthService $authService)
     {

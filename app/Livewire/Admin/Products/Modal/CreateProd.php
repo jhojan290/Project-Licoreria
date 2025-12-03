@@ -109,6 +109,36 @@ class CreateProd extends Component
         }
     }
 
+    public function updatedImage()
+    {
+        // 1. PROTECCIÓN: Si no hay imagen o hubo error de subida
+        if (!$this->image) {
+            return;
+        }
+
+        try {
+            // 2. INTENTAMOS VALIDAR
+            // Esto lanzará la excepción si el archivo no se puede leer
+            $this->validate([
+                'image' => 'image|max:5120|mimes:jpg,jpeg,png,webp', // 5MB Max
+            ]);
+
+        } catch (\League\Flysystem\UnableToRetrieveMetadata $e) {
+            // 3. CAPTURAMOS EL ERROR TÉCNICO (El error que te salió)
+            $this->image = null; // Borramos la referencia corrupta
+            $this->addError('image', 'El archivo no se pudo cargar. Posiblemente sea muy pesado.');
+            
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // 4. CAPTURAMOS ERROR DE VALIDACIÓN NORMAL (No es imagen, etc)
+            $this->image = null;
+            throw $e; // Dejamos que Livewire muestre el mensaje rojo normal
+        } catch (\Exception $e) {
+            // 5. CUALQUIER OTRO ERROR
+            $this->image = null;
+            $this->addError('image', 'Error al subir la imagen: ' . $e->getMessage());
+        }
+    }
+
     public function render()
     {
         return view('livewire.admin.products.modal.create-prod');

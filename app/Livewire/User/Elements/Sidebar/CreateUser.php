@@ -38,7 +38,12 @@ class CreateUser extends Component
 
         
         // Disparamos el evento que ya configuramos en tu Sidebar para cambiar de vista
-        $this->dispatch('openSidebar', partial: 'login', title: 'Iniciar Sesión', message:'¡Cuenta creada con éxito! Por favor inicia sesión');
+        $this->dispatch('openSidebar',
+            partial: 'login', 
+            title: 'Iniciar Sesión', 
+            message:'¡Cuenta creada con éxito! Por favor inicia sesión', 
+            type: 'success'
+        );
     }
 
     public function render()

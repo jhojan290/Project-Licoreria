@@ -34,7 +34,7 @@
         </div>
 
         <div x-show="partial === 'login'" class="flex-1 h-full overflow-hidden relative">
-            <livewire:user.elements.sidebar.login :status="$statusMessage" keep-alive />
+            <livewire:user.elements.sidebar.login :status="$statusMessage" :type="$statusType" />
         </div>
 
         <div x-show="partial === 'cart'" class="flex-1 h-full overflow-hidden relative">

@@ -5,15 +5,31 @@
         <div class="flex flex-col items-center text-center gap-6 mb-8">
 
             {{-- MENSAJE DE ÉXITO --}}
-            @if ($status)
+            @if ($status) 
                 <div x-data="{ show: true }" x-show="show"
                     x-transition:enter="transition ease-out duration-500"
                     x-transition:enter-start="opacity-0 transform -translate-y-2 scale-95"
                     x-transition:enter-end="opacity-100 transform translate-y-0 scale-100"
-                    class="w-full bg-green-500/10 border border-green-500/20 text-green-400 px-4 py-3 rounded-lg text-sm font-bold mb-4 shadow-[0_0_15px_rgba(34,197,94,0.2)] flex items-center gap-3">
-                    <span class="material-symbols-outlined text-lg">check_circle</span>
+                    @class([
+                    'w-full border px-4 py-3 rounded-lg text-sm font-bold animate-fade-in-down flex items-center gap-3 shadow-lg',
+                    // VERDE: Éxito
+                    'bg-green-500/10 border-green-500/20 text-green-400' => $type === 'success',
+                    // ROJO: Advertencia / Error (Carrito)
+                    'bg-red-500/10 border-red-500/20 text-red-400' => $type === 'warning' || $type === 'error',
+                    // AZUL: Default
+                    'bg-blue-500/10 border-blue-500/20 text-blue-400' => $type === 'info'
+                    ])
+                >
+                        {{-- Icono Cambiante --}}
+                    <span class="material-symbols-outlined text-lg">
+                        @if($type === 'success') check_circle 
+                        @elseif($type === 'warning') lock 
+                        @else info @endif
+                    </span>
+
                     <span class="flex-1 text-left">{{ $status }}</span>
-                    <button @click="show = false" class="text-green-600 hover:text-green-300 focus:outline-none">
+                    
+                    <button @click="show = false" class="opacity-60 hover:opacity-100 transition-opacity focus:outline-none">
                         <span class="material-symbols-outlined text-base">close</span>
                     </button>
                 </div>

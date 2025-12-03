@@ -12,16 +12,17 @@ class Sidebar extends Component
     public $partial = 'login'; // Valor por defecto para evitar nulos
     public $statusMessage = '';
     public $icon = 'menu';
+    public $statusType = 'success';
 
     // 1. ABRIR SIDEBAR (Desde botones externos)
     #[On('openSidebar')]
-    public function open($title, $partial, $message = '')
+    public function open($title, $partial, $message = '', $type = 'success')
     {
         $this->title = $title;
         $this->partial = $partial;
         $this->statusMessage = $message;
         $this->open = true;
-        
+        $this->statusType = $type;
         $this->updateIcon(); // Calculamos el icono al abrir
     }
 

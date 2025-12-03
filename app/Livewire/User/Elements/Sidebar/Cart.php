@@ -144,6 +144,16 @@ class Cart extends Component
             return; 
         }
 
+        if (!auth()->check()) {
+            $this->dispatch('openSidebar', 
+                title: 'Iniciar Sesión', 
+                partial: 'login', 
+                message: '🔒 Para finalizar tu compra, necesitas iniciar sesión.',
+                type: 'warning' // <--- TIPO AMARILLO/ROJO
+            );
+            return;
+        }
+
         // 1. Guardamos la selección en la sesión
         session()->put('checkout_selected_ids', $this->selected);
         

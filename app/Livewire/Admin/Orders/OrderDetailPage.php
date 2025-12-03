@@ -2,22 +2,23 @@
 
 namespace App\Livewire\Admin\Orders;
 
-use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use App\Models\Order;
-use App\Models\Product; 
-use App\Services\Admin\AdminOrderService; // <--- Usamos el nuevo servicio
+use App\Models\Product;
+use App\Services\User\CheckoutService;
 use App\Mail\OrderInvoice;
 use App\Mail\OrderCancelled;
 use App\Mail\OrderApproved;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
-
+use Barryvdh\DomPDF\Facade\Pdf; // Asegúrate de tener instalado dompdf
 
 class OrderDetailPage extends Component
 {
     public Order $order;
     public $newStatus;
 
+    // Opciones para el select
     public $statusOptions = [
         'pending' => 'Pendiente',
         'completed' => 'Completado',
@@ -30,82 +31,77 @@ class OrderDetailPage extends Component
         $this->newStatus = $this->order->status;
     }
 
+    /**
+     * 1. ACTUALIZAR ESTADO Y STOCK
+     */
     public function updateStatus()
     {
         $this->validate(['newStatus' => 'required|in:pending,completed,cancelled']);
+        
+        $service = app(CheckoutService::class);
+        // Usamos la lógica del servicio para el stock y el estado
+        $service->updateStatusAndHandleStock($this->order, $this->newStatus);
 
-        $oldStatus = $this->order->status;
-        $newStatus = $this->newStatus;
+        $this->order->refresh(); 
 
-        if ($oldStatus === $newStatus) return;
+        // Mensaje Feedback
+        $mensaje = "Estado actualizado a " . $this->statusOptions[$this->newStatus];
+        
+        if ($this->newStatus === 'completed') {
+            session()->flash('success', $mensaje);
+            
+            // Opcional: Enviar correo automático al completar
+            try {
+                Mail::to($this->order->user->email)->send(new OrderApproved($this->order));
+            } catch (\Exception $e) {}
 
-        if (in_array($this->order->status, ['completed', 'cancelled'])) {
-            return; 
-        }
-
-        $this->validate(['newStatus' => 'required|in:pending,completed,cancelled']);
-
-        // A. DEVOLVER STOCK SI SE CANCELA
-        if ($newStatus === 'cancelled' && $oldStatus !== 'cancelled') {
-            foreach ($this->order->items as $item) {
-                $product = Product::find($item->product_id);
-                if ($product) {
-                    $product->increment('stock', $item->quantity);
-                }
-            }
-        }
-
-        // B. ACTUALIZAR BASE DE DATOS
-        $this->order->update(['status' => $newStatus]);
-
-        // C. ENVIAR CORREOS (LÓGICA CORREGIDA)
-        // Quitamos el try-catch silencioso para que si falla, te avise en pantalla
-        try {
-            if ($newStatus === 'cancelled') {
-                // Enviar correo de cancelación
+        } elseif ($this->newStatus === 'cancelled') {
+            session()->flash('error', $mensaje);
+            
+            // Opcional: Enviar correo automático al cancelar
+            try {
                 Mail::to($this->order->user->email)->send(new OrderCancelled($this->order));
-            
-            } elseif ($newStatus === 'completed') {
-                // CAMBIO AQUÍ: Usamos OrderApproved en lugar de OrderInvoice
-                Mail::to($this->order->user->email)->send(new OrderApproved($this->order)); 
-            }
-        } catch (\Exception $e) {
-            // Si falla el correo, guardamos el error en el log pero no detenemos el proceso
-            Log::error('Error enviando correo de estado: ' . $e->getMessage());
-            session()->flash('error', 'El estado cambió, pero falló el envío del correo: ' . $e->getMessage());
-            
-            // No retornamos, dejamos que siga para mostrar el mensaje de estado actualizado
-        }
+            } catch (\Exception $e) {}
 
-        // D. MENSAJE DINÁMICO
-        $mensaje = 'Estado actualizado a ' . ucfirst($this->statusOptions[$newStatus]);
-
-        if ($newStatus === 'completed') {
-            session()->flash('success', $mensaje); 
-        } elseif ($newStatus === 'cancelled') {
-            // Si ya había mensaje de error de correo, lo concatenamos
-            $errorPrevio = session('error') ? session('error') . ' | ' : '';
-            session()->flash('error', $errorPrevio . $mensaje); 
         } else {
-            session()->flash('status_stock', $mensaje); 
+            session()->flash('status_stock', $mensaje);
         }
 
         $this->dispatch('order-status-updated'); 
     }
 
-    public function resendInvoice()
+    /**
+     * 2. DESCARGAR PDF (Solo descarga el archivo)
+     */
+    public function downloadInvoice($orderId = null)
     {
-        try {
-            Mail::to($this->order->user->email)->send(new OrderInvoice($this->order));
-            session()->flash('success', 'Factura reenviada correctamente.');
-        } catch (\Exception $e) {
-            session()->flash('error', 'Error al enviar correo.');
+        // 1. Obtener la orden
+        $order = $orderId ? Order::with('user', 'items.product')->find($orderId) : $this->order;
+
+        if ($order) {
+            // 2. Instanciamos el Mailable para obtener el HTML con estilos
+            $mailable = new OrderInvoice($order);
+            $html = $mailable->render();
+
+            // 3. Generamos la instancia del PDF (pero NO llamamos a ->download() directo aquí)
+            $pdf = Pdf::loadHTML($html)->setPaper('a4', 'portrait');
+
+            // 4. SOLUCIÓN FINAL: Usamos streamDownload
+            // Esto evita que Livewire intente leer el archivo binario y falle con UTF-8
+            return response()->streamDownload(function () use ($pdf) {
+                echo $pdf->output();
+            }, 'factura_orden_' . $order->id . '.pdf');
         }
     }
+
+    /**
+     * 3. REENVIAR CORREO (Solo envía el email)
+     */
 
     public function render()
     {
         return view('livewire.admin.orders.order-detail-page')
-            ->extends('layouts.admin')->section('content');
+            ->extends('layouts.admin')
+            ->section('content');
     }
 }
