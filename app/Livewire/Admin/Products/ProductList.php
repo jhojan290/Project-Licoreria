@@ -78,33 +78,43 @@ class ProductList extends Component
         $this->selected = [];
     }
 
+    // En App\Livewire\Admin\Products\ProductList.php
+
     public function toggleSelectAll()
     {
-        // AHORA SÍ FUNCIONA: $this->products ya existe gracias a #[Computed]
+        // 1. Obtener IDs de la página actual como Strings
         $pageIds = $this->products->pluck('id')->map(fn($id) => (string) $id)->toArray();
 
-        $this->selected = array_map(fn($id) => (string) $id, $this->selected);
+        // 2. Calcular cuántos de estos ya están seleccionados
+        $intersect = array_intersect($this->selected, $pageIds);
 
-        $allSelected = count(array_intersect($pageIds, $this->selected)) === count($pageIds);
-
-        if ($allSelected) {
+        // 3. LÓGICA SIMPLE (Igual a la del Carrito):
+        // Si la cantidad de coincidencias es IGUAL al total de la página -> DESMARCAR TODO
+        if (count($intersect) === count($pageIds)) {
+            // Quitamos los IDs de esta página del array general
             $this->selected = array_values(array_diff($this->selected, $pageIds));
-        } else {
-            $this->selected = array_unique(array_merge($this->selected, $pageIds));
+        } 
+        // En cualquier otro caso (0 seleccionados, o 3 de 10 seleccionados) -> MARCAR TODO
+        else {
+            // Unimos los actuales con los nuevos y quitamos duplicados
+            $this->selected = array_values(array_unique(array_merge($this->selected, $pageIds)));
         }
     }
 
     #[Computed]
     public function isAllSelected()
     {
-        // AHORA SÍ FUNCIONA: $this->products ya existe
-        $pageIds = $this->products->pluck('id')->map(fn($i) => (string) $i)->toArray();
+        // 1. Obtener IDs página actual
+        $pageIds = $this->products->pluck('id')->map(fn($id) => (string) $id)->toArray();
 
         if (empty($pageIds)) {
             return false;
         }
 
-        return count(array_intersect($pageIds, $this->selected)) === count($pageIds);
+        // 2. Verificar si TODOS están dentro de la selección
+        $intersect = array_intersect($this->selected, $pageIds);
+        
+        return count($intersect) === count($pageIds);
     }
 
     public function exportExcel($scope = 'all')
@@ -125,6 +135,8 @@ class ProductList extends Component
 
     public function render()
     {
+
+        
         // Ya no hacemos la consulta aquí, solo pasamos la computada a la vista
         return view('livewire.admin.products.product-list', [
             'products' => $this->products // Pasamos la propiedad computada

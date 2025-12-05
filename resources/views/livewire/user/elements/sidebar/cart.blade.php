@@ -7,7 +7,8 @@
                     <input 
                         type="checkbox" 
                         wire:click="toggleSelectAll" 
-                        @if($this->isAllSelected) checked @endif
+                        @checked($this->isAllSelected)
+                        wire:key="select-all-{{ count($selected) }}"
                         class="peer h-5 w-5 cursor-pointer appearance-none rounded border border-white/20 bg-[#121212] checked:border-[#D4AF37] checked:bg-[#D4AF37] transition-all focus:ring-0 focus:ring-offset-0"
                     >
                     <span class="material-symbols-outlined absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[16px] text-black opacity-0 peer-checked:opacity-100 pointer-events-none">check</span>
@@ -130,32 +131,41 @@
                 </span>
             </div>
 
-            <button 
-                type="button"
-                wire:click="proceedToCheckout"
-                wire:loading.attr="disabled"
-                wire:target="proceedToCheckout"
-                @disabled(count($selected) == 0)
-                class="w-full h-14 rounded-xl text-base font-black uppercase tracking-wide transition-all shadow-xl flex items-center justify-center gap-3 group relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed
-                {{ count($selected) > 0 
-                    ? 'bg-[#D4AF37] text-[#121212] hover:bg-white hover:scale-[1.02] shadow-yellow-900/20 cursor-pointer' 
-                    : 'bg-white/10 text-gray-500' }}"
-            >
-                <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out {{ count($selected) == 0 ? 'hidden' : '' }}"></div>
+            <div x-data="{ redirecting: false }" class="w-full mt-8">
+    
+                <button 
+                    type="button"
+                    
+                    {{-- 1. Al hacer clic, activamos la bandera de Alpine inmediatamente --}}
+                    @click="redirecting = true; $wire.proceedToCheckout()"
+                    
+                    {{-- 2. Deshabilitamos si no hay selección O si ya estamos redirigiendo --}}
+                    :disabled="redirecting || {{ count($selected) == 0 ? 'true' : 'false' }}"
+                    
+                    class="w-full h-16 rounded-2xl text-lg font-black uppercase tracking-wide transition-all shadow-xl flex items-center justify-center gap-3 group relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed
+                    {{ count($selected) > 0 
+                        ? 'bg-[#D4AF37] text-[#121212] hover:bg-white hover:scale-[1.02] shadow-yellow-900/20 cursor-pointer' 
+                        : 'bg-white/10 text-gray-500' }}"
+                >
+                    <div x-show="!redirecting" class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out {{ count($selected) == 0 ? 'hidden' : '' }}"></div>
 
-                <span wire:loading.remove wire:target="proceedToCheckout" class="flex items-center gap-2 relative z-10">
-                    <span>Pagar Ahora</span>
-                    <span class="material-symbols-outlined text-2xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                </span>
+                    <span x-show="!redirecting" class="flex items-center gap-2 relative z-10">
+                        <span>Pagar Ahora</span>
+                        <span class="material-symbols-outlined text-2xl leading-none flex items-center group-hover:translate-x-1 transition-transform">
+                            arrow_forward
+                        </span>
+                    </span>
+                    
+                    <span x-show="redirecting" x-cloak class="flex items-center gap-3 relative z-10">
+                        <svg class="animate-spin h-6 w-6 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span>Procesando...</span>
+                    </span>
+                </button>
 
-                <span wire:loading.flex wire:target="proceedToCheckout" class="items-center gap-3 relative z-10">
-                    <svg class="animate-spin h-5 w-5 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    <span>Procesando...</span>
-                </span>
-            </button>
+            </div>
 
             <div class="mt-5 text-center">
                 <button @click="$dispatch('close-sidebar')" class="text-xs font-bold text-gray-500 hover:text-white transition-colors cursor-pointer border-b border-transparent hover:border-white pb-0.5">

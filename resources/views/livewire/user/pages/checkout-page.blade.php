@@ -33,10 +33,6 @@
                     </div>
                     Volver al Catálogo
                 </a>
-                <div class="flex items-center gap-2 opacity-50">
-                    <span class="material-symbols-outlined text-sm">lock</span>
-                    <span class="text-xs font-bold uppercase tracking-widest">Pago Seguro SSL</span>
-                </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
@@ -98,22 +94,33 @@
                         </div>
                         
                         @if(count($selected) > 0)
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 relative z-10">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+    
                                 <div wire:click="$set('selectedPaymentMethod', 'nequi')" 
                                     class="h-20 rounded-2xl border cursor-pointer transition-all flex items-center justify-start px-6 gap-4 relative overflow-hidden group
-                                    {{ $selectedPaymentMethod === 'nequi' ? 'bg-[#200020] border-[#D4AF37] shadow-[0_0_20px_rgba(218,0,129,0.2)]' : 'bg-[#181611] border-white/10 hover:border-white/30 hover:bg-[#200020]/40' }}">
-                                    <div class="w-10 h-10 rounded-full bg-[#DA0081] flex items-center justify-center text-white font-bold text-xs">N</div>
+                                    {{ $selectedPaymentMethod === 'nequi' ? 'bg-[#200020] border-[#DA0063] shadow-[0_0_20px_rgba(218,0,99,0.3)]' : 'bg-[#181611] border-white/10 hover:border-[#DA0063]/50 hover:bg-[#200020]/50' }}">
+                                    
+                                    <div class="w-12 h-12 flex-shrink-0 rounded-full bg-white p-1 flex items-center justify-center overflow-hidden border border-white/10 shadow-sm">
+                                        <img src="{{ asset('img/nequi.jpg') }}" class="h-full w-full object-contain" alt="Nequi">
+                                    </div>
+                                    
                                     <span class="text-white font-bold text-lg">Nequi</span>
+                                    
                                     @if($selectedPaymentMethod === 'nequi')
-                                        <div class="absolute top-3 right-3 text-[#D4AF37]"><span class="material-symbols-outlined text-xl">check_circle</span></div>
+                                        <div class="absolute top-3 right-3 text-[#DA0063]"><span class="material-symbols-outlined text-xl">check_circle</span></div>
                                     @endif
                                 </div>
 
                                 <div wire:click="$set('selectedPaymentMethod', 'bancolombia')" 
                                     class="h-20 rounded-2xl border cursor-pointer transition-all flex items-center justify-start px-6 gap-4 relative overflow-hidden group
-                                    {{ $selectedPaymentMethod === 'bancolombia' ? 'bg-white border-[#D4AF37] shadow-[0_0_20px_rgba(255,255,255,0.2)]' : 'bg-[#181611] border-white/10 hover:border-white/30 hover:bg-white/10' }}">
-                                    <div class="w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center text-black font-bold text-xs">B</div>
+                                    {{ $selectedPaymentMethod === 'bancolombia' ? 'bg-white border-[#FDDA24] shadow-[0_0_20px_rgba(253,218,36,0.4)]' : 'bg-[#181611] border-white/10 hover:border-white hover:bg-white/10' }}">
+                                    
+                                    <div class="w-12 h-12 flex-shrink-0 rounded-full bg-white p-1 flex items-center justify-center overflow-hidden border border-gray-200 shadow-sm">
+                                        <img src="{{ asset('img/bancolombia.jpg') }}" class="h-full w-full object-contain" alt="Bancolombia">
+                                    </div>
+                                    
                                     <span class="font-bold text-lg {{ $selectedPaymentMethod === 'bancolombia' ? 'text-black' : 'text-white' }}">Bancolombia</span>
+                                    
                                     @if($selectedPaymentMethod === 'bancolombia')
                                         <div class="absolute top-3 right-3 text-black"><span class="material-symbols-outlined text-xl">check_circle</span></div>
                                     @endif
@@ -121,9 +128,14 @@
 
                                 <div wire:click="$set('selectedPaymentMethod', 'daviplata')" 
                                     class="h-20 rounded-2xl border cursor-pointer transition-all flex items-center justify-start px-6 gap-4 relative overflow-hidden group
-                                    {{ $selectedPaymentMethod === 'daviplata' ? 'bg-[#EF3340] border-[#D4AF37] shadow-[0_0_20px_rgba(239,51,64,0.2)]' : 'bg-[#181611] border-white/10 hover:border-white/30 hover:bg-[#EF3340]/20' }}">
-                                    <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#EF3340] font-bold text-xs">D</div>
+                                    {{ $selectedPaymentMethod === 'daviplata' ? 'bg-[#ED1C24] border-white shadow-[0_0_20px_rgba(237,28,36,0.4)]' : 'bg-[#181611] border-white/10 hover:border-[#ED1C24]/50 hover:bg-[#ED1C24]/10' }}">
+                                    
+                                    <div class="w-12 h-12 flex-shrink-0 rounded-full bg-white p-1 flex items-center justify-center overflow-hidden border border-white/10 shadow-sm">
+                                        <img src="{{ asset('img/davivienda.png') }}" class="h-full w-full object-contain" alt="Daviplata">
+                                    </div>
+                                    
                                     <span class="font-bold text-lg text-white">Daviplata</span>
+                                    
                                     @if($selectedPaymentMethod === 'daviplata')
                                         <div class="absolute top-3 right-3 text-white"><span class="material-symbols-outlined text-xl">check_circle</span></div>
                                     @endif
@@ -131,13 +143,19 @@
 
                                 <div wire:click="$set('selectedPaymentMethod', 'pse')" 
                                     class="h-20 rounded-2xl border cursor-pointer transition-all flex items-center justify-start px-6 gap-4 relative overflow-hidden group
-                                    {{ $selectedPaymentMethod === 'pse' ? 'bg-[#0033A0] border-[#D4AF37] shadow-[0_0_20px_rgba(0,51,160,0.2)]' : 'bg-[#181611] border-white/10 hover:border-white/30 hover:bg-[#0033A0]/20' }}">
-                                    <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#0033A0] font-bold text-xs">P</div>
+                                    {{ $selectedPaymentMethod === 'pse' ? 'bg-[#0033A0] border-[#D4AF37] shadow-[0_0_20px_rgba(0,51,160,0.2)]' : 'bg-[#181611] border-white/10 hover:border-[#0033A0] hover:bg-[#0033A0]/20' }}">
+                                    
+                                    <div class="w-12 h-12 flex-shrink-0 rounded-full bg-white p-1 flex items-center justify-center overflow-hidden border border-gray-200 shadow-sm">
+                                        <img src="{{ asset('img/pse.jpg') }}" class="h-full w-full object-contain" alt="PSE">
+                                    </div>
+
                                     <span class="font-bold text-lg text-white">PSE</span>
+                                    
                                     @if($selectedPaymentMethod === 'pse')
-                                        <div class="absolute top-3 right-3 text-white"><span class="material-symbols-outlined text-xl">check_circle</span></div>
+                                        <div class="absolute top-3 right-3 text-[#0033A0]"><span class="material-symbols-outlined text-xl">check_circle</span></div>
                                     @endif
                                 </div>
+
                             </div>
 
                             @error('selectedPaymentMethod') 
@@ -154,31 +172,61 @@
                     </section>
                 </div>
 
-                <div class="lg:col-span-1">
-                    <div class="bg-[#181611] p-6 md:p-8 rounded-3xl border border-white/10 sticky top-24 shadow-2xl">
+                <div class="lg:col-span-1" x-data="{ showModal: false }">
+                    <div class="bg-[#181611] p-6 rounded-2xl border border-white/10 sticky top-8">
                         
-                        <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-xl font-black text-white tracking-tight">Tu Pedido</h3>
-                            @if(count($selected) > 0)
-                                <button 
-                                    wire:click="removeSelection"
-                                    wire:confirm="¿Quitar los productos seleccionados?"
-                                    class="text-xs font-bold text-red-400 hover:text-white hover:bg-red-500 px-3 py-1.5 rounded-lg transition-all border border-red-500/30 flex items-center gap-1"
-                                >
-                                    <span class="material-symbols-outlined text-sm">delete</span>
-                                    Quitar ({{ count($selected) }})
-                                </button>
-                            @endif
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-bold text-white">Resumen del Pedido</h3>
                         </div>
+
+                        @if(count($cartItems) > 0)
+                            <div class="flex items-center justify-between mb-4 pb-4 border-b border-white/5">
+                                
+                                <label class="flex items-center gap-2 cursor-pointer group select-none">
+                                    <div class="relative flex items-center">
+                                        <input 
+                                            type="checkbox" 
+                                            wire:click="toggleSelectAll" 
+                                            {{-- 2. ESTADO VISUAL (Usa la propiedad computada) --}}
+                                            {{-- Esto asegura que Livewire controle el estado --}}
+                                            @checked($this->isAllSelected)
+
+                                            {{-- 3. TRUCO PARA FORZAR ACTUALIZACIÓN --}}
+                                            {{-- Al cambiar la cantidad de seleccionados, obligamos a repintar este input --}}
+                                            wire:key="select-all-{{ count($selected) }}"
+                                            class="peer h-4 w-4 cursor-pointer appearance-none rounded border border-white/30 bg-[#181611] checked:border-[#D4AF37] checked:bg-[#D4AF37] transition-all focus:ring-0"
+                                        >
+                                        <span class="material-symbols-outlined absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[12px] text-black opacity-0 peer-checked:opacity-100 pointer-events-none">check</span>
+                                    </div>
+                                    <span class="text-xs font-bold text-gray-400 group-hover:text-white transition-colors uppercase tracking-wider">
+                                        Todo
+                                    </span>
+                                </label>
+
+                                @if(count($selected) > 0)
+                                    <button 
+                                        @click="showModal = true" 
+                                        class="text-xs font-bold text-red-400 hover:text-white hover:bg-red-500/20 px-2 py-1 rounded transition-all flex items-center gap-1 border border-red-500/20 group"
+                                        title="Quitar seleccionados"
+                                    >
+                                        <span class="material-symbols-outlined text-sm group-hover:scale-110 transition-transform">delete_sweep</span>
+                                        Quitar ({{ count($selected) }})
+                                    </button>
+                                @endif
+                            </div>
+                        @endif
                         
                         <div class="space-y-4 mb-8 max-h-[350px] overflow-y-auto custom-scrollbar pr-2">
                             @foreach($cartItems as $item)
                                 <div wire:key="checkout-item-{{ $item['id'] }}" 
-                                     class="group flex gap-4 p-3 rounded-xl border transition-all duration-300 {{ in_array($item['id'], $selected) ? 'bg-white/5 border-[#D4AF37]/30' : 'border-transparent opacity-50 grayscale hover:opacity-80' }}">
+                                    class="group flex gap-3 p-3 rounded-xl border transition-all duration-300 {{ in_array($item['id'], $selected) ? 'bg-white/5 border-[#D4AF37]/30' : 'border-transparent opacity-60 hover:opacity-100' }}">
                                     
-                                    <div class="flex items-center">
-                                        <input type="checkbox" value="{{ $item['id'] }}" wire:model.live="selected" 
-                                            class="h-5 w-5 rounded border-white/30 bg-[#121212] text-[#D4AF37] focus:ring-[#D4AF37] cursor-pointer transition-all">
+                                    <div class="flex items-center self-center">
+                                        <label class="relative flex items-center cursor-pointer p-1">
+                                            <input type="checkbox" value="{{ $item['id'] }}" wire:model.live="selected" 
+                                                class="peer h-5 w-5 rounded border-white/30 bg-[#121212] text-[#D4AF37] focus:ring-[#D4AF37] cursor-pointer transition-all appearance-none checked:bg-[#D4AF37] checked:border-[#D4AF37]">
+                                            <span class="material-symbols-outlined absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[16px] text-black opacity-0 peer-checked:opacity-100 pointer-events-none">check</span>
+                                        </label>
                                     </div>
 
                                     <div class="h-14 w-14 rounded-lg bg-white/10 overflow-hidden flex-shrink-0 border border-white/5">
@@ -188,65 +236,226 @@
                                     </div>
                                     
                                     <div class="flex-1 min-w-0 flex flex-col justify-center">
-                                        <p class="text-sm text-white font-bold line-clamp-1 group-hover:text-[#D4AF37] transition-colors">{{ $item['name'] }}</p>
-                                        <p class="text-xs text-gray-500 font-medium">Cant: {{ $item['quantity'] }}</p>
+                                        <p class="text-sm text-white font-medium line-clamp-1">{{ $item['name'] }}</p>
+                                        <div class="flex justify-between items-center mt-0.5">
+                                            <p class="text-xs text-gray-500">x{{ $item['quantity'] }}</p>
+                                            
+                                            <button 
+                                                wire:click="remove({{ $item['id'] }})" 
+                                                class="text-gray-600 hover:text-red-400 transition-colors p-1 rounded-full hover:bg-red-500/10"
+                                                title="Eliminar solo este producto"
+                                            >
+                                                <span class="material-symbols-outlined text-base">delete</span>
+                                            </button>
+                                        </div>
                                     </div>
                                     
-                                    <p class="text-sm font-black self-center whitespace-nowrap {{ in_array($item['id'], $selected) ? 'text-[#D4AF37]' : 'text-gray-600' }}">
+                                    <p class="text-sm font-black self-start whitespace-nowrap {{ in_array($item['id'], $selected) ? 'text-[#D4AF37]' : 'text-gray-600' }}">
                                         ${{ number_format($item['price'] * $item['quantity'], 0) }}
                                     </p>
                                 </div>
                             @endforeach
                         </div>
 
-                        <div class="space-y-3 border-t border-white/10 pt-6">
+                        <div class="border-t border-white/10 pt-4 space-y-2">
                             <div class="flex justify-between text-gray-400 text-sm">
-                                <span>Subtotal ({{ count($selected) }})</span>
-                                <span class="text-white font-medium">${{ number_format($this->checkoutTotal, 0, ',', '.') }}</span>
+                                <span>Productos ({{ count($selected) }})</span>
+                                <span>${{ number_format($this->checkoutTotal, 0, ',', '.') }}</span>
                             </div>
-                            <div class="flex justify-between text-gray-400 text-sm">
-                                <span>Envío</span>
-                                <span class="text-green-400 font-bold uppercase tracking-wider">Gratis</span>
+                            <div class="flex justify-between text-white text-xl font-black pt-2 mb-6">
+                                <span>Total a Pagar</span>
+                                <span class="text-[#D4AF37]">${{ number_format($this->checkoutTotal, 0, ',', '.') }}</span>
+                            </div>
+
+                            <button 
+                                wire:click="initiatePayment"  {{-- CAMBIO: Llamamos a iniciar, no a completar --}}
+                                wire:loading.attr="disabled" 
+                                wire:target="initiatePayment"
+                                @if(count($selected) == 0) disabled @endif
+                                class="w-full h-16 mt-8 rounded-2xl text-lg font-black uppercase tracking-wide transition-all shadow-xl flex items-center justify-center gap-3 group relative overflow-hidden
+                                {{ count($selected) > 0 
+                                    ? 'bg-[#D4AF37] text-[#121212] hover:bg-white hover:scale-[1.02] shadow-yellow-900/20 cursor-pointer' 
+                                    : 'bg-white/10 text-gray-500 cursor-not-allowed' }}"
+                            >
+                                <span wire:loading.remove wire:target="initiatePayment" class="flex items-center gap-2 relative z-10">
+                                    <span>Continuar al Pago</span> {{-- Texto más realista --}}
+                                    <span class="material-symbols-outlined text-2xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                </span>
+                                
+                                <span wire:loading.flex wire:target="initiatePayment" class="items-center gap-3 relative z-10">
+                                    <svg class="animate-spin h-6 w-6 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                    <span>Procesando...</span>
+                                </span>
+                            </button>
+                            
+                            <p class="text-center text-[10px] text-gray-500 mt-4 leading-tight px-4">
+                                Al confirmar, aceptas nuestros <a href="#" class="underline hover:text-white">Términos y Condiciones</a>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div x-show="showModal" 
+                        style="display: none;" 
+                        class="fixed inset-0 z-[100] flex items-center justify-center px-4"
+                        x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0"
+                        x-transition:enter-end="opacity-100"
+                        x-transition:leave="transition ease-in duration-200"
+                        x-transition:leave-start="opacity-100"
+                        x-transition:leave-end="opacity-0"
+                        x-cloak
+                    >
+                        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" @click="showModal = false"></div>
+
+                        <div class="relative bg-[#181611] border border-white/10 rounded-2xl p-6 max-w-sm w-full text-center shadow-2xl transform transition-all"
+                            x-show="showModal"
+                            x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 scale-95 translate-y-4"
+                            x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                        >
+                            <div class="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center mx-auto mb-4">
+                                <span class="material-symbols-outlined text-red-500 text-2xl">warning</span>
                             </div>
                             
-                            <div class="flex justify-between items-end pt-4 border-t border-white/10 mt-4">
-                                <span class="text-white font-bold">Total a Pagar</span>
-                                <span class="text-3xl font-black text-[#D4AF37] leading-none">
-                                    ${{ number_format($this->checkoutTotal, 0, ',', '.') }}
-                                </span>
+                            <h3 class="text-lg font-bold text-white mb-2">¿Estás seguro?</h3>
+                            <p class="text-sm text-gray-400 mb-6">
+                                Vas a eliminar {{ count($selected) }} productos de tu lista de compra actual.
+                            </p>
+
+                            <div class="flex gap-3 justify-center">
+                                <button @click="showModal = false" class="px-4 py-2 rounded-lg border border-white/10 text-gray-300 text-sm font-bold hover:bg-white/5 transition-colors">
+                                    Cancelar
+                                </button>
+                                
+                                <button 
+                                    wire:click="removeSelection" 
+                                    @click="showModal = false" 
+                                    class="px-4 py-2 rounded-lg bg-red-500 text-white text-sm font-bold hover:bg-red-600 transition-colors shadow-lg shadow-red-900/20"
+                                >
+                                    Sí, Quitar
+                                </button>
                             </div>
                         </div>
-
-                        <button 
-                            wire:click="completeOrder" 
-                            wire:loading.attr="disabled" 
-                            wire:target="completeOrder"
-                            @if(count($selected) == 0) disabled @endif
-                            class="w-full h-16 mt-8 rounded-2xl text-lg font-black uppercase tracking-wide transition-all shadow-xl flex items-center justify-center gap-3 group relative overflow-hidden
-                            {{ count($selected) > 0 
-                                ? 'bg-[#D4AF37] text-[#121212] hover:bg-white hover:scale-[1.02] shadow-[#D4AF37]/20' 
-                                : 'bg-white/10 text-gray-500 cursor-not-allowed' }}"
-                        >
-                            <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
-
-                            <span wire:loading.remove wire:target="completeOrder" class="flex items-center gap-2 relative z-10">
-                                <span>Confirmar Pedido</span>
-                                <span class="material-symbols-outlined text-2xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                            </span>
-                            
-                            <span wire:loading.flex wire:target="completeOrder" class="items-center gap-3 relative z-10">
-                                <svg class="animate-spin h-6 w-6 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                                <span>Procesando...</span>
-                            </span>
-                        </button>
-                        
-                        <p class="text-center text-[10px] text-gray-500 mt-4 leading-tight px-4">
-                            Al confirmar la compra, aceptas nuestros <a href="#" class="underline hover:text-white">Términos y Condiciones</a> y <a href="#" class="underline hover:text-white">Política de Privacidad</a>.
-                        </p>
                     </div>
                 </div>
-
             </div>
         @endif
+    </div>
+
+    <div x-data="{ open: @entangle('showBankModal') }" 
+        x-show="open" 
+        x-cloak
+        class="fixed inset-0 z-[100] flex items-center justify-center px-4 font-display"
+    >
+        <div 
+            x-show="open" 
+            x-transition.opacity 
+            @click="open = false" 
+            class="absolute inset-0 bg-black/90 backdrop-blur-md cursor-pointer"
+        ></div>
+
+        <div x-show="open" 
+            @click.stop
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 scale-95 translate-y-10"
+            x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+            class="relative w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden z-10"
+        >
+            <div class="px-8 py-6 flex items-center justify-between rounded-t-3xl border-b border-black/5
+                {{ $selectedPaymentMethod === 'nequi' ? 'bg-[#120031]' : '' }}
+                {{ $selectedPaymentMethod === 'daviplata' ? 'bg-[#ED1C24]' : '' }}
+                {{ $selectedPaymentMethod === 'bancolombia' ? 'bg-white' : '' }}
+                {{ $selectedPaymentMethod === 'pse' ? 'bg-white' : '' }}
+            ">
+                
+                <div class="flex items-center gap-4">
+                    @if(in_array($selectedPaymentMethod, ['nequi', 'daviplata']))
+                        <div class="bg-white p-2 rounded-xl shadow-lg border border-white/20 flex items-center justify-center h-14 w-14">
+                            @if($selectedPaymentMethod === 'nequi')
+                                <img src="{{ asset('img/nequi.jpg') }}" class="h-full w-full object-contain rounded-lg">
+                            @else
+                                <img src="{{ asset('img/davivienda.png') }}" class="h-full w-full object-contain">
+                            @endif
+                        </div>
+                        <div class="flex flex-col text-white">
+                            <span class="text-xs opacity-80 font-medium uppercase tracking-wider">Pagando con</span>
+                            <span class="text-xl font-bold capitalize">{{ $selectedPaymentMethod }}</span>
+                        </div>
+
+                    @else
+                        <div class="flex flex-col">
+                            <span class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">Pagando con</span>
+                            @if($selectedPaymentMethod === 'bancolombia')
+                                <img src="{{ asset('img/bancolombia.jpg') }}" class="h-10 w-auto object-contain">
+                            @elseif($selectedPaymentMethod === 'pse')
+                                <img src="{{ asset('img/pse.jpg') }}" class="h-12 w-auto object-contain">
+                            @endif
+                        </div>
+                    @endif
+                </div>
+
+                <button @click="open = false" 
+                    class="p-2 rounded-full transition-all hover:scale-110 focus:outline-none
+                    {{ in_array($selectedPaymentMethod, ['nequi', 'daviplata']) 
+                        ? 'text-white/70 hover:text-white hover:bg-white/10' 
+                        : 'text-gray-400 hover:text-black hover:bg-gray-100' }}">
+                    <span class="material-symbols-outlined text-2xl">close</span>
+                </button>
+            </div>
+
+            <div class="p-8 bg-white text-gray-800">
+                
+                <div class="text-center mb-6">
+                    <p class="text-sm text-gray-500 uppercase tracking-wider font-bold mb-1">Total a Pagar</p>
+                    <p class="text-3xl font-black text-gray-900">${{ number_format($this->checkoutTotal, 0, ',', '.') }}</p>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase mb-2">
+                            @if($selectedPaymentMethod === 'nequi' || $selectedPaymentMethod === 'daviplata')
+                                Número de Celular
+                            @elseif($selectedPaymentMethod === 'bancolombia')
+                                Usuario Sucursal Virtual
+                            @else
+                                Correo Electrónico registrado en PSE
+                            @endif
+                        </label>
+                        <input type="text" wire:model="bankField" 
+                            class="w-full h-12 px-4 rounded-xl bg-gray-100 border border-gray-200 text-gray-900 focus:border-black focus:ring-0 font-bold text-lg outline-none transition-all"
+                            placeholder="{{ $selectedPaymentMethod === 'nequi' ? '300 123 4567' : 'Ingresa tus datos...' }}"
+                        >
+                        @error('bankField') <span class="text-red-500 text-xs font-bold">{{ $message }}</span> @enderror
+                    </div>
+
+                    <p class="text-xs text-gray-400 text-center leading-relaxed">
+                        Estás en un entorno seguro simulado. Al continuar, se procesará el pedido en LicUp.
+                    </p>
+                </div>
+
+                <button 
+                    wire:click="finalizeTransaction"
+                    wire:loading.attr="disabled"
+                    class="w-full h-14 mt-6 rounded-xl text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed
+                    {{ $selectedPaymentMethod === 'nequi' ? 'bg-[#DA0081] hover:bg-[#b5006b]' : '' }}
+                    {{ $selectedPaymentMethod === 'daviplata' ? 'bg-[#ED1C24] hover:bg-[#c4151c]' : '' }}
+                    {{ $selectedPaymentMethod === 'bancolombia' ? 'bg-[#FDDA24] text-black hover:bg-yellow-500' : '' }}
+                    {{ $selectedPaymentMethod === 'pse' ? 'bg-[#0071CE] hover:bg-[#005bb5]' : '' }}"
+                >
+                    <span wire:loading.remove class="flex items-center justify-center w-full h-full">
+                        Pagar Ahora
+                    </span>
+                    
+                    <span wire:loading.flex class="items-center justify-center gap-2 w-full h-full">
+                        <svg class="animate-spin h-5 w-5 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span>Procesando...</span>
+                    </span>
+                </button>
+
+            </div>
+        </div>
     </div>
 </div>

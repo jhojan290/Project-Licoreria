@@ -13,12 +13,16 @@ class CheckoutPage extends Component
     // Datos de envío
     public $address, $city, $phone, $identification;
     
-    // 1. NUEVA VARIABLE: Para guardar qué banco seleccionó el usuario
+    // Datos de Pago
     public $selectedPaymentMethod = ''; 
-
+    
     // Lógica de selección de productos
     public $selected = []; 
     public $success = false;
+
+    // VARIABLES PARA EL MODAL DE PAGO (SIMULACIÓN)
+    public $showBankModal = false;
+    public $bankField = ''; 
 
     public function mount(CartService $cartService)
     {
@@ -31,7 +35,7 @@ class CheckoutPage extends Component
         }
 
         if (empty($cartContent)) {
-            return redirect()->route('catalog');
+            return redirect()->route('catalogo');
         }
 
         // 2. Sincronizar selección
@@ -41,8 +45,9 @@ class CheckoutPage extends Component
             $this->selected = array_map('strval', array_keys($cartContent));
         }
         
-        // Pre-llenar email (solo visual, no se guarda en variable pública porque usamos Auth::user())
-        // $this->email = Auth::user()->email; 
+        // Opcional: Pre-llenar datos del usuario
+        // $user = Auth::user();
+        // $this->email = $user->email; 
     }
 
     #[Computed]
@@ -60,63 +65,79 @@ class CheckoutPage extends Component
         return $total;
     }
 
-    // 2. RENOMBRAMOS LA FUNCIÓN: Ya no recibe $method por parámetro, usa la variable pública
-    public function completeOrder(CartService $cartService, CheckoutService $checkoutService)
+    // ====================================================
+    // PASO 1: VALIDAR Y ABRIR MODAL (Reemplaza completeOrder)
+    // ====================================================
+    public function initiatePayment()
     {
-        // Validaciones
+        // Validaciones del Formulario de Envío
         $this->validate([
             'address' => 'required|min:5',
             'city' => 'required',
             'phone' => 'required|numeric',
             'identification' => 'required',
-            // 3. NUEVA VALIDACIÓN: Obligatorio seleccionar banco
             'selectedPaymentMethod' => 'required', 
         ], [
             'selectedPaymentMethod.required' => 'Por favor selecciona un método de pago.'
         ]);
 
-        // Validar que haya productos seleccionados
         if (empty($this->selected)) {
             $this->addError('payment', 'Debes seleccionar al menos un producto para pagar.');
             return;
         }
 
-        // Filtramos los items a pagar
+        // Si todo está bien, abrimos la "Pasarela Falsa"
+        $this->showBankModal = true;
+        $this->bankField = ''; // Limpiamos el campo simulado
+    }
+
+    // ====================================================
+    // PASO 2: PROCESAR TRANSACCIÓN REAL (Al confirmar en Modal)
+    // ====================================================
+    public function finalizeTransaction(CartService $cartService, CheckoutService $checkoutService)
+    {
+        // Validación del campo falso del banco (para realismo)
+        $this->validate([
+            'bankField' => 'required'
+        ], ['bankField.required' => 'Este campo es obligatorio por tu banco.']);
+
+        // 1. Filtrar items seleccionados
         $allItems = $cartService->getContent();
         $itemsToPay = array_filter($allItems, function($key) {
             return in_array((string)$key, $this->selected);
         }, ARRAY_FILTER_USE_KEY);
 
-        // Procesar la orden
+        // 2. Procesar la orden (DB, Stock, Correo)
         $checkoutService->processOrder([
-            'payment_method' => $this->selectedPaymentMethod, // <--- USAMOS LA SELECCIÓN DEL USUARIO
+            'payment_method' => $this->selectedPaymentMethod,
             'address' => $this->address,
             'city' => $this->city,
             'phone' => $this->phone,
             'identification' => $this->identification,
         ], $itemsToPay, $this->checkoutTotal);
 
-        // Limpiar carrito (solo lo pagado) y mostrar éxito
+        // 3. Limpiar carrito y mostrar éxito
         $cartService->removeMultiple($this->selected);
+        $this->showBankModal = false;
         $this->success = true;
     }
+
+    // ====================================================
+    // FUNCIONES AUXILIARES (INTACTAS)
+    // ====================================================
 
     public function removeSelection()
     {
         if (!empty($this->selected)) {
-            // 1. Borramos usando el servicio
             $cartService = app(CartService::class);
             $cartService->removeMultiple($this->selected);
             
-            // 2. Limpiamos la selección
             $this->selected = [];
 
-            // 3. Si el carrito queda vacío, redirigir al catálogo
             if (empty($cartService->getContent())) {
                 return redirect()->route('catalogo');
             }
             
-            // 4. Avisar al sidebar que se actualice (por si el usuario abre el sidebar después)
             $this->dispatch('cart-updated');
         }
     }
@@ -126,12 +147,22 @@ class CheckoutPage extends Component
         $cartService = app(CartService::class);
         $allItems = array_keys($cartService->getContent());
         
-        // Si ya están todos seleccionados, vaciamos. Si no, llenamos.
         if (count($this->selected) === count($allItems)) {
             $this->selected = [];
         } else {
             $this->selected = array_map('strval', $allItems);
         }
+    }
+
+    #[Computed]
+    public function isAllSelected()
+    {
+        $cartService = app(CartService::class);
+        $items = $cartService->getContent();
+        
+        if (empty($items)) return false;
+        
+        return count($this->selected) === count($items);
     }
 
     public function render()

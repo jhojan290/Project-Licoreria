@@ -16,7 +16,8 @@
 
                 <div class="flex w-full md:w-auto gap-3">
                     <a href="{{ route('admin.orders') }}" 
-                       class="flex-1 md:flex-none items-center justify-center h-11 px-5 rounded-xl bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white transition-all text-sm font-bold border border-white/10 group">
+                    {{-- AGREGADO: la clase 'flex' al principio --}}
+                    class="flex flex-1 md:flex-none items-center justify-center h-11 px-5 rounded-xl bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white transition-all text-sm font-bold border border-white/10 group">
                         <span class="material-symbols-outlined text-lg mr-2 group-hover:-translate-x-1 transition-transform">arrow_back</span>
                         Volver
                     </a>
@@ -69,22 +70,33 @@
                                     
                                     <div class="flex-1 min-w-0 w-full">
                                         <div class="flex justify-between items-start gap-4">
-                                            <div>
-                                                <p class="text-base font-bold text-white line-clamp-2">{{ $item->product_name }}</p>
-                                                <div class="flex items-center gap-3 mt-1">
-                                                    <span class="text-xs text-gray-500 bg-white/5 px-2 py-0.5 rounded border border-white/5">{{ $item->product->category ?? 'Licor' }}</span>
-                                                    <span class="text-xs text-gray-500">Vol: {{ $item->product->volume ?? 'N/A' }}</span>
+                                            
+                                            <div class="flex-1 pr-2"> {{-- Agregué pr-2 para dar aire al precio --}}
+                                                <p class="text-base font-bold text-white line-clamp-2 leading-tight">
+                                                    {{ $item->product_name }}
+                                                </p>
+                                                <div class="flex flex-wrap items-center gap-2 mt-2">
+                                                    <span class="text-xs font-bold text-gray-400 bg-white/10 px-2 py-0.5 rounded border border-white/5">
+                                                        {{ $item->product->category ?? 'Licor' }}
+                                                    </span>
+                                                    <span class="text-xs font-medium text-gray-500">
+                                                        Vol: {{ $item->product->volume ?? 'N/A' }}
+                                                    </span>
                                                 </div>
                                             </div>
                                             
-                                            <div class="text-right">
-                                                <p class="text-lg font-black text-[#D4AF37]">
+                                            <div class="text-right flex-shrink-0">
+                                                
+                                                <p class="text-2xl sm:text-3xl font-black text-[#D4AF37] leading-none tracking-tight">
                                                     ${{ number_format($item->price * $item->quantity, 0, ',', '.') }}
                                                 </p>
-                                                <p class="text-xs text-gray-500 font-medium">
-                                                    {{ $item->quantity }} x ${{ number_format($item->price, 0, ',', '.') }}
+                                                
+                                                <p class="text-sm sm:text-base text-gray-400 font-bold mt-1">
+                                                    {{ $item->quantity }} <span class="text-gray-600 font-normal">x</span> ${{ number_format($item->price, 0, ',', '.') }}
                                                 </p>
+                                                
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -145,10 +157,20 @@
                                 
                                 <button type="submit" 
                                     wire:loading.attr="disabled"
-                                    class="w-full h-11 rounded-xl bg-[#D4AF37] text-[#121212] font-black text-sm hover:bg-white transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-yellow-900/20 transform active:scale-95">
-                                    <span wire:loading.remove>Actualizar Estado</span>
-                                    <span wire:loading class="flex items-center gap-2">
-                                        <svg class="animate-spin h-4 w-4 text-[#121212]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                    class="w-full h-11 rounded-lg bg-primary text-black font-bold hover:bg-white transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-yellow-900/20 transform active:scale-95"
+                                >
+                                    {{-- 1. TEXTO NORMAL (Se oculta al cargar) --}}
+                                    <span wire:loading.remove>
+                                        Actualizar Estado
+                                    </span>
+
+                                    {{-- 2. TEXTO CARGANDO (Se muestra al cargar) --}}
+                                    {{-- CAMBIO: Usamos .flex para asegurar alineación inmediata --}}
+                                    <span wire:loading.flex class="items-center gap-2">
+                                        <svg class="animate-spin h-4 w-4 text-[#121212]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
                                         <span>Guardando...</span>
                                     </span>
                                 </button>

@@ -113,13 +113,6 @@
 @layer components {
     /*clases reutilizables para componentes*/
 
-    .hero-bg {
-        @apply bg-cover bg-center bg-no-repeat rounded-xl;
-        background-image:
-            linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.6)),
-            url("https://lh3.googleusercontent.com/aida-public/AB6AXuAtlxbsoUuOX7rIjXOL5lTMkTlaw0Kw5c_xpi057ol8G1ooZtX5ADecvWrIuRU7d6j9ZCkfW3yr5nSOlpzgqHzLY1-itAhgcZmPL7k3dF2185wMicNsR05FnREMxbDFWhVfggg01Wan6Ty3SwOc5N9u1S7D3l2k7HKxshUMF4obXPvsvTb49pnArWz0tIATu3fyoAubCVGX1kP46OA4hB6fNfeI81MJ165Qiu2XSqC2BUWrtgazrZvp54s93emrlPUiZeZXgDsnPqs");
-    }
-
     .hero-guest{
         background-image: url("../../public/img/barriles.png")
     }
@@ -186,74 +179,8 @@
     .animate-infinite-scroll {
         animation: infinite-scroll 20s linear infinite; /* Ajusta 20s para más rápido o más lento */
     }
-
-    .bg-cat-whisky {
-        @apply absolute inset-0 bg-cover bg-center;
-        background-image:
-            linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-            url("https://lh3.googleusercontent.com/aida-public/AB6AXuCsz-fNkcPBFj2Wd7i7cbzhS2Qrwyoy6skejrAD6Nvl7KFg7bPu8Lo5Zv5JZKDQWGOwLziwe_sRJvg7FC_nEQce8kydtOWvAII0rPV67Ci9zKArIKVXuOBsfGg55MfyYRTJNWh5c2G2cR_aqfMcjaTFMNiByzq-T_NNWmzENmE6NX5cfDiyYEJMfbYVge3-A0ROyVpQiafuySxHJeUT3mAHeP8Xd82RqjWIyZcrlbUQ85spkO3fYMVtFPR2UlQxmOfqYm_-J6xPPFk");
-    }
-
-    /* RON */
-    .bg-cat-ron {
-        @apply absolute inset-0 bg-cover bg-center;
-        background-image:
-            linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-            url("https://lh3.googleusercontent.com/aida-public/AB6AXuBjTCEagqlj6CfI2a0naplno_7hST6jXhx4hTevGZD6DVScNyp-lXvEesM7tQ2SWkMXqX0f79rJPJ9TsSbHPO9ox8tRBtuSm32n-38ZRozWo-Q_tHY47-gOPCNeaAtGmI9gtuL8ZzCFsOMrpLl7d68_Y_Lr4zSkzyMlXNXmD_-btxXbYBKXI9FlLSrokOGrZOGVF2yKxTRR2FBxpXO_04hGJ1bwyqZuOGLW8yWC0w4fsPN076pG7Arjj9tfVNXwHDFky--AC14Ey3k");
-    }
-
-    /* GIN */
-    .bg-cat-gin {
-        @apply absolute inset-0 bg-cover bg-center;
-        background-image:
-            linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-            url("https://lh3.googleusercontent.com/aida-public/AB6AXuD_zmJJbXC0lDv23tWfiLQI7lwv-xPsABDfB0yy6cksNruz5Dq0AlATgY3sLrA53r_y8hayqVoATF5K30IFGX6DHW2XFNtktyNxQH6ggqt-l07S1O3mYddqxajl7CpBqdhMgldm8nyaerkfW8uteqNpjXFyNQuShZtDTygLkj-vXSGeLwGQ5ubSL7SdIQyOzJ_fWxr-xZRAcBYkexzmrPTcDV1V0J5206ylbqctBYhfxsw2UBRI7JxAFdGreRO1iajWZEIoWfp8_mg");
-    }
-
-    /* TEQUILA */
-    .bg-cat-tequila {
-        @apply absolute inset-0 bg-cover bg-center;
-        background-image:
-            linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-            url("https://lh3.googleusercontent.com/aida-public/AB6AXuDzr-kEuNBnTvTp_Vhee-ArKZiSrOxnwdhSMUo9lHOyuaZJdALpD_jie6ceGDa0gyfzuQdBrzVObIWEz-7E_knCJwBA8nweLVCimvAoc_OphNmnZxw0RzIr_uQPGgiHdjZqC7BNDHzJbo2dlGpscA9JiPdVRtiBkC1Tg3tUKP_DSwk8TlzqexLCLHjJdvKXnQzKrGFhqA_riSooUQE_KpaFE3lcFd_XudFUmI89o8ORfbURJ8owufbMWwfPcafkMT_SpwpAirdaYS8");
-    }
-
-    /* VINO */
-    .bg-cat-vino {
-        @apply absolute inset-0 bg-cover bg-center;
-        background-image:
-            linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-            url("https://lh3.googleusercontent.com/aida-public/AB6AXuBrmht44HLekYjVaze_-kf0cwzD6vX0eejTL7ulegx53aXhnTWLZW4_wil6oN_SWMlYmuxdp2FSI3iPyGINcS3-RU9uJBymGMs2-9Sx8AlpLhq8atoWVGaatd8F5a5oltpBIxqZcNQT9NMkEdvL0fvBg0ev6idqPk__XNMUYVefjKdoB0U7WM1oiXCb5FnvuKkM2T0nQ1QjIlzGv-U7jDve74OkPaZNq_HMbgqrza6pJ_9O8AFda4_MJEH5X9pNrJ37zuSrG98AHY4");
-    }
-
-    /* CERVEZA */
-    .bg-cat-cerveza {
-        @apply absolute inset-0 bg-cover bg-center;
-        background-image:
-            linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
-            url("https://lh3.googleusercontent.com/aida-public/AB6AXuCjEQ8604aKanTjt1C7Wt_lWed6eihrXJmExY9Wf8z5p-H8hLIHw3XdopbHWNfzshQ5FBmjB4xYzqt-AQlWtkcJvTGUJN_2jJlS-pfG_HgL0QaCD5N_Kt9-HgnQ2NeYPDPckA4WtIX9II3E-fkgYOHOsdBGhTQZoi6ooC1lPJgdMg0is2JFbKS5Wo5bGQccqLYlEWS6btkly2CI-kCYdrDwUSWWtBgkuYQa5H01p8C50cZV0e0xuTo-xXyM1XykQPflkJJ_aj7nlzE");
-    }
-
-    /*Seccion licores recomendados*/
-
-    .bg-prod-whisky {
-    background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCzv_wkHrIIr-LLeQ96cw6Zv3njh_b2vG6__Q-aLbkRBV5CQ44X8xCwIW1Hdsq_ujNkvPS0ofOC6LvIAFcG7VjPla2zwnclmpnS4qsY_bBgeW7gk0aG3ty16oRi9Iis6ctXRaW8iS51hnyIps4UXUhlkRtuXuI6eGP1IIAeVemNBHbQDR8q83VG6J1vhztGoZt3lNNjIQW5Ios3klMdYMQtPzUU86ZMaZp2suhAyMkbHK2i4dSMxmmIVoPyWqXPFKH3yjxv4hk5wFU");
-    }
-
-    .bg-prod-ron {
-        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCq9Vb7cDSyOmPi5pYqEqW42p1FR9c1CM3xNBMNTLqto0Qy-yKmEvOgzZ6QrkpAkJyBNfrQ6_MujDNSVbsN8WPQA8XYalYxSpII2KfeU9ERUz7vAzBoL6ZLPg3hb4fkNfEerp4mb1T2R2vTDkCbpnIKL2aMlW4_hDdDn30GwuLG4aQSKUvD4mg3mDc8VmBosQzoFk92O-xEL9PEay-3aKNcm_2fa-J8OkKhDovwyxKKw4NY74c-tdbkSkR4t6yzK7KCPTQcLhI0EDY");
-    }
-
-    .bg-prod-gin {
-        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBbSN7myzxZsenCIjMhAvYJskz10Fl8ffXquBLRiXVPR2wW9bZ88jeIvvw6VNOIe8QoIPgxxRefNLQOHD6563LSkYsptN5lPJJ6LtB2Jaubs0tgN4xxpvMnWX2PGKxI0Rx0Ic_AUegMRj-EMl82pE8v5kzrRclAkigW7T8-wUgfk6peyHSgeunPNyG8W0GZzLTmZA0xFg_aWKi4A_uwKPer9-G-YKDyH2kazgLevxv7r_psbP3rtIztviPmeH02z1QPF_QLGxswLk0");
-    }
-
-    .bg-prod-tequila {
-        background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBYzvyZ-Y1qOlGlg3gZXF2053O0ZKEq6F-JxH1_5cDES3z8y0l17dmhEIpna7oVX0zu676q67Pk9DGEJbRJUclhGfy7cErzz7pJtqO2VbmVdcnII_A0sCIG31wr5qCTFa5umH4P3YB_ZJrGekJmKVj9LEPMke16GoC4cayJVOdXijiuRwjpDLPTXlreGfuES_RneNHm1RwWHSnAglHeWmruO6Lnbv_RO-0zPP3Nm6hPkTSyyk-YobNTInK4kWxCT3Ku6NTER_HVk7Q");
-    }
     
 }
-
 
 /* Soporte para Firefox (que usa otra sintaxis) */
 .custom-scrollbar {

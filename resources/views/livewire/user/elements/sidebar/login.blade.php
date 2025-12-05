@@ -116,19 +116,36 @@
                 type="submit"
                 wire:loading.attr="disabled"
                 wire:target="login"
-                class="w-full h-14 mt-2 rounded-xl bg-[#D4AF37] text-[#121212] text-lg font-black uppercase tracking-wide hover:bg-white hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-yellow-900/20 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group"
+                class="w-full h-14 mt-2 rounded-xl bg-[#D4AF37] text-[#121212] text-lg font-black uppercase tracking-wide hover:bg-white hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-yellow-900/20 disabled:opacity-50 disabled:cursor-not-allowed grid place-items-center group relative overflow-hidden"
             >
-                <span wire:loading.remove wire:target="login" class="flex items-center gap-2">
-                    Ingresar <span class="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">login</span>
+                {{-- 1. ESTADO NORMAL --}}
+                {{-- 'col-start-1 row-start-1' hace que ocupe el mismo espacio que el spinner --}}
+                {{-- wire:loading.class añade opacidad 0 suavemente al cargar --}}
+                <span 
+                    wire:target="login" 
+                    wire:loading.class="opacity-0 scale-90" 
+                    class="col-start-1 row-start-1 flex items-center gap-2 transition-all duration-200 ease-out"
+                >
+                    Ingresar 
+                    <span class="material-symbols-outlined text-xl leading-none group-hover:translate-x-1 transition-transform">
+                        login
+                    </span>
                 </span>
 
-                <span wire:loading.flex wire:target="login" class="items-center gap-2">
+                {{-- 2. ESTADO CARGANDO --}}
+                {{-- Empieza invisible (opacity-0). Al cargar, Livewire le quita esa clase y se muestra --}}
+                <span 
+                    wire:target="login" 
+                    wire:loading.class.remove="opacity-0 scale-90" 
+                    class="col-start-1 row-start-1 flex items-center gap-2 opacity-0 scale-90 transition-all duration-200 ease-in"
+                >
                     <svg class="animate-spin h-5 w-5 text-[#121212]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
                     <span>Verificando...</span>
                 </span>
+
             </button>
 
         </form>

@@ -3,7 +3,7 @@
     <section class="relative w-full h-[85vh] overflow-hidden">
         <div class="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1569529465841-dfecdab7503b?q=80&w=1974&auto=format&fit=crop" 
-                 class="w-full h-full object-cover object-center opacity-50 scale-105 animate-pulse-slow" alt="Banner">
+                class="w-full h-full object-cover object-center opacity-50 scale-105 animate-pulse-slow" alt="Banner">
             <div class="absolute inset-0 bg-gradient-to-t from-[#121212] via-[#121212]/60 to-transparent"></div>
             <div class="absolute inset-0 bg-gradient-to-r from-[#121212]/90 via-transparent to-transparent"></div>
         </div>
@@ -37,28 +37,74 @@
         </div>
     </section>
 
-    <section class="py-20 container mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">Explora por Categoría</h2>
-            <div class="h-1 w-20 bg-[#D4AF37] mx-auto rounded-full"></div>
+    <section class="py-20 container mx-auto px-4 relative" x-data="{ 
+        scroll(direction) {
+            const container = $refs.catSlider;
+            // CAMBIO: Ahora nos movemos el ancho exacto de la pantalla visible menos un margen
+            // para que el usuario vea un pedacito del anterior y no se pierda.
+            const scrollAmount = container.clientWidth * 0.85; 
+            
+            if (direction === 'left') {
+                container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                const maxScroll = container.scrollWidth - container.clientWidth;
+                
+                // Si estamos muy cerca del final (margen de 20px), volvemos al inicio
+                if (container.scrollLeft >= maxScroll - 20) {
+                    container.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                }
+            }
+        }
+    }">
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">Explora por Categoría</h2>
+                <div class="h-1 w-20 bg-[#D4AF37] rounded-full"></div>
+            </div>
+
+            <div class="flex gap-2">
+                <button @click="scroll('left')" class="h-10 w-10 rounded-full border border-white/10 bg-white/5 text-white hover:bg-[#D4AF37] hover:text-black hover:border-[#D4AF37] flex items-center justify-center transition-all active:scale-95">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+                <button @click="scroll('right')" class="h-10 w-10 rounded-full border border-white/10 bg-white/5 text-white hover:bg-[#D4AF37] hover:text-black hover:border-[#D4AF37] flex items-center justify-center transition-all active:scale-95">
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+            </div>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+
+        <div class="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scroll-smooth no-scrollbar" 
+            x-ref="catSlider"
+            style="scrollbar-width: none; -ms-overflow-style: none;">
+            
+            <style>div[x-ref="catSlider"]::-webkit-scrollbar { display: none; }</style>
+
             @php
                 $categories = [
                     ['name' => 'Whiskey', 'img' => 'https://images.unsplash.com/photo-1527281400683-1aae777175f8?auto=format&fit=crop&w=400'],
                     ['name' => 'Ron', 'img' => 'https://images.unsplash.com/photo-1614313511387-1436a4480ebb?auto=format&fit=crop&w=400'],
-                    ['name' => 'Gin', 'img' => 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=400'],
+                    ['name' => 'Ginebra', 'img' => 'https://images.unsplash.com/photo-1583225556361-bba423e3a21c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D=400'],
+                    ['name' => 'Brandy', 'img' => 'https://images.unsplash.com/photo-1734857840011-ce0b78545404?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D=400'],
+                    ['name' => 'Vodka', 'img' => 'https://images.unsplash.com/photo-1550985543-f47f38aeee65?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D=400'],
                     ['name' => 'Tequila', 'img' => 'https://images.unsplash.com/photo-1516535794938-6063878f08cc?auto=format&fit=crop&w=400'],
-                    ['name' => 'Vino', 'img' => 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=400'],
+                    ['name' => 'Vino', 'img' => 'https://images.unsplash.com/photo-1606657765076-44154cfec14d?q=80&w=1977&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D=400'],
                     ['name' => 'Cerveza', 'img' => 'https://images.unsplash.com/photo-1618885472179-5e474019f2a9?auto=format&fit=crop&w=400&q=80'],
+                    ['name' => 'Aguardiente', 'img' => 'https://images.unsplash.com/photo-1635247187043-05ef00152506?fm=jpg&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fHNob3QlMjBnbGFzc3xlbnwwfHwwfHx8MA%3D%3D&ixlib=rb-4.1.0&q=60&w=400'],
                 ];
             @endphp
+
             @foreach($categories as $cat)
-                <a href="{{ route('catalog', ['category' => $cat['name']]) }}" class="group relative h-64 rounded-2xl overflow-hidden cursor-pointer">
+                <a href="{{ route('catalog', ['category' => $cat['name']]) }}" class="flex-shrink-0 w-48 md:w-56 group relative h-72 rounded-2xl overflow-hidden cursor-pointer snap-center border border-white/5 hover:border-[#D4AF37]/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    
                     <img src="{{ $cat['img'] }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100">
+                    
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                    
                     <div class="absolute bottom-0 w-full p-4 text-center">
-                        <p class="text-white text-lg font-bold uppercase tracking-widest group-hover:text-[#D4AF37] transition-colors transform translate-y-2 group-hover:translate-y-0 duration-300">{{ $cat['name'] }}</p>
+                        <p class="text-white text-lg font-bold uppercase tracking-widest group-hover:text-[#D4AF37] transition-colors transform translate-y-2 group-hover:translate-y-0 duration-300">
+                            {{ $cat['name'] }}
+                        </p>
                     </div>
                 </a>
             @endforeach
@@ -92,30 +138,44 @@
     </section>
 
     <section class="py-24 container mx-auto px-4">
-        <div class="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
-            <div>
-                <span class="text-[#D4AF37] uppercase tracking-widest text-sm font-bold mb-2 block">Inspiración</span>
-                <h2 class="text-4xl font-black text-white">¿Para qué es la ocasión?</h2>
-            </div>
+    
+        <div class="mb-12">
+            <span class="text-[#D4AF37] uppercase tracking-widest text-sm font-bold mb-2 block">Inspiración</span>
+            <h2 class="text-4xl font-black text-white mb-4">¿Para qué es la ocasión?</h2>
+            
+            <p class="text-gray-400 max-w-2xl text-lg leading-relaxed border-l-2 border-[#D4AF37]/50 pl-4">
+                Hemos seleccionado las mejores opciones basándonos en precio y categoría para tu momento especial.
+            </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 h-[500px] md:h-[400px]">
-            <a href="{{ route('catalog') }}" class="group relative rounded-2xl overflow-hidden h-full">
-                <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-80">
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                <div class="absolute bottom-6 left-6">
+            
+            <a href="{{ route('catalog', ['occasion' => 'gift']) }}" class="group relative rounded-2xl overflow-hidden h-full cursor-pointer border border-white/5 hover:border-[#D4AF37]/50 transition-all">
+                <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600" 
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-80">
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+                
+                <div class="absolute bottom-6 left-6 z-10">
+                    <div class="w-10 h-1 bg-[#D4AF37] mb-3 rounded-full"></div>
                     <h3 class="text-2xl font-bold text-white mb-1 group-hover:text-[#D4AF37] transition-colors">Para Regalar</h3>
-                    <p class="text-gray-300 text-sm">Detalles que impresionan</p>
+                    <p class="text-gray-300 text-sm font-medium">Selección Premium & Lujo</p>
                 </div>
             </a>
-            <a href="{{ route('catalog') }}" class="group relative rounded-2xl overflow-hidden h-full md:col-span-2">
-                <img src="{{ asset('img/licores.png') }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-80">
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                <div class="absolute bottom-6 left-6">
+
+            <a href="{{ route('catalog', ['occasion' => 'party']) }}" class="group relative rounded-2xl overflow-hidden h-full md:col-span-2 cursor-pointer border border-white/5 hover:border-[#D4AF37]/50 transition-all">
+                <img src="https://images.unsplash.com/photo-1516997121675-4c2d1684aa3e?auto=format&fit=crop&w=1200" 
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-80">
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+                
+                <div class="absolute bottom-6 left-6 z-10">
+                    <div class="w-10 h-1 bg-[#D4AF37] mb-3 rounded-full"></div>
                     <h3 class="text-2xl font-bold text-white mb-1 group-hover:text-[#D4AF37] transition-colors">Celebración & Fiesta</h3>
-                    <p class="text-gray-300 text-sm">Los infaltables de la noche</p>
+                    <p class="text-gray-300 text-sm font-medium">Los infaltables de la noche</p>
                 </div>
             </a>
+
         </div>
     </section>
 
@@ -123,7 +183,7 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col lg:flex-row gap-12 items-center">
                 <div class="lg:w-1/2">
-                    <span class="text-[#D4AF37] font-bold uppercase tracking-widest text-sm mb-2 block">LicUp Academy</span>
+                    <span class="text-[#D4AF37] font-bold uppercase tracking-widest text-sm mb-2 block">LicUp</span>
                     <h2 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
                         Aprende a catar como un <span class="text-[#D4AF37]">Profesional</span>
                     </h2>

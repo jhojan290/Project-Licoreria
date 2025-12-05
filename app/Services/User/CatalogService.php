@@ -39,6 +39,23 @@ class CatalogService
             };
         }
 
+
+        if (!empty($filters['occasion'])) {
+            if ($filters['occasion'] === 'gift') {
+                // LÓGICA REGALO: Precio mayor a 100k O Categorías Premium
+                $query->where(function($q) {
+                    $q->where('price', '>=', 100000)
+                    ->orWhereIn('category', ['Whiskey', 'Vino', 'Ginebra', 'Brandy']);
+                });
+            } elseif ($filters['occasion'] === 'party') {
+                // LÓGICA FIESTA: Precio menor a 100k O Categorías de Fiesta
+                $query->where(function($q) {
+                    $q->where('price', '<', 100000)
+                    ->orWhereIn('category', ['Aguardiente', 'Ron', 'Tequila', 'Cerveza', 'Vodka']);
+                });
+            }
+        }
+
         // 5. ORDENAMIENTO (Sin popularidad)
         match ($sort) {
             'price_asc'  => $query->orderBy('price', 'asc'),

@@ -19,6 +19,7 @@ class CatalogPage extends Component
     #[Url(except: '')] public $brand = '';
     #[Url(except: '')] public $priceRange = '';
     #[Url(except: 'newest')] public $sort = 'newest';
+    #[Url(except: '')] public $occasion = '';
 
     // Resetear paginación al filtrar
     public function updatedSearch() { $this->resetPage(); }
@@ -28,7 +29,7 @@ class CatalogPage extends Component
 
     public function clearFilters()
     {
-        $this->reset(['search', 'category', 'brand', 'priceRange', 'sort']);
+        $this->reset(['search', 'category', 'brand', 'priceRange', 'sort', 'occasion']);
         $this->resetPage();
     }
 
@@ -41,6 +42,7 @@ class CatalogPage extends Component
             'category' => $this->category,
             'brand' => $this->brand,
             'priceRange' => $this->priceRange,
+            'occasion' => $this->occasion,
         ], $this->sort);
     }
 
@@ -66,6 +68,7 @@ class CatalogPage extends Component
         // 3. ABRIR EL SIDEBAR (Esto es lo que faltaba)
         $this->dispatch('openSidebar', title: 'Tu Carrito', partial: 'cart');
     }
+    
 
     public function render()
     {
