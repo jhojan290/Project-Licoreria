@@ -53,6 +53,13 @@ class Sidebar extends Component
         $this->open = false;
     }
 
+    #[On('close-sidebar')]
+    public function closeFromChild()
+    {
+        $this->open = false;
+    }
+
+
     public function render()
     {
         return view('livewire.user.elements.sidebar');

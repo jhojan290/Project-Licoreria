@@ -34,11 +34,11 @@
         
         @forelse($this->cartItems as $item)
             <div wire:key="cart-item-{{ $item['id'] }}" 
-                 class="group flex gap-4 p-3 rounded-xl transition-all duration-300 hover:bg-white/5 border 
-                 {{ in_array($item['id'], $selected) ? 'bg-white/[0.02] border-[#D4AF37]/30 shadow-lg shadow-black/20' : 'border-transparent opacity-80 hover:opacity-100 grayscale-[0.3] hover:grayscale-0' }}">
+                class="group flex gap-4 p-3 rounded-xl transition-all duration-300 hover:bg-white/5 border 
+                {{ in_array($item['id'], $selected) ? 'bg-white/[0.02] border-[#D4AF37]/30 shadow-lg shadow-black/20' : 'border-transparent opacity-80 hover:opacity-100 grayscale-[0.3] hover:grayscale-0' }}">
                 
                 <div class="flex items-center self-center flex-shrink-0 pl-1">
-                     <label class="relative flex items-center cursor-pointer p-1">
+                    <label class="relative flex items-center cursor-pointer p-1">
                         <input 
                             type="checkbox" 
                             value="{{ $item['id'] }}"
@@ -168,9 +168,15 @@
             </div>
 
             <div class="mt-5 text-center">
-                <button @click="$dispatch('close-sidebar')" class="text-xs font-bold text-gray-500 hover:text-white transition-colors cursor-pointer border-b border-transparent hover:border-white pb-0.5">
-                    Seguir Comprando
-                </button>
+                <div class="mt-5 text-center">
+                    <button 
+                        type="button"
+                        @click="$dispatch('close-sidebar')" 
+                        class="text-xs font-bold text-gray-500 hover:text-white transition-colors cursor-pointer border-b border-transparent hover:border-white pb-0.5"
+                    >
+                        Seguir Comprando
+                    </button>
+                </div>
             </div>
         </div>
     @endif

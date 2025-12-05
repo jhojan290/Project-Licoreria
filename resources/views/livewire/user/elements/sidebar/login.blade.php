@@ -38,7 +38,7 @@
             <div class="flex items-center gap-3 group">
                 <img src="{{ asset('img/licUp.png') }}" alt="LicUp" class="h-12 w-auto object-contain drop-shadow-lg group-hover:scale-105 transition-transform duration-500">
                 <div class="h-10 w-[2px] bg-[#D4AF37] rounded-full opacity-80"></div>
-                <h2 class="text-4xl font-black tracking-tighter font-licup text-[#D4AF37]">
+                <h2 class="text-3xl font-black tracking-tighter font-licup text-[#D4AF37]">
                     LicUp
                 </h2>
             </div>

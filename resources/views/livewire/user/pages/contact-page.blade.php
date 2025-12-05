@@ -30,7 +30,7 @@
                     <div class="absolute top-0 right-0 w-20 h-20 bg-[#25D366]/10 rounded-full blur-xl -mr-4 -mt-4 group-hover:bg-[#25D366]/20 transition-colors"></div>
                     <div class="relative z-10 flex items-center gap-4">
                         <div class="w-12 h-12 bg-[#25D366]/10 rounded-full flex items-center justify-center text-[#25D366] group-hover:bg-[#25D366] group-hover:text-white transition-all">
-                            <span class="material-symbols-outlined text-2xl">chat</span>
+                            <img src="{{ asset('img/wp.png') }}">
                         </div>
                         <div>
                             <h3 class="text-lg font-bold text-white mb-0.5">WhatsApp</h3>
