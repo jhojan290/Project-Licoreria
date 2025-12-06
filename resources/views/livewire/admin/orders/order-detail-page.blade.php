@@ -1,3 +1,4 @@
+@section('title', $order->id . ' | LicUp')
 <div class="layout-container flex h-full grow flex-col bg-background-dark min-h-screen font-display">
     <div class="flex flex-1 justify-center py-6 md:py-10 px-4 sm:px-6 lg:px-8">
         <div class="w-full max-w-7xl flex-1 flex flex-col">

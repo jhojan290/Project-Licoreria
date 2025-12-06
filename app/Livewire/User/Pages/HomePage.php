@@ -5,7 +5,9 @@ namespace App\Livewire\User\Pages;
 use Livewire\Component;
 use App\Models\Product;
 use App\Services\User\CartService; // Importar para el carrito
+use Livewire\Attributes\Title;
 
+#[Title('Inicio - LicUp')]
 class HomePage extends Component
 {
     // PROPIEDAD COMPUTADA: Productos Recomendados

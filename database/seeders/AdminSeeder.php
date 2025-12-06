@@ -15,10 +15,10 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         User::updateOrCreate(
-            ['email' => 'jdagudeloadm@gmail.com'], // 1. Busca por este campo
+            ['email' => 'stivenydios3816@gmail.com'], // 1. Busca por este campo
             [
                 'name' => 'Admin', // <--- AQUÍ CAMBIAS EL NOMBRE
-                'password' => Hash::make('devadmprue2854#.'), // Se actualiza la contraseña (o se deja la misma)
+                'password' => Hash::make('admin2025#'), // Se actualiza la contraseña (o se deja la misma)
                 'role' => 'admin',
             ]
         );

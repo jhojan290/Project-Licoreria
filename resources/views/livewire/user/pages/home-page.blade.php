@@ -1,3 +1,5 @@
+@section('title', 'Inicio | LicUp')
+
 <main class="flex-grow bg-background-dark font-display overflow-hidden">
 
     <section class="relative w-full h-[85vh] overflow-hidden">
@@ -306,4 +308,5 @@
     </section>
 
 </main>
+
 

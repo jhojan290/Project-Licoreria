@@ -10,22 +10,23 @@
                 <div class="relative mb-8">
                     <div class="absolute inset-0 bg-green-500/20 blur-2xl rounded-full animate-pulse"></div>
                     <div class="relative bg-[#121212] border-2 border-green-500/50 p-6 rounded-full shadow-2xl">
-                        <span class="material-symbols-outlined text-6xl text-green-500">check_circle</span>
+                        <span class="material-symbols-outlined text-6xl text-green-500">whatsapp</span>
                     </div>
                 </div>
                 
-                <h1 class="text-5xl font-black text-white mb-4 tracking-tight">¡Compra Exitosa!</h1>
-                <p class="text-gray-400 text-lg mb-10 max-w-md leading-relaxed">
-                    Tu pedido ha sido procesado. Hemos enviado la factura electrónica y los detalles de envío a tu correo.
+                <h1 class="text-5xl font-black text-white mb-4 tracking-tight">¡Casi listo!</h1>
+                <p class="text-gray-400 text-lg mb-8 max-w-lg leading-relaxed">
+                    Tu pedido <strong>ha sido registrado</strong> en nuestro sistema.
+                    <br><br>
+                    Se ha abierto una nueva pestaña con <strong>WhatsApp</strong> para que confirmes el pago y el envío con nuestro administrador.
                 </p>
                 
-                <a href="{{ route('catalog') }}" class="group relative inline-flex h-14 px-10 items-center justify-center rounded-full bg-[#D4AF37] text-[#121212] font-bold text-lg hover:bg-white transition-all shadow-[0_0_30px_rgba(212,175,55,0.3)] hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] hover:-translate-y-1">
-                    <span class="material-symbols-outlined mr-2 group-hover:-translate-x-1 transition-transform">arrow_back</span>
-                    Volver al Catálogo
-                </a>
+                <div class="flex flex-col gap-4">
+                    <p class="text-xs text-gray-500">¿No se abrió WhatsApp?</p>
+                    <a href="{{ route('catalog') }}" class="text-[#D4AF37] font-bold hover:underline">Volver al Catálogo</a>
+                </div>
             </div>
-        @else
-            
+        @else      
             <div class="flex items-center justify-between mb-10">
                 <a href="{{ route('catalog') }}" class="group flex items-center gap-3 text-gray-400 hover:text-white transition-colors font-bold uppercase tracking-widest text-xs">
                     <div class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#D4AF37] group-hover:text-[#D4AF37] transition-all">
@@ -262,34 +263,38 @@
                                 <span>Productos ({{ count($selected) }})</span>
                                 <span>${{ number_format($this->checkoutTotal, 0, ',', '.') }}</span>
                             </div>
+                            
                             <div class="flex justify-between text-white text-xl font-black pt-2 mb-6">
                                 <span>Total a Pagar</span>
                                 <span class="text-[#D4AF37]">${{ number_format($this->checkoutTotal, 0, ',', '.') }}</span>
                             </div>
 
                             <button 
-                                wire:click="initiatePayment"  {{-- CAMBIO: Llamamos a iniciar, no a completar --}}
+                                wire:click="confirmOrder" 
                                 wire:loading.attr="disabled" 
-                                wire:target="initiatePayment"
+                                wire:target="confirmOrder"
                                 @if(count($selected) == 0) disabled @endif
-                                class="w-full h-16 mt-8 rounded-2xl text-lg font-black uppercase tracking-wide transition-all shadow-xl flex items-center justify-center gap-3 group relative overflow-hidden
+                                class="w-full h-16 rounded-2xl text-lg font-black uppercase tracking-wide transition-all shadow-xl flex items-center justify-center gap-2 group relative overflow-hidden
                                 {{ count($selected) > 0 
-                                    ? 'bg-[#D4AF37] text-[#121212] hover:bg-white hover:scale-[1.02] shadow-yellow-900/20 cursor-pointer' 
+                                    ? 'bg-[#25D366] text-white hover:bg-[#1ebd59] shadow-green-900/20 cursor-pointer' 
                                     : 'bg-white/10 text-gray-500 cursor-not-allowed' }}"
                             >
-                                <span wire:loading.remove wire:target="initiatePayment" class="flex items-center gap-2 relative z-10">
-                                    <span>Continuar al Pago</span> {{-- Texto más realista --}}
-                                    <span class="material-symbols-outlined text-2xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out {{ count($selected) == 0 ? 'hidden' : '' }}"></div>
+
+                                <span wire:loading.remove wire:target="confirmOrder" class="flex items-center gap-2 relative z-10">
+                                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.31-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                                    Confirmar en WhatsApp
                                 </span>
                                 
-                                <span wire:loading.flex wire:target="initiatePayment" class="items-center gap-3 relative z-10">
-                                    <svg class="animate-spin h-6 w-6 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                {{-- Estado Cargando --}}
+                                <span wire:loading.flex wire:target="confirmOrder" class="items-center gap-2 relative z-10">
+                                    <svg class="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                                     <span>Procesando...</span>
                                 </span>
                             </button>
                             
                             <p class="text-center text-[10px] text-gray-500 mt-4 leading-tight px-4">
-                                Al confirmar, aceptas nuestros <a href="#" class="underline hover:text-white">Términos y Condiciones</a>.
+                                Serás redirigido al chat para finalizar tu pago y envío.
                             </p>
                         </div>
                     </div>
@@ -341,121 +346,13 @@
             </div>
         @endif
     </div>
-
-    <div x-data="{ open: @entangle('showBankModal') }" 
-        x-show="open" 
-        x-cloak
-        class="fixed inset-0 z-[100] flex items-center justify-center px-4 font-display"
-    >
-        <div 
-            x-show="open" 
-            x-transition.opacity 
-            @click="open = false" 
-            class="absolute inset-0 bg-black/90 backdrop-blur-md cursor-pointer"
-        ></div>
-
-        <div x-show="open" 
-            @click.stop
-            x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0 scale-95 translate-y-10"
-            x-transition:enter-end="opacity-100 scale-100 translate-y-0"
-            class="relative w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden z-10"
-        >
-            <div class="px-8 py-6 flex items-center justify-between rounded-t-3xl border-b border-black/5
-                {{ $selectedPaymentMethod === 'nequi' ? 'bg-[#120031]' : '' }}
-                {{ $selectedPaymentMethod === 'daviplata' ? 'bg-[#ED1C24]' : '' }}
-                {{ $selectedPaymentMethod === 'bancolombia' ? 'bg-white' : '' }}
-                {{ $selectedPaymentMethod === 'pse' ? 'bg-white' : '' }}
-            ">
-                
-                <div class="flex items-center gap-4">
-                    @if(in_array($selectedPaymentMethod, ['nequi', 'daviplata']))
-                        <div class="bg-white p-2 rounded-xl shadow-lg border border-white/20 flex items-center justify-center h-14 w-14">
-                            @if($selectedPaymentMethod === 'nequi')
-                                <img src="{{ asset('img/nequi.jpg') }}" class="h-full w-full object-contain rounded-lg">
-                            @else
-                                <img src="{{ asset('img/davivienda.png') }}" class="h-full w-full object-contain">
-                            @endif
-                        </div>
-                        <div class="flex flex-col text-white">
-                            <span class="text-xs opacity-80 font-medium uppercase tracking-wider">Pagando con</span>
-                            <span class="text-xl font-bold capitalize">{{ $selectedPaymentMethod }}</span>
-                        </div>
-
-                    @else
-                        <div class="flex flex-col">
-                            <span class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">Pagando con</span>
-                            @if($selectedPaymentMethod === 'bancolombia')
-                                <img src="{{ asset('img/bancolombia.jpg') }}" class="h-10 w-auto object-contain">
-                            @elseif($selectedPaymentMethod === 'pse')
-                                <img src="{{ asset('img/pse.jpg') }}" class="h-12 w-auto object-contain">
-                            @endif
-                        </div>
-                    @endif
-                </div>
-
-                <button @click="open = false" 
-                    class="p-2 rounded-full transition-all hover:scale-110 focus:outline-none
-                    {{ in_array($selectedPaymentMethod, ['nequi', 'daviplata']) 
-                        ? 'text-white/70 hover:text-white hover:bg-white/10' 
-                        : 'text-gray-400 hover:text-black hover:bg-gray-100' }}">
-                    <span class="material-symbols-outlined text-2xl">close</span>
-                </button>
-            </div>
-
-            <div class="p-8 bg-white text-gray-800">
-                
-                <div class="text-center mb-6">
-                    <p class="text-sm text-gray-500 uppercase tracking-wider font-bold mb-1">Total a Pagar</p>
-                    <p class="text-3xl font-black text-gray-900">${{ number_format($this->checkoutTotal, 0, ',', '.') }}</p>
-                </div>
-
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-500 uppercase mb-2">
-                            @if($selectedPaymentMethod === 'nequi' || $selectedPaymentMethod === 'daviplata')
-                                Número de Celular
-                            @elseif($selectedPaymentMethod === 'bancolombia')
-                                Usuario Sucursal Virtual
-                            @else
-                                Correo Electrónico registrado en PSE
-                            @endif
-                        </label>
-                        <input type="text" wire:model="bankField" 
-                            class="w-full h-12 px-4 rounded-xl bg-gray-100 border border-gray-200 text-gray-900 focus:border-black focus:ring-0 font-bold text-lg outline-none transition-all"
-                            placeholder="{{ $selectedPaymentMethod === 'nequi' ? '300 123 4567' : 'Ingresa tus datos...' }}"
-                        >
-                        @error('bankField') <span class="text-red-500 text-xs font-bold">{{ $message }}</span> @enderror
-                    </div>
-
-                    <p class="text-xs text-gray-400 text-center leading-relaxed">
-                        Estás en un entorno seguro simulado. Al continuar, se procesará el pedido en LicUp.
-                    </p>
-                </div>
-
-                <button 
-                    wire:click="finalizeTransaction"
-                    wire:loading.attr="disabled"
-                    class="w-full h-14 mt-6 rounded-xl text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed
-                    {{ $selectedPaymentMethod === 'nequi' ? 'bg-[#DA0081] hover:bg-[#b5006b]' : '' }}
-                    {{ $selectedPaymentMethod === 'daviplata' ? 'bg-[#ED1C24] hover:bg-[#c4151c]' : '' }}
-                    {{ $selectedPaymentMethod === 'bancolombia' ? 'bg-[#FDDA24] text-black hover:bg-yellow-500' : '' }}
-                    {{ $selectedPaymentMethod === 'pse' ? 'bg-[#0071CE] hover:bg-[#005bb5]' : '' }}"
-                >
-                    <span wire:loading.remove class="flex items-center justify-center w-full h-full">
-                        Pagar Ahora
-                    </span>
-                    
-                    <span wire:loading.flex class="items-center justify-center gap-2 w-full h-full">
-                        <svg class="animate-spin h-5 w-5 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        <span>Procesando...</span>
-                    </span>
-                </button>
-
-            </div>
-        </div>
-    </div>
 </div>
+
+@script
+<script>
+    $wire.on('open-whatsapp', (event) => {
+        // En Livewire 3, event es el objeto con los parámetros
+        window.open(event.url, '_blank');
+    });
+</script>
+@endscript

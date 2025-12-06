@@ -1,3 +1,5 @@
+@section('title', 'Catalogo | LicUp')
+
 <main class="flex-grow bg-background-dark min-h-screen font-display">
     
     <div class="relative bg-[#0f0f0f] border-b border-white/5 py-12 md:py-16">
@@ -126,8 +128,8 @@
                             <a href="{{ route('product.detail', $product->id) }}" class="block relative aspect-[4/5] bg-gradient-to-b from-white/5 to-[#121212] p-6 flex items-center justify-center overflow-hidden">
                                 @if($product->image_path)
                                     <img src="{{ asset('storage/' . $product->image_path) }}" 
-                                         alt="{{ $product->name }}" 
-                                         class="h-full w-full object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-2xl">
+                                        alt="{{ $product->name }}" 
+                                        class="h-full w-full object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-2xl">
                                 @else
                                     <div class="flex flex-col items-center text-gray-700">
                                         <span class="material-symbols-outlined text-6xl mb-2">image_not_supported</span>

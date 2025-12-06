@@ -35,7 +35,7 @@ class CheckoutPage extends Component
         }
 
         if (empty($cartContent)) {
-            return redirect()->route('catalogo');
+            return redirect()->route('catalog');
         }
 
         // 2. Sincronizar selección
@@ -94,21 +94,30 @@ class CheckoutPage extends Component
     // ====================================================
     // PASO 2: PROCESAR TRANSACCIÓN REAL (Al confirmar en Modal)
     // ====================================================
-    public function finalizeTransaction(CartService $cartService, CheckoutService $checkoutService)
+    public function confirmOrder(CartService $cartService, CheckoutService $checkoutService)
     {
-        // Validación del campo falso del banco (para realismo)
+        // 1. Validaciones
         $this->validate([
-            'bankField' => 'required'
-        ], ['bankField.required' => 'Este campo es obligatorio por tu banco.']);
+            'address' => 'required|min:5',
+            'city' => 'required',
+            'phone' => 'required|numeric',
+            'identification' => 'required',
+            'selectedPaymentMethod' => 'required', 
+        ], [
+            'selectedPaymentMethod.required' => 'Por favor selecciona un banco para continuar.'
+        ]);
 
-        // 1. Filtrar items seleccionados
-        $allItems = $cartService->getContent();
-        $itemsToPay = array_filter($allItems, function($key) {
-            return in_array((string)$key, $this->selected);
-        }, ARRAY_FILTER_USE_KEY);
+        if (empty($this->selected)) {
+            $this->addError('payment', 'Debes seleccionar productos.');
+            return;
+        }
 
-        // 2. Procesar la orden (DB, Stock, Correo)
-        $checkoutService->processOrder([
+        // 2. Filtrar items seleccionados
+        $items = $cartService->getContent();
+        $itemsToPay = array_filter($items, fn($key) => in_array((string)$key, $this->selected), ARRAY_FILTER_USE_KEY);
+
+        // 3. Procesar Orden
+        $order = $checkoutService->processOrder([
             'payment_method' => $this->selectedPaymentMethod,
             'address' => $this->address,
             'city' => $this->city,
@@ -116,10 +125,37 @@ class CheckoutPage extends Component
             'identification' => $this->identification,
         ], $itemsToPay, $this->checkoutTotal);
 
-        // 3. Limpiar carrito y mostrar éxito
+        // 4. Limpiar carrito
         $cartService->removeMultiple($this->selected);
-        $this->showBankModal = false;
-        $this->success = true;
+        
+        // 5. CONSTRUIR MENSAJE DE WHATSAPP (Con lista de productos)
+        $numeroVendedor = '573102640889'; // TU NÚMERO REAL
+        $nombreCliente = Auth::user()->name;
+        
+        $msg  = "Hola *LicUp* 🥃, quiero finalizar mi pedido.\n\n";
+        $msg .= "🧾 *Orden:* #{$order->id}\n";
+        $msg .= "👤 *Cliente:* {$nombreCliente}\n";
+        
+        // ↓↓↓ AQUÍ AGREGAMOS LOS PRODUCTOS ↓↓↓
+        $msg .= "📦 *Productos:*\n";
+        foreach ($itemsToPay as $item) {
+            $subtotalItem = number_format($item['price'] * $item['quantity'], 0, ',', '.');
+            $msg .= "▪ {$item['quantity']}x {$item['name']} (\${$subtotalItem})\n";
+        }
+        $msg .= "\n"; // Espacio
+        // ↑↑↑ FIN DE LA LISTA DE PRODUCTOS ↑↑↑
+
+        $msg .= "📍 *Entrega:* {$this->address}, {$this->city}\n";
+        $msg .= "💰 *Total a Pagar:* $" . number_format($this->checkoutTotal, 0, ',', '.') . "\n";
+        $msg .= "💳 *Método:* " . ucfirst($this->selectedPaymentMethod) . "\n\n";
+        $msg .= "Quedo atento a los datos de la cuenta para transferir.";
+
+        $url = "https://wa.me/{$numeroVendedor}?text=" . urlencode($msg);
+
+        $this->success = true; // Para mostrar la pantalla de "Pedido en Proceso"
+        
+        // Enviamos la URL al navegador para que la abra él
+        $this->dispatch('open-whatsapp', url: $url);
     }
 
     // ====================================================
@@ -135,7 +171,7 @@ class CheckoutPage extends Component
             $this->selected = [];
 
             if (empty($cartService->getContent())) {
-                return redirect()->route('catalogo');
+                return redirect()->route('catalog');
             }
             
             $this->dispatch('cart-updated');

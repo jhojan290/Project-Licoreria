@@ -1,5 +1,5 @@
 @extends('layouts.user')
-
+@section('title', 'Contacto | LicUp')
 @section('content')
 <main class="flex-grow bg-background-dark min-h-screen font-display">
     

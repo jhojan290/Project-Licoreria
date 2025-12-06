@@ -1,13 +1,13 @@
 @extends('layouts.user')
-
+@section('title', 'Sobre Nosotros | LicUp')
 @section('content')
 <main class="flex-grow bg-background-dark font-display overflow-hidden text-gray-300">
 
     <section class="relative w-full h-[70vh] flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=2069&auto=format&fit=crop" 
-                 class="w-full h-full object-cover opacity-40" 
-                 alt="Bodega de Licores">
+                class="w-full h-full object-cover opacity-40" 
+                alt="Bodega de Licores">
             <div class="absolute inset-0 bg-gradient-to-b from-[#121212] via-[#121212]/60 to-[#121212]"></div>
         </div>
 
@@ -32,8 +32,8 @@
                 <div class="absolute top-4 -left-4 w-full h-full border-2 border-[#D4AF37]/30 rounded-2xl transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 duration-500"></div>
                 <div class="relative rounded-2xl overflow-hidden shadow-2xl">
                     <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000&auto=format&fit=crop" 
-                         class="w-full h-[500px] object-cover grayscale group-hover:grayscale-0 transition-all duration-700" 
-                         alt="Historia">
+                        class="w-full h-[500px] object-cover grayscale group-hover:grayscale-0 transition-all duration-700" 
+                        alt="Historia">
                 </div>
             </div>
 
