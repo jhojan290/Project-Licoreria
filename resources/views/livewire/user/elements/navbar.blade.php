@@ -9,7 +9,7 @@
             <div class="flex items-center gap-8">
                 <a href="/inicio" class="flex items-center gap-4 text-white hover:opacity-90 transition-opacity group">
                     <img 
-                        src="{{ asset('img/licUp.png') }}" 
+                        src="{{ asset('img/LicUp.png') }}" 
                         alt="Logo LicUp" 
                         class="h-12 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
                     >
