@@ -39,16 +39,17 @@
             {{-- SECCIÓN DERECHA: ACCIONES --}}
             <div class="flex items-center justify-end gap-2 sm:gap-4">
 
-                {{-- LÓGICA DE USUARIO --}}
                 @auth
                     <div x-data="{ open: false }" class="relative">
                         <button @click="open = !open" @click.outside="open = false"
                             class="flex h-10 items-center gap-2 px-3 rounded-lg bg-primary text-background-dark hover:bg-white/10 hover:text-primary transition-colors cursor-pointer border border-transparent focus:outline-none max-w-[150px] sm:max-w-none">
                             
-                            {{-- 5. El nombre solo aparece en pantallas medianas hacia arriba --}}
+                            {{-- CAMBIO: Ahora solo muestra el nombre --}}
                             <span class="text-sm font-bold capitalize hidden md:block truncate">
-                                Bienvenid@, {{ explode(' ', auth()->user()->name)[0] }}
+                                {{ explode(' ', auth()->user()->name)[0] }}
                             </span>
+
+                            {{-- En móviles sigue mostrando solo el ícono para ahorrar espacio --}}
                             <span class="md:hidden material-symbols-outlined text-xl">person</span>
                             
                             <span class="material-symbols-outlined text-xl transition-transform duration-200" :class="{'rotate-180': open}">
@@ -56,7 +57,7 @@
                             </span>
                         </button>
 
-                        {{-- Dropdown del usuario (Sin cambios funcionales) --}}
+                        {{-- Dropdown del usuario (Sin cambios) --}}
                         <div x-show="open" 
                             x-transition:enter="transition ease-out duration-100"
                             x-transition:enter-start="opacity-0 scale-95"
