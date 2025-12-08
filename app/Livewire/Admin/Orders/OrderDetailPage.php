@@ -73,25 +73,28 @@ class OrderDetailPage extends Component
     /**
      * 2. DESCARGAR PDF (Solo descarga el archivo)
      */
-    public function downloadInvoice($orderId = null)
+    public function downloadInvoice()
     {
-        // 1. Obtener la orden
-        $order = $orderId ? Order::with('user', 'items.product')->find($orderId) : $this->order;
+        // 1. Buscamos la orden (Igual que siempre)
+        // Es vital el 'with' para que la vista tenga los datos de productos y usuario
+        $order = Order::with(['items.product', 'user'])->find($this->order->id);
 
-        if ($order) {
-            // 2. Instanciamos el Mailable para obtener el HTML con estilos
-            $mailable = new OrderInvoice($order);
-            $html = $mailable->render();
-
-            // 3. Generamos la instancia del PDF (pero NO llamamos a ->download() directo aquí)
-            $pdf = Pdf::loadHTML($html)->setPaper('a4', 'portrait');
-
-            // 4. SOLUCIÓN FINAL: Usamos streamDownload
-            // Esto evita que Livewire intente leer el archivo binario y falle con UTF-8
-            return response()->streamDownload(function () use ($pdf) {
-                echo $pdf->output();
-            }, 'factura_orden_' . $order->id . '.pdf');
+        if (!$order) {
+            return; // O lanzar una alerta de error
         }
+
+        // 2. AQUÍ ESTÁ EL CAMBIO CLAVE:
+        // En lugar de usar la vista del correo (emails.order...), 
+        // cargamos la vista NUEVA que acabamos de crear.
+        $pdf = Pdf::loadView('pdf.facture', compact('order'));
+
+        // Opcional: Configurar tamaño de papel
+        $pdf->setPaper('a4', 'portrait');
+
+        // 3. Descargar
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->output();
+        }, 'Factura-LicUp-' . str_pad($order->id, 6, '0', STR_PAD_LEFT) . '.pdf');
     }
 
     /**

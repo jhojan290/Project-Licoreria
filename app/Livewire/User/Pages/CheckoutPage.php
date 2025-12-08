@@ -26,7 +26,6 @@ class CheckoutPage extends Component
 
     public function mount(CartService $cartService)
     {
-        // 1. Recuperamos lo que seleccionó en el sidebar
         $preSelected = session()->get('checkout_selected_ids', []);
         $cartContent = $cartService->getContent();
 
@@ -38,16 +37,13 @@ class CheckoutPage extends Component
             return redirect()->route('catalog');
         }
 
-        // 2. Sincronizar selección
+        // Sincronizar selección
         if (!empty($preSelected)) {
-            $this->selected = array_intersect($preSelected, array_keys($cartContent));
+            // array_values asegura que los indices sean 0, 1, 2...
+            $this->selected = array_values(array_intersect($preSelected, array_keys($cartContent)));
         } else {
-            $this->selected = array_map('strval', array_keys($cartContent));
+            $this->selected = array_values(array_map('strval', array_keys($cartContent)));
         }
-        
-        // Opcional: Pre-llenar datos del usuario
-        // $user = Auth::user();
-        // $this->email = $user->email; 
     }
 
     #[Computed]
@@ -162,6 +158,39 @@ class CheckoutPage extends Component
     // FUNCIONES AUXILIARES (INTACTAS)
     // ====================================================
 
+
+    #[On('cart-updated')] 
+    public function refreshCart()
+    {
+        unset($this->cartItems);
+        unset($this->total);
+        unset($this->isAllSelected);
+    }
+
+
+    public function remove($id)
+    {
+        // 1. Eliminar del servicio (Backend)
+        app(CartService::class)->remove($id);
+        
+        // 2. CORRECCIÓN DEL ERROR: 
+        // Aseguramos que $this->selected sea un array. 
+        // Si por error llegó como "true", lo convertimos a array vacío para no romper el código.
+        if (!is_array($this->selected)) {
+            $this->selected = [];
+        }
+
+        // 3. Quitamos el ID eliminado de la lista de seleccionados
+        $this->selected = array_diff($this->selected, [(string)$id]);
+        
+        // 4. IMPORTANTE: Reindexar el array
+        // Livewire prefiere arrays indexados [0, 1, 2] en lugar de huecos [0, 2, 5]
+        $this->selected = array_values($this->selected);
+        
+        // 5. Refrescar la vista
+        $this->refreshCart();
+    }
+
     public function removeSelection()
     {
         if (!empty($this->selected)) {
@@ -169,10 +198,6 @@ class CheckoutPage extends Component
             $cartService->removeMultiple($this->selected);
             
             $this->selected = [];
-
-            if (empty($cartService->getContent())) {
-                return redirect()->route('catalog');
-            }
             
             $this->dispatch('cart-updated');
         }

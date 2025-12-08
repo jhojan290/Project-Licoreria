@@ -135,8 +135,6 @@ class ProductList extends Component
 
     public function render()
     {
-
-        
         // Ya no hacemos la consulta aquí, solo pasamos la computada a la vista
         return view('livewire.admin.products.product-list', [
             'products' => $this->products // Pasamos la propiedad computada

@@ -217,6 +217,7 @@
                             </div>
                         @endif
                         
+                        <!-- seccion a cambiar -->
                         <div class="space-y-4 mb-8 max-h-[350px] overflow-y-auto custom-scrollbar pr-2">
                             @foreach($cartItems as $item)
                                 <div wire:key="checkout-item-{{ $item['id'] }}" 
@@ -236,24 +237,26 @@
                                         @endif
                                     </div>
                                     
-                                    <div class="flex-1 min-w-0 flex flex-col justify-center">
+                                    <div class="flex-1 min-w-0 flex flex-col gap-1">
                                         <p class="text-sm text-white font-medium line-clamp-1">{{ $item['name'] }}</p>
-                                        <div class="flex justify-between items-center mt-0.5">
-                                            <p class="text-xs text-gray-500">x{{ $item['quantity'] }}</p>
-                                            
-                                            <button 
-                                                wire:click="remove({{ $item['id'] }})" 
-                                                class="text-gray-600 hover:text-red-400 transition-colors p-1 rounded-full hover:bg-red-500/10"
-                                                title="Eliminar solo este producto"
-                                            >
-                                                <span class="material-symbols-outlined text-base">delete</span>
-                                            </button>
-                                        </div>
+                                        <p class="text-xs text-gray-500 mt-1">x{{ $item['quantity'] }}</p>
                                     </div>
                                     
-                                    <p class="text-sm font-black self-start whitespace-nowrap {{ in_array($item['id'], $selected) ? 'text-[#D4AF37]' : 'text-gray-600' }}">
-                                        ${{ number_format($item['price'] * $item['quantity'], 0) }}
-                                    </p>
+                                    <div class="flex flex-col items-end justify-between gap-1">
+                                        
+                                        <p class="text-sm font-black whitespace-nowrap {{ in_array($item['id'], $selected) ? 'text-[#D4AF37]' : 'text-gray-600' }}">
+                                            ${{ number_format($item['price'] * $item['quantity'], 0) }}
+                                        </p>
+
+                                        <button 
+                                            wire:click="remove({{ $item['id'] }})" 
+                                            class="text-gray-600 hover:text-red-400 transition-colors p-1 rounded-full hover:bg-red-500/10 -mr-1"
+                                            title="Eliminar solo este producto"
+                                        >
+                                            <span class="material-symbols-outlined text-base">delete</span>
+                                        </button>
+                                    </div>
+
                                 </div>
                             @endforeach
                         </div>

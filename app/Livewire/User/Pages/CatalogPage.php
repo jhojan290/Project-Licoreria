@@ -18,8 +18,22 @@ class CatalogPage extends Component
     #[Url(except: '')] public $category = '';
     #[Url(except: '')] public $brand = '';
     #[Url(except: '')] public $priceRange = '';
-    #[Url(except: 'newest')] public $sort = 'newest';
     #[Url(except: '')] public $occasion = '';
+    // CAMBIO 1: El orden por defecto ahora es 'random' (Aleatorio / Recomendados)
+    #[Url(except: 'random')] public $sort = 'random';
+
+
+
+    // --- NUEVO: Generar la semilla al cargar el componente ---
+    public function mount()
+    {
+        // Si el usuario no tiene una "semilla" de aleatoriedad, creamos una.
+        // Esto asegura que el orden sea aleatorio, pero se mantenga igual 
+        // mientras navega por las páginas 1, 2, 3...
+        if (!session()->has('catalog_seed')) {
+            session()->put('catalog_seed', rand());
+        }
+    }
 
     // Resetear paginación al filtrar
     public function updatedSearch() { $this->resetPage(); }
@@ -30,6 +44,7 @@ class CatalogPage extends Component
     public function clearFilters()
     {
         $this->reset(['search', 'category', 'brand', 'priceRange', 'sort', 'occasion']);
+        $this->sort = 'random';
         $this->resetPage();
     }
 

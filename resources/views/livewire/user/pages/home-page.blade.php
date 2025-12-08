@@ -42,16 +42,21 @@
     <section class="py-20 container mx-auto px-4 relative" x-data="{ 
         scroll(direction) {
             const container = $refs.catSlider;
-            // CAMBIO: Ahora nos movemos el ancho exacto de la pantalla visible menos un margen
-            // para que el usuario vea un pedacito del anterior y no se pierda.
-            const scrollAmount = container.clientWidth * 0.85; 
+            const scrollAmount = container.clientWidth * 0.85;
+            // Calculamos el máximo scroll posible (ancho total - ancho visible)
+            const maxScroll = container.scrollWidth - container.clientWidth;
             
             if (direction === 'left') {
-                container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                // LOGICA CORREGIDA:
+                // Si estamos al principio (con un margen de 20px), vamos al final
+                if (container.scrollLeft <= 20) {
+                    container.scrollTo({ left: maxScroll, behavior: 'smooth' });
+                } else {
+                    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                }
             } else {
-                const maxScroll = container.scrollWidth - container.clientWidth;
-                
-                // Si estamos muy cerca del final (margen de 20px), volvemos al inicio
+                // LOGICA DERECHA (Se mantiene igual):
+                // Si estamos al final, volvemos al inicio
                 if (container.scrollLeft >= maxScroll - 20) {
                     container.scrollTo({ left: 0, behavior: 'smooth' });
                 } else {
@@ -112,7 +117,7 @@
             @endforeach
         </div>
     </section>
-
+    
     <section class="py-16 bg-white/5 border-y border-white/5">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div class="p-6 rounded-2xl bg-[#121212] border border-white/5 hover:border-[#D4AF37]/30 transition-all group">
