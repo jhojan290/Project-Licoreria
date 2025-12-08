@@ -101,22 +101,47 @@
                 
                 <input id="file-upload" wire:model="image" type="file" class="sr-only" accept="image/*" />
 
-                <div class="w-full flex flex-col items-center justify-center transition-opacity duration-300" wire:loading.class="opacity-30">
-                    @if ($image)
-                        <img src="{{ $image->temporaryUrl() }}" class="h-40 object-contain mb-4 drop-shadow-xl">
-                    @elseif ($existingImage)
-                        <img src="{{ asset('storage/' . $existingImage) }}" class="h-40 object-contain mb-4 drop-shadow-xl">
-                    @else
-                        <div class="h-20 w-20 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                            <span class="material-symbols-outlined text-4xl text-gray-500 group-hover:text-[#D4AF37]">add_photo_alternate</span>
+                <div x-data="{ 
+                    preview: null, 
+                    handleFile(event) {
+                        const file = event.target.files[0];
+                        if (!file) return;
+                        
+                        // Creamos un lector para mostrar la imagen AL INSTANTE
+                        const reader = new FileReader();
+                        reader.onload = (e) => { this.preview = e.target.result };
+                        reader.readAsDataURL(file);
+                    }
+                }" class="relative w-full">
+                
+                    <input type="file" 
+                        wire:model="image" 
+                        @change="handleFile"
+                        accept="image/png, image/jpeg, image/jpg, image/webp"
+                        class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+                
+                    <div class="w-full flex flex-col items-center justify-center transition-opacity duration-300" wire:loading.class="opacity-30">
+                        
+                        <template x-if="preview">
+                            <img :src="preview" class="h-40 object-contain mb-4 drop-shadow-xl rounded-lg">
+                        </template>
+                
+                        <template x-if="!preview">
+                            @if ($existingImage)
+                                <img src="{{ asset('storage/' . $existingImage) }}" class="h-40 object-contain mb-4 drop-shadow-xl">
+                            @else
+                                <div class="h-20 w-20 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                    <span class="material-symbols-outlined text-4xl text-gray-500 group-hover:text-[#D4AF37]">add_photo_alternate</span>
+                                </div>
+                            @endif
+                        </template>
+                
+                        <div class="text-center">
+                            <span class="font-bold text-white group-hover:text-[#D4AF37] transition-colors" 
+                                x-text="preview || '{{ $existingImage }}' ? 'Cambiar imagen' : 'Subir imagen'">
+                            </span>
+                            <p class="text-xs text-gray-500 mt-1">PNG, JPG, WEBP hasta 5mb</p>
                         </div>
-                    @endif
-
-                    <div class="text-center">
-                        <span class="font-bold text-white group-hover:text-[#D4AF37] transition-colors">
-                            {{ $image || $existingImage ? 'Cambiar imagen' : 'Subir imagen' }}
-                        </span>
-                        <p class="text-xs text-gray-500 mt-1">PNG, JPG hasta 2MB</p>
                     </div>
                 </div>
 
