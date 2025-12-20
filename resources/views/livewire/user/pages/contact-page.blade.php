@@ -35,7 +35,7 @@
                         <div>
                             <h3 class="text-lg font-bold text-white mb-0.5">WhatsApp</h3>
                             <p class="text-gray-400 text-xs">Atención inmediata</p>
-                            <p class="text-green-400 text-sm font-mono font-bold mt-1">+57 300 123 4567</p>
+                            <p class="text-green-400 text-sm font-mono font-bold mt-1">+57 310 264 0889</p>
                         </div>
                     </div>
                 </a>
