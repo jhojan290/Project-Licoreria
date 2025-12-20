@@ -125,7 +125,7 @@ class CheckoutPage extends Component
         $cartService->removeMultiple($this->selected);
         
         // 5. CONSTRUIR MENSAJE DE WHATSAPP (Con lista de productos)
-        $numeroVendedor = '573102640889'; // TU NÚMERO REAL
+        $numeroVendedor = '573127430067'; // TU NÚMERO REAL
         $nombreCliente = Auth::user()->name;
         
         $msg  = "Hola *LicUp* 🥃, quiero finalizar mi pedido.\n\n";

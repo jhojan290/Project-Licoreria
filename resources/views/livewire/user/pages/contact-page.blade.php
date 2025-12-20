@@ -35,7 +35,7 @@
                         <div>
                             <h3 class="text-lg font-bold text-white mb-0.5">WhatsApp</h3>
                             <p class="text-gray-400 text-xs">Atención inmediata</p>
-                            <p class="text-green-400 text-sm font-mono font-bold mt-1">+57 310 264 0889</p>
+                            <p class="text-green-400 text-sm font-mono font-bold mt-1">+57 312 743 0067</p>
                         </div>
                     </div>
                 </a>
@@ -69,9 +69,9 @@
                     <p class="text-sm text-gray-400 mb-4 leading-relaxed">
                         Para eventos, bodas o pedidos al por mayor, contáctanos directamente a nuestro correo especializado.
                     </p>
-                    <a href="mailto:corporativo@licup.com" class="flex items-center gap-2 text-white hover:text-[#D4AF37] transition-colors font-medium text-sm">
+                    <a class="flex items-center gap-2 text-white hover:text-[#D4AF37] transition-colors font-medium text-sm">
                         <span class="material-symbols-outlined text-lg">mail</span>
-                        corporativo@licup.com
+                        jdagudeloadm@gmail.com
                     </a>
                 </div>
 
