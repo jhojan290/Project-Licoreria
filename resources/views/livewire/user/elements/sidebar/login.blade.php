@@ -1,4 +1,4 @@
-<div class="w-full min-h-full flex flex-col items-center justify-center px-6 py-12">
+<div class="w-full h-full overflow-y-auto flex flex-col items-center px-6 py-12 custom-scrollbar">
 
     <div class="w-full max-w-md animate-fade-in-up">
 

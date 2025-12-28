@@ -69,9 +69,9 @@
                         <div class="space-y-2">
                             @foreach([
                                 '' => 'Todos',
-                                'low' => 'Menos de $50k',
-                                'mid' => '$50k - $150k',
-                                'high' => 'Más de $150k'
+                                'low' => 'Menos de $50.000',
+                                'mid' => '$50.000 - $150.000',
+                                'high' => 'Más de $150.000'
                             ] as $val => $label)
                                 <label class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-white/5 transition-colors">
                                     <div class="relative flex items-center">

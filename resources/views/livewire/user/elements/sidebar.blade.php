@@ -1,5 +1,6 @@
 <div 
     x-data="{ partial: @entangle('partial'), open: @entangle('open') }"
+    x-effect="open ? document.body.classList.add('overflow-hidden') : document.body.classList.remove('overflow-hidden')"
     x-cloak
     class="relative z-[60]" {{-- Z-Index alto para tapar el Navbar sticky --}}
 >
