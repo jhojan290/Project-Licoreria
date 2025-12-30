@@ -111,7 +111,7 @@
                 {{-- BOTÓN CREAR CUENTA (Solo Desktop Grande) --}}
                 @guest
                     <button wire:click="$dispatch('openSidebar', { title: 'Crear Cuenta', partial: 'createUser' })" 
-                        class="hidden xl:flex h-10 items-center justify-center rounded-lg px-4 bg-[#D4AF37] text-[#121212] text-sm font-bold hover:bg-white transition-all shadow-lg shadow-[#D4AF37]/10 ml-2 whitespace-nowrap">
+                        class="hidden lg:flex h-10 items-center justify-center rounded-lg px-4 bg-[#D4AF37] text-[#121212] text-sm font-bold hover:bg-white transition-all shadow-lg shadow-[#D4AF37]/10 ml-2 whitespace-nowrap">
                         Crear Cuenta
                     </button>
                 @endguest
