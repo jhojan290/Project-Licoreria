@@ -2,7 +2,7 @@
 {{-- SALUDO --}}
 ¡Hola, {{ $name }}!
 
-Recibiste este correo porque hiciste una solicitud de restablecimiento de contraseña para tu cuenta de **LicUp**.
+Recibiste este correo porque hiciste una solicitud de restablecimiento de contraseña para tu cuenta de **Estanquillo Fry**.
 
 {{-- BOTÓN DORADO --}}
 <x-mail::button :url="$url" color="primary">
@@ -14,7 +14,7 @@ Este enlace de restablecimiento expirará en 60 minutos.
 Si no solicitaste un cambio de contraseña, no es necesaria ninguna acción.
 
 Saludos,<br>
-El equipo de LicUp.
+El equipo de Estanquillo Fry.
 
 {{-- AQUÍ ESTÁ LA SOLUCIÓN: ESCRIBIMOS EL SUBCOPY MANUALMENTE --}}
 <x-slot:subcopy>

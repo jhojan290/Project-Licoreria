@@ -8,27 +8,27 @@
                     {{-- CELDA 1: EL LOGO --}}
                     {{-- Aumentamos el padding-right a 20px para dar espacio a la línea --}}
                     <td style="vertical-align: middle; padding-right: 20px;">
-                        <img 
+                        <img
                             src="https://i.imgur.com/lZtqX77.png"
-                            alt="LicUp Logo" 
-                            width="55" 
+                            alt="Estanquillo Fry Logo"
+                            width="55"
                             height="auto"
                             style="display: block; border: 0;"
                         >
                     </td>
 
                     {{-- CELDA 2: EL TEXTO + LÍNEA SEPARADORA --}}
-                    {{-- 
+                    {{--
                         AQUÍ ESTÁ LA MAGIA:
                         1. border-left: 2px solid #d4af37; -> Crea la línea vertical dorada.
                         2. padding-left: 20px; -> Separa el texto de la línea.
                         3. height: 45px; -> Fuerza una altura mínima para que la línea se vea alta y elegante.
                     --}}
                     <td style="vertical-align: middle; padding-left: 20px; border-left: 2px solid #d4af37; height: 30px;">
-                        <img 
-                            src="https://i.imgur.com/UvcF59K.png" 
-                            alt="LicUp Titulo" 
-                            width="55" 
+                        <img
+                            src="https://i.imgur.com/UvcF59K.png"
+                            alt="Estanquillo Fry Titulo"
+                            width="55"
                             height="auto"
                             style="display: block; border: 0;"
                         >

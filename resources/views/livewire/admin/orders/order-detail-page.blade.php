@@ -1,4 +1,4 @@
-@section('title', $order->id . ' | LicUp')
+@section('title', $order->id . ' | Estanquillo Fry')
 <div class="layout-container flex h-full grow flex-col bg-background-dark min-h-screen font-display">
     <div class="flex flex-1 justify-center py-6 md:py-10 px-4 sm:px-6 lg:px-8">
         <div class="w-full max-w-7xl flex-1 flex flex-col">
@@ -258,7 +258,7 @@
             </div>
             
             <footer class="mt-auto pt-12 pb-6 border-t border-white/5 mt-12">
-                <p class="text-xs text-gray-600 text-center">© {{ date('Y') }} LicUp Admin Panel. Todos los derechos reservados.</p>
+                <p class="text-xs text-gray-600 text-center">© {{ date('Y') }} Estanquillo Fry Admin Panel. Todos los derechos reservados.</p>
             </footer>
 
         </div>

@@ -23,7 +23,7 @@ class OrderInvoice extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Gracias por tu compra en LicUp 🍾'
+            subject: 'Gracias por tu compra en Estanquillo Fry 🍾'
         );
     }
 

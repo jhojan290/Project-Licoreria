@@ -1,5 +1,5 @@
 @extends('layouts.user')
-@section('title', 'Sobre Nosotros | LicUp')
+@section('title', 'Sobre Nosotros | Estanquillo Fry')
 @section('content')
 <main class="flex-grow bg-background-dark font-display overflow-hidden text-gray-300">
 
@@ -38,26 +38,17 @@
             </div>
 
             <div class="order-1 lg:order-2">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">El Origen de <span class="text-[#D4AF37]">LicUp</span></h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">El Origen de <span class="text-[#D4AF37]">Estanquillo Fry</span></h2>
                 <div class="space-y-6 text-lg leading-relaxed">
                     <p>
-                        Todo comenzó con un viaje a las tierras altas de Escocia. Allí entendimos que el licor no es simplemente una bebida, es **historia líquida**. Es el resultado de generaciones de maestros destiladores perfeccionando un arte.
+                        Estanquillo Fry nació en Dosquebradas, con ese espíritu colombiano de atender bien, recomendar con confianza y tener siempre una buena opción para compartir.
                     </p>
                     <p>
-                        Al regresar, notamos que faltaba algo en el mercado: un lugar que no solo vendiera botellas, sino que **educara y elevara** la experiencia de beber. Así nació LicUp.
+                        Su origen está en la cercanía del barrio, en las reuniones familiares, los asados, las celebraciones de fin de semana y esos momentos donde una botella acompaña una historia entre amigos.
                     </p>
                     <p>
-                        Lo que empezó como una pequeña colección privada para amigos, hoy se ha convertido en la cava digital más selecta del país, curando más de 500 referencias de los 5 continentes.
+                        Hoy queremos llevar esa misma experiencia a lo digital: una tienda clara, confiable y pensada para que encuentres licores nacionales e importados sin perder el trato amable de un estanquillo colombiano.
                     </p>
-                </div>
-                
-                <div class="mt-8 flex items-center gap-4">
-                    <div class="flex -space-x-4">
-                        <img class="w-12 h-12 rounded-full border-2 border-[#121212]" src="https://i.pravatar.cc/100?img=33" alt="Fundador">
-                        <img class="w-12 h-12 rounded-full border-2 border-[#121212]" src="https://i.pravatar.cc/100?img=12" alt="Fundador">
-                        <img class="w-12 h-12 rounded-full border-2 border-[#121212]" src="https://i.pravatar.cc/100?img=59" alt="Fundador">
-                    </div>
-                    <p class="text-sm text-gray-500 font-medium">Fundado por amantes del licor, <br> para amantes del licor.</p>
                 </div>
             </div>
 

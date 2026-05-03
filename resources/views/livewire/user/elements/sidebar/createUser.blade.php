@@ -3,11 +3,7 @@
     <div class="flex flex-col items-center text-center gap-5 pt-4 mb-8 flex-shrink-0">
         
         <div class="flex items-center gap-2 mb-1">
-            <img src="{{ asset('img/licUp.png') }}" alt="LicUp" class="h-12 w-auto object-contain drop-shadow-lg group-hover:scale-105 transition-transform duration-500">
-                <div class="h-10 w-[2px] bg-[#D4AF37] rounded-full opacity-80"></div>
-                <h2 class="text-3xl font-black tracking-tighter font-licup text-[#D4AF37]">
-                    LicUp
-                </h2>
+            <img src="{{ asset('img/estanquillo.png') }}" alt="Estanquillo Fry" class="h-14 w-40 object-cover drop-shadow-lg group-hover:scale-105 transition-transform duration-500" style="object-position: center 45%;">
         </div>
 
         <h1 class="text-3xl sm:text-4xl font-black leading-tight text-white">

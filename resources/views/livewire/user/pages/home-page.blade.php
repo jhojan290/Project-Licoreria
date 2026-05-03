@@ -1,4 +1,4 @@
-@section('title', 'Inicio | LicUp')
+@section('title', 'Inicio | Estanquillo Fry')
 
 <main class="flex-grow bg-background-dark font-display overflow-hidden">
 
@@ -190,7 +190,7 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col lg:flex-row gap-12 items-center">
                 <div class="lg:w-1/2">
-                    <span class="text-[#D4AF37] font-bold uppercase tracking-widest text-sm mb-2 block">LicUp</span>
+                    <span class="text-[#D4AF37] font-bold uppercase tracking-widest text-sm mb-2 block">Estanquillo Fry</span>
                     <h2 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
                         Aprende a catar como un <span class="text-[#D4AF37]">Profesional</span>
                     </h2>
@@ -291,7 +291,7 @@
 
         <div class="container mx-auto px-4 relative z-10 text-center">
             <span class="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-[#D4AF37] text-xs font-bold uppercase tracking-widest mb-6">
-                Experiencia LicUp
+                Experiencia Estanquillo Fry
             </span>
             
             <h2 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">

@@ -1,6 +1,6 @@
 <div class="w-full max-w-4xl rounded-2xl bg-[#121212] text-white shadow-2xl flex overflow-hidden border border-white/10">
 
-    <div class="hidden md:block w-1/2 bg-cover bg-center" 
+    <div class="hidden md:block w-1/2 bg-cover bg-center"
         style="background-image: url('https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=1000&auto=format&fit=crop')">
         <div class="h-full w-full bg-black/40"></div> </div>
 
@@ -20,14 +20,12 @@
         @else
             <div class="text-center md:text-left">
                 <div class="flex justify-center md:justify-start items-center gap-2 mb-6 opacity-70">
-                    <img 
-                        src="{{ asset('img/licUp.png') }}" 
-                        alt="Logo LicUp" 
-                        class="h-12 w-auto object-contain"
+                    <img
+                        src="{{ asset('img/estanquillo.png') }}"
+                        alt="Logo Estanquillo Fry"
+                        class="h-14 w-40 object-cover"
+                        style="object-position: center 45%;"
                     >
-                    <div class="h-12 w-[2px] bg-licup rounded-full opacity-80"></div>
-
-                    <h2 class="text-2xl font-bold tracking-tight font-licup text-licup">LicUp</h2>
                 </div>
 
                 <h2 class="text-2xl font-bold mb-2">Establecer Nueva Contraseña</h2>

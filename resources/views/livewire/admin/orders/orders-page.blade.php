@@ -1,4 +1,4 @@
-@section('title', 'Órdenes | LicUp')
+@section('title', 'Órdenes | Estanquillo Fry')
 
 {{-- 1. ENVOLVEMOS TODO EN x-data PARA CONTROLAR EL MODAL --}}
 <div x-data="{ 

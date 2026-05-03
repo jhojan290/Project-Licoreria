@@ -6,9 +6,12 @@
         <div class="flex items-center justify-between h-20">
 
             <div class="flex items-center gap-3 group">
+                <img src="{{ asset('img/estanquillo.png') }}" alt="Logo Estanquillo" class="h-12 w-32 sm:h-14 sm:w-40 object-cover group-hover:scale-105 transition-transform" style="object-position: center 45%;">
+                {{--
                 <img src="{{ asset('img/licUp.png') }}" alt="Logo LicUp" class="h-10 w-auto object-contain group-hover:scale-105 transition-transform">
                 <div class="h-8 w-[2px] bg-[#D4AF37] rounded-full opacity-80 hidden sm:block"></div>
                 <h2 class="hidden sm:block text-2xl font-bold tracking-tight font-licup text-[#D4AF37]">LicUp Admin</h2>
+                --}}
             </div>
 
             <nav class="hidden lg:flex items-center gap-8 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">

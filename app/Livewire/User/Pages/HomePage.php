@@ -7,7 +7,7 @@ use App\Models\Product;
 use App\Services\User\CartService; // Importar para el carrito
 use Livewire\Attributes\Title;
 
-#[Title('Inicio - LicUp')]
+#[Title('Inicio - Estanquillo Fry')]
 class HomePage extends Component
 {
     // PROPIEDAD COMPUTADA: Productos Recomendados

@@ -94,7 +94,7 @@ class OrderDetailPage extends Component
         // 3. Descargar
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
-        }, 'Factura-LicUp-' . str_pad($order->id, 6, '0', STR_PAD_LEFT) . '.pdf');
+        }, 'Factura-Estanquillo-Fry-' . str_pad($order->id, 6, '0', STR_PAD_LEFT) . '.pdf');
     }
 
     /**

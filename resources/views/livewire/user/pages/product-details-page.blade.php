@@ -1,4 +1,4 @@
-@section('title', $product->name . ' | LicUp')
+@section('title', $product->name . ' | Estanquillo Fry')
 
 <main class="flex-grow bg-background-dark min-h-screen py-12 px-4 sm:px-6 lg:px-8 flex items-center font-display">
     

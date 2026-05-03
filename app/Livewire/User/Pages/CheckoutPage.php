@@ -128,7 +128,7 @@ class CheckoutPage extends Component
         $numeroVendedor = '573127430067'; // TU NÚMERO REAL
         $nombreCliente = Auth::user()->name;
         
-        $msg  = "Hola *LicUp* 🥃, quiero finalizar mi pedido.\n\n";
+        $msg  = "Hola *Estanquillo Fry* 🥃, quiero finalizar mi pedido.\n\n";
         $msg .= "🧾 *Orden:* #{$order->id}\n";
         $msg .= "👤 *Cliente:* {$nombreCliente}\n";
         

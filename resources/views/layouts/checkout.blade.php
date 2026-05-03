@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finalizar Compra | LicUp</title>
-    <link rel="icon" href="{{ asset('img/licUp.png') }}" type="image/png">
+    <title>Finalizar Compra | Estanquillo Fry</title>
+    <link rel="icon" href="{{ asset('img/frylicoreria.png') }}" type="image/png">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
     @livewireStyles
@@ -17,7 +17,7 @@
 
     <footer class="py-6 border-t border-white/10 bg-[#121212]">
         <div class="container mx-auto px-4 text-center">
-            <p class="text-sm text-gray-500">© 2025 LicUp</p>
+            <p class="text-sm text-gray-500">© 2025 Estanquillo Fry</p>
         </div>
     </footer>
 

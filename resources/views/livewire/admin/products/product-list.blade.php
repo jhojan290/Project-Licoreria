@@ -1,4 +1,4 @@
-@section('title', 'Inventario | LicUp')
+@section('title', 'Inventario | Estanquillo Fry')
 
 <div class="layout-container flex h-full grow flex-col bg-background-dark min-h-screen font-display">
     <div class="flex flex-1 justify-center py-8 px-4 sm:px-6 lg:px-8">

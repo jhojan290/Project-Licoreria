@@ -49,7 +49,7 @@ class OrderApproved extends Mailable
                 // Si le pusiste otro nombre al archivo .blade.php, cámbialo aquí
                 $pdf = Pdf::loadView('pdf.facture', ['order' => $this->order]);
                 return $pdf->output();
-            }, 'Factura-LicUp-' . str_pad($this->order->id, 6, '0', STR_PAD_LEFT) . '.pdf')
+            }, 'Factura-Estanquillo-Fry-' . str_pad($this->order->id, 6, '0', STR_PAD_LEFT) . '.pdf')
                 ->withMime('application/pdf'),
         ];
     }

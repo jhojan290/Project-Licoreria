@@ -1,4 +1,4 @@
-@section('title', 'Catalogo | LicUp')
+@section('title', 'Catalogo | Estanquillo Fry')
 
 <main class="flex-grow bg-background-dark min-h-screen font-display">
     

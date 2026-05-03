@@ -58,7 +58,7 @@ class ResetPasswordNotification extends Notification
         $userName = $notifiable->name ?? 'Usuario';
 
         return (new MailMessage)
-            ->subject('Restablecer Contraseña - LicUp')
+            ->subject('Restablecer Contraseña - Estanquillo Fry')
             // 3. PASAMOS EL NOMBRE A LA VISTA
             // Agregamos 'name' => $userName al array de datos.
             ->markdown('mail.reset-password', [
