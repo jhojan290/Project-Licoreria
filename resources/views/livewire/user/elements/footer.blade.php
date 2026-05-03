@@ -16,7 +16,7 @@
                     --}}
                 </a>
                 <p class="text-gray-500 text-sm leading-relaxed max-w-xs">
-                    Tu destino premium para licores del mundo. Curaduría experta y momentos inolvidables en cada botella.
+                    Su estanquillo de confianza para licores nacionales e importados. Buena selección y buenos momentos en cada botella.
                 </p>
                 <div class="flex gap-4">
                     <a href="https://www.instagram.com/fredy_ram99?igsh=MTJhZmhnazduNTJyYQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-[#D4AF37] hover:text-black transition-all hover:-translate-y-1">

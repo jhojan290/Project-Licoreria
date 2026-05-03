@@ -15,7 +15,7 @@
                 Nuestra Ubicación
             </h1>
             <p class="text-gray-400 max-w-xl mx-auto text-lg animate-fade-in-up delay-100">
-                Descubre nuestra boutique de licores premium. Un espacio diseñado para los amantes del buen beber.
+                Ven a nuestro estanquillo en Dosquebradas. Un lugar donde encontrará licores de buena calidad y gente que le asesora con confianza.
             </p>
         </div>
     </div>
@@ -64,10 +64,10 @@
                 <div class="bg-[#181611] border border-white/10 rounded-2xl p-6">
                     <div class="flex items-center gap-3 mb-4">
                         <span class="material-symbols-outlined text-[#D4AF37]">business_center</span>
-                        <h3 class="text-lg font-bold text-white">Ventas Corporativas</h3>
+                        <h3 class="text-lg font-bold text-white">Ventas</h3>
                     </div>
                     <p class="text-sm text-gray-400 mb-4 leading-relaxed">
-                        Para eventos, bodas o pedidos al por mayor, contáctanos directamente a nuestro correo especializado.
+                        Para eventos, bodas o pedidos al por mayor, contáctanos directamente a nuestro correo.
                     </p>
                     <a href="mailto:Fredyrb@outlook.com" class="flex items-center gap-2 text-white hover:text-[#D4AF37] transition-colors font-medium text-sm">
                         <span class="material-symbols-outlined text-lg">mail</span>
@@ -82,20 +82,20 @@
                 <div class="bg-[#181611] border border-white/10 rounded-2xl p-8 relative overflow-hidden">
                     <div class="relative z-10 flex flex-col md:flex-row items-center gap-6">
                         <div class="flex-1 text-center md:text-left">
-                            <span class="text-[#D4AF37] text-xs font-bold uppercase tracking-widest mb-2 block">Showroom</span>
-                            <h2 class="text-2xl font-bold text-white mb-3">Vive la Experiencia Estanquillo Fry</h2>
+                            <span class="text-[#D4AF37] text-xs font-bold uppercase tracking-widest mb-2 block">Estanquillo</span>
+                            <h2 class="text-2xl font-bold text-white mb-3">Venga por su licor de confianza</h2>
                             <p class="text-gray-400 text-sm leading-relaxed mb-4">
-                                No somos solo una tienda online. Visita nuestra boutique en Playa Rica, Dosquebradas y disfruta de asesoría personalizada por sommeliers expertos. Contamos con una zona de catas privada y una cava climatizada con las mejores referencias del mundo.
+                                Estamos en Playa Rica, Dosquebradas, listos para sacarlo del apuro: la pola para el parche, el guaro para la reunión o el trago bueno para celebrar. Pregunte sin pena y le ayudamos a escoger lo que mejor le quede.
                             </p>
                             <div class="flex flex-wrap gap-4 justify-center md:justify-start">
                                 <div class="flex items-center gap-2 text-xs text-gray-300 bg-white/5 px-3 py-1.5 rounded-full">
-                                    <span class="material-symbols-outlined text-[#D4AF37] text-sm">wifi</span> Zona WiFi
+                                    <span class="material-symbols-outlined text-[#D4AF37] text-sm">shopping_bag</span> Para llevar
                                 </div>
                                 <div class="flex items-center gap-2 text-xs text-gray-300 bg-white/5 px-3 py-1.5 rounded-full">
-                                    <span class="material-symbols-outlined text-[#D4AF37] text-sm">local_parking</span> Valet Parking
+                                    <span class="material-symbols-outlined text-[#D4AF37] text-sm">sports_bar</span> Frías listas
                                 </div>
                                 <div class="flex items-center gap-2 text-xs text-gray-300 bg-white/5 px-3 py-1.5 rounded-full">
-                                    <span class="material-symbols-outlined text-[#D4AF37] text-sm">wine_bar</span> Zona de Cata
+                                    <span class="material-symbols-outlined text-[#D4AF37] text-sm">local_drink</span> Buen surtido
                                 </div>
                             </div>
                         </div>

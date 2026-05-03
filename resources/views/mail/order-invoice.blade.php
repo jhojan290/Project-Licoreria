@@ -3,19 +3,19 @@
 
 Hola **{{ $order->user->name }}**,
 
-Gracias por elegir **Estanquillo Fry** 💛
-Queremos informarte que hemos recibido tu pedido correctamente, pero **actualmente se encuentra en estado pendiente**.
+Gracias por escoger **Estanquillo Fry** 💛
+Tu pedido lleg\u00f3 en buenas manos. Apenas confirmemos todo, nos ponemos a preparar tu orden para que llegue calentita.
 
-Esto significa que estamos validando tu información de pago o procesando la confirmación final de tu orden.
-No te preocupes, en breve recibirás una nueva notificación cuando tu pedido sea aprobado y pase a preparación.
+Esto significa que estamos validando tu pago y confirmando que tengamos todo disponible.
+No se preocupe, en breve le avisamos cuando est\u00e9 listo y en camino.
 
 ---
 
-## 🧾 Resumen de tu pedido
+## 🧾 Su pedido
 
 **Estado actual:** ⏳ Pendiente
-**Método de pago:** {{ ucfirst($order->payment_method) }}
-**Fecha de solicitud:** {{ $order->created_at->format('d M Y \a \l\a\s H:i') }}
+**Forma de pago:** {{ ucfirst($order->payment_method) }}
+**Fecha:** {{ $order->created_at->format('d M Y \a \l\a\s H:i') }}
 
 <x-mail::table>
 | Producto | Cantidad | Precio |
@@ -28,13 +28,13 @@ No te preocupes, en breve recibirás una nueva notificación cuando tu pedido se
 
 ---
 
-## 🚚 Dirección de entrega registrada
+## 🚚 Direcci\u00f3n para la entrega
 
 📍 **{{ $order->address }}**
 🏙️ **{{ $order->city }}**
 📞 **{{ $order->phone }}**
 
-Si alguno de estos datos no es correcto, por favor contáctanos lo antes posible para evitar retrasos en la entrega.
+Si alguno de estos datos no est\u00e1 bien, n\u00f3s avisa ya para no tener problemas con la entrega.
 
 ---
 
@@ -52,10 +52,10 @@ Una vez todo esté aprobado, recibirás un correo confirmando que tu pedido ha s
 
 ## 🥂 Gracias por confiar en Estanquillo Fry
 
-Apreciamos que formes parte de nuestra comunidad.
-Trabajamos para que cada experiencia sea tan buena como tu bebida favorita 🍷
+Usted es parte importante de nuestro equipo.
+Nos esforzamos para que cada compra sea tan buena como su trago favorito 🍷
 
-Si tienes alguna duda o necesitas ayuda, nuestro equipo está listo para asistirte.
+Si tiene alguna pregunta o necesita ayuda, aquí estamos.
 
 <x-mail::button :url="route('catalog')">
 Ver más productos

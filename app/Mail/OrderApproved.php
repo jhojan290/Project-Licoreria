@@ -16,7 +16,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 class OrderApproved extends Mailable
 {
     use Queueable, SerializesModels;
-    
+
     public $order;
 
     public function __construct(Order $order)
@@ -27,7 +27,7 @@ class OrderApproved extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Tu pedido ha sido aprobado ✌️',
+            subject: 'Su pedido está listo ✌️',
         );
     }
 

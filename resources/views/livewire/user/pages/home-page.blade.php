@@ -4,19 +4,19 @@
 
     <section class="relative w-full h-[85vh] overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1569529465841-dfecdab7503b?q=80&w=1974&auto=format&fit=crop" 
+            <img src="https://images.unsplash.com/photo-1569529465841-dfecdab7503b?q=80&w=1974&auto=format&fit=crop"
                 class="w-full h-full object-cover object-center opacity-50 scale-105 animate-pulse-slow" alt="Banner">
             <div class="absolute inset-0 bg-gradient-to-t from-[#121212] via-[#121212]/60 to-transparent"></div>
             <div class="absolute inset-0 bg-gradient-to-r from-[#121212]/90 via-transparent to-transparent"></div>
         </div>
 
         <div class="relative z-10 container mx-auto h-full flex flex-col justify-center px-6 md:px-12 gap-6">
-            <span class="text-[#D4AF37] uppercase tracking-[0.3em] text-sm font-bold animate-in fade-in slide-in-from-left-8 duration-700 delay-100">Premium Selection</span>
+            <span class="text-[#D4AF37] uppercase tracking-[0.3em] text-sm font-bold animate-in fade-in slide-in-from-left-8 duration-700 delay-100">Nuestro Surtido</span>
             <h1 class="text-white text-5xl md:text-7xl lg:text-8xl font-black leading-tight tracking-tighter max-w-4xl animate-in fade-in slide-in-from-left-8 duration-1000 delay-200">
-                El Arte del <br/> <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#FCEEA6]">Buen Beber</span>
+                ¿Cómo se toma <br/> <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#FCEEA6]">un buen trago?</span>
             </h1>
             <p class="text-gray-300 text-lg md:text-xl font-light max-w-xl leading-relaxed animate-in fade-in slide-in-from-left-8 duration-1000 delay-300">
-                Explora nuestra colección curada de licores nacionales e importados. Calidad garantizada.
+                Encuentra licores nacionales e importados de buena calidad. Todo lo que necesita para celebrar, compartir o disfrutar.
             </p>
             <div class="flex flex-wrap gap-4 mt-4 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
                 <a href="{{ route('catalog') }}" class="inline-flex items-center justify-center h-14 px-8 rounded-full bg-[#D4AF37] text-[#121212] text-lg font-bold hover:bg-white hover:scale-105 transition-all shadow-[0_0_40px_rgba(212,175,55,0.4)]">Ver Catálogo</a>
@@ -39,13 +39,13 @@
         </div>
     </section>
 
-    <section class="py-20 container mx-auto px-4 relative" x-data="{ 
+    <section class="py-20 container mx-auto px-4 relative" x-data="{
         scroll(direction) {
             const container = $refs.catSlider;
             const scrollAmount = container.clientWidth * 0.85;
             // Calculamos el máximo scroll posible (ancho total - ancho visible)
             const maxScroll = container.scrollWidth - container.clientWidth;
-            
+
             if (direction === 'left') {
                 // LOGICA CORREGIDA:
                 // Si estamos al principio (con un margen de 20px), vamos al final
@@ -81,10 +81,10 @@
             </div>
         </div>
 
-        <div class="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scroll-smooth no-scrollbar" 
+        <div class="flex overflow-x-auto gap-4 pb-4 snap-x snap-mandatory scroll-smooth no-scrollbar"
             x-ref="catSlider"
             style="scrollbar-width: none; -ms-overflow-style: none;">
-            
+
             <style>div[x-ref="catSlider"]::-webkit-scrollbar { display: none; }</style>
 
             @php
@@ -103,11 +103,11 @@
 
             @foreach($categories as $cat)
                 <a href="{{ route('catalog', ['category' => $cat['name']]) }}" class="flex-shrink-0 w-48 md:w-56 group relative h-72 rounded-2xl overflow-hidden cursor-pointer snap-center border border-white/5 hover:border-[#D4AF37]/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                    
+
                     <img src="{{ $cat['img'] }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100">
-                    
+
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-                    
+
                     <div class="absolute bottom-0 w-full p-4 text-center">
                         <p class="text-white text-lg font-bold uppercase tracking-widest group-hover:text-[#D4AF37] transition-colors transform translate-y-2 group-hover:translate-y-0 duration-300">
                             {{ $cat['name'] }}
@@ -117,15 +117,15 @@
             @endforeach
         </div>
     </section>
-    
+
     <section class="py-16 bg-white/5 border-y border-white/5">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div class="p-6 rounded-2xl bg-[#121212] border border-white/5 hover:border-[#D4AF37]/30 transition-all group">
                 <div class="w-16 h-16 mx-auto bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-[#D4AF37] transition-colors">
                     <span class="material-symbols-outlined text-3xl text-[#D4AF37] group-hover:text-black">local_shipping</span>
                 </div>
-                <h3 class="text-white text-xl font-bold mb-2">Envíos Seguros</h3>
-                <p class="text-gray-400 text-sm">Empaquetado especial anti-roturas y entrega rápida a nivel nacional.</p>
+                <h3 class="text-white text-xl font-bold mb-2">Llega Bien Empaquetada</h3>
+                <p class="text-gray-400 text-sm">Empaques que protegen y entregas rápidas a nivel nacional. Nada roto.</p>
             </div>
             <div class="p-6 rounded-2xl bg-[#121212] border border-white/5 hover:border-[#D4AF37]/30 transition-all group">
                 <div class="w-16 h-16 mx-auto bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-[#D4AF37] transition-colors">
@@ -138,44 +138,44 @@
                 <div class="w-16 h-16 mx-auto bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-[#D4AF37] transition-colors">
                     <span class="material-symbols-outlined text-3xl text-[#D4AF37] group-hover:text-black">support_agent</span>
                 </div>
-                <h3 class="text-white text-xl font-bold mb-2">Soporte Premium</h3>
-                <p class="text-gray-400 text-sm">Asesoría personalizada para tus eventos y colecciones.</p>
+                <h3 class="text-white text-xl font-bold mb-2">Asesoría de Confianza</h3>
+                <p class="text-gray-400 text-sm">Te ayudamos a escoger lo mejor para tus eventos y reuniones sin vueltas.</p>
             </div>
         </div>
     </section>
 
     <section class="py-24 container mx-auto px-4">
-    
+
         <div class="mb-12">
             <span class="text-[#D4AF37] uppercase tracking-widest text-sm font-bold mb-2 block">Inspiración</span>
             <h2 class="text-4xl font-black text-white mb-4">¿Para qué es la ocasión?</h2>
-            
+
             <p class="text-gray-400 max-w-2xl text-lg leading-relaxed border-l-2 border-[#D4AF37]/50 pl-4">
-                Hemos seleccionado las mejores opciones basándonos en precio y categoría para tu momento especial.
+                Escogemos lo mejor para cada ocasión: para la pola con los amigos, para celebrar en grande o para regalar algo de verdad.
             </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 h-[500px] md:h-[400px]">
-            
+
             <a href="{{ route('catalog', ['occasion' => 'gift']) }}" class="group relative rounded-2xl overflow-hidden h-full cursor-pointer border border-white/5 hover:border-[#D4AF37]/50 transition-all">
-                <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600" 
+                <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-80">
-                
+
                 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                
+
                 <div class="absolute bottom-6 left-6 z-10">
                     <div class="w-10 h-1 bg-[#D4AF37] mb-3 rounded-full"></div>
                     <h3 class="text-2xl font-bold text-white mb-1 group-hover:text-[#D4AF37] transition-colors">Para Regalar</h3>
-                    <p class="text-gray-300 text-sm font-medium">Selección Premium & Lujo</p>
+                    <p class="text-gray-300 text-sm font-medium">Lo mejor para sorprender</p>
                 </div>
             </a>
 
             <a href="{{ route('catalog', ['occasion' => 'party']) }}" class="group relative rounded-2xl overflow-hidden h-full md:col-span-2 cursor-pointer border border-white/5 hover:border-[#D4AF37]/50 transition-all">
-                <img src="https://images.unsplash.com/photo-1516997121675-4c2d1684aa3e?auto=format&fit=crop&w=1200" 
+                <img src="https://images.unsplash.com/photo-1516997121675-4c2d1684aa3e?auto=format&fit=crop&w=1200"
                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-80">
-                
+
                 <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
-                
+
                 <div class="absolute bottom-6 left-6 z-10">
                     <div class="w-10 h-1 bg-[#D4AF37] mb-3 rounded-full"></div>
                     <h3 class="text-2xl font-bold text-white mb-1 group-hover:text-[#D4AF37] transition-colors">Celebración & Fiesta</h3>
@@ -192,12 +192,12 @@
                 <div class="lg:w-1/2">
                     <span class="text-[#D4AF37] font-bold uppercase tracking-widest text-sm mb-2 block">Estanquillo Fry</span>
                     <h2 class="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
-                        Aprende a catar como un <span class="text-[#D4AF37]">Profesional</span>
+                        Aprende a disfrutar como un <span class="text-[#D4AF37]">Catador</span>
                     </h2>
                     <p class="text-gray-400 text-lg mb-8">
-                        El secreto de un buen trago no solo está en la botella, sino en cómo se sirve. Descubre nuestros consejos para elevar tu experiencia.
+                        Lo bueno no está solo en la botella, sino en cómo se toma. Aquí le pasamos los trucos para que le saque el máximo provecho a su trago.
                     </p>
-                    
+
                     <div class="space-y-6">
                         <div class="flex gap-4 items-start group">
                             <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#D4AF37] transition-colors">
@@ -219,7 +219,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="lg:w-1/2 relative">
                     <div class="absolute -inset-4 bg-[#D4AF37]/20 blur-2xl rounded-full"></div>
                     <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800" class="relative rounded-2xl shadow-2xl border border-white/10 transform rotate-3 hover:rotate-0 transition-transform duration-500">
@@ -242,7 +242,7 @@
             <div class="w-full md:w-1/2 text-center md:text-left">
                 <span class="text-[#D4AF37] font-bold uppercase tracking-widest text-sm mb-2 block">Selección del Mes</span>
                 <h2 class="text-4xl md:text-6xl font-black text-white mb-6 leading-none">{{ $featured->name ?? 'Producto Destacado' }}</h2>
-                <p class="text-gray-400 text-lg mb-8 leading-relaxed">{{ $featured->description ?? 'Calidad excepcional.' }}</p>
+                <p class="text-gray-400 text-lg mb-8 leading-relaxed">{{ $featured->description ?? 'De los buenos, créame.' }}</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center">
                     <p class="text-3xl font-bold text-white">${{ number_format($featured->price ?? 0, 0) }}</p>
                     <button wire:click="addToCart({{ $featured->id ?? 0 }})" class="h-12 px-8 rounded-full bg-white text-black font-bold hover:bg-[#D4AF37] transition-colors flex items-center gap-2">
@@ -254,7 +254,7 @@
     </section>
 
     <section class="py-20 container mx-auto px-4 overflow-hidden relative group">
-    
+
         <div class="flex justify-between items-end mb-8 px-2">
             <div>
                 <h2 class="text-3xl font-bold text-white">Tendencias</h2>
@@ -266,9 +266,9 @@
         </div>
 
         <div class="relative w-full overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
-            
+
             <div class="flex gap-6 w-max animate-infinite-scroll hover:[animation-play-state:paused]">
-                
+
                 @foreach($this->recommendedProducts as $product)
                     @include('livewire.user.partials.product-card', ['product' => $product])
                 @endforeach
@@ -283,7 +283,7 @@
     </section>
 
     <section class="relative py-24 bg-[#0a0a0a] overflow-hidden border-t border-white/5">
-    
+
         <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
             <div class="absolute top-1/2 left-1/4 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-[120px] -translate-y-1/2"></div>
             <div class="absolute bottom-0 right-0 w-64 h-64 bg-purple-900/10 rounded-full blur-[100px]"></div>
@@ -293,17 +293,17 @@
             <span class="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-[#D4AF37] text-xs font-bold uppercase tracking-widest mb-6">
                 Experiencia Estanquillo Fry
             </span>
-            
+
             <h2 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">
                 Más que una Botella,<br/>
                 <span class="text-gray-500">Un Momento Inolvidable.</span>
             </h2>
-            
+
             <p class="text-gray-400 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-                Desde los clásicos atemporales hasta las joyas ocultas de la destilería moderna. 
-                Encuentra el acompañante perfecto para tus celebraciones más importantes.
+                Desde los clásicos que todos conocen hasta los tragos que no todos encuentran.
+                Encuentra lo que necesita para celebrar en grande.
             </p>
-            
+
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="{{ route('catalog') }}" class="h-14 px-10 rounded-full bg-white text-black font-bold text-lg hover:bg-[#D4AF37] transition-colors flex items-center justify-center gap-2 shadow-xl shadow-white/5">
                     Ver Colección Completa

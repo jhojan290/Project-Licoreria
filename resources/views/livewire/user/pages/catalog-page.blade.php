@@ -1,16 +1,16 @@
 @section('title', 'Catalogo | Estanquillo Fry')
 
 <main class="flex-grow bg-background-dark min-h-screen font-display">
-    
+
     <div class="relative bg-[#0f0f0f] border-b border-white/5 py-12 md:py-16">
         <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
         <div class="container mx-auto px-4 relative z-10 text-center">
             <span class="text-[#D4AF37] font-bold uppercase tracking-[0.3em] text-xs mb-3 block animate-fade-in-down">Nuestra Colección</span>
             <h1 class="text-4xl md:text-6xl font-black text-white tracking-tight mb-4 animate-fade-in-up">
-                Catálogo <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-yellow-200">Premium</span>
+                Nuestro <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-yellow-200">Catálogo</span>
             </h1>
             <p class="text-gray-400 max-w-xl mx-auto text-sm md:text-base animate-fade-in-up delay-100">
-                Explora nuestra selección exclusiva de licores del mundo. Calidad garantizada en cada botella.
+                Conoce nuestros licores nacionales e importados de buena calidad. Todo lo que necesita para el parche, la celebración o el detalle.
             </p>
         </div>
     </div>
@@ -19,14 +19,14 @@
         <div class="flex flex-col lg:flex-row gap-8 items-start">
 
             <aside class="w-full lg:w-72 flex-shrink-0 space-y-8 lg:sticky lg:top-24 transition-all duration-300" x-data="{ mobileFiltersOpen: false }">
-                
+
                 <button @click="mobileFiltersOpen = !mobileFiltersOpen" class="lg:hidden w-full flex items-center justify-between bg-[#181611] border border-white/10 rounded-xl p-4 text-white font-bold">
                     <span class="flex items-center gap-2"><span class="material-symbols-outlined text-[#D4AF37]">tune</span> Filtros</span>
                     <span class="material-symbols-outlined transition-transform duration-300" :class="{'rotate-180': mobileFiltersOpen}">expand_more</span>
                 </button>
 
                 <div class="space-y-8 lg:block" :class="mobileFiltersOpen ? 'block mt-4' : 'hidden'">
-                    
+
                     <div class="hidden lg:flex items-center justify-between border-b border-white/10 pb-4">
                         <h2 class="text-xl font-bold text-white flex items-center gap-2">
                             <span class="material-symbols-outlined text-[#D4AF37]">filter_list</span> Filtros
@@ -38,7 +38,7 @@
 
                     <div class="relative group">
                         <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-[#D4AF37] transition-colors">search</span>
-                        <input wire:model.live.debounce.300ms="search" type="text" placeholder="Buscar licor..." 
+                        <input wire:model.live.debounce.300ms="search" type="text" placeholder="Buscar licor..."
                             class="w-full h-12 pl-10 pr-4 rounded-xl bg-[#181611] border border-white/10 text-white placeholder:text-gray-600 focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all text-sm">
                     </div>
 
@@ -105,7 +105,7 @@
 
 
             <div class="flex-1 min-w-0">
-                
+
                 <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8 pb-4 border-b border-white/5">
                     <p class="text-gray-400 text-sm">
                         Mostrando <span class="text-white font-bold">{{ $this->products->firstItem() ?? 0 }}-{{ $this->products->lastItem() ?? 0 }}</span> de <span class="text-white font-bold">{{ $this->products->total() }}</span> resultados
@@ -124,11 +124,11 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
                     @forelse($this->products as $product)
                         <div wire:key="prod-{{ $product->id }}" class="group relative flex flex-col bg-[#181611] border border-white/5 rounded-2xl overflow-hidden hover:border-[#D4AF37]/30 transition-all duration-300 hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] hover:-translate-y-1">
-                            
+
                             <a href="{{ route('product.detail', $product->id) }}" class="block relative aspect-[4/5] bg-gradient-to-b from-white/5 to-[#121212] p-6 flex items-center justify-center overflow-hidden">
                                 @if($product->image_path)
-                                    <img src="{{ asset('storage/' . $product->image_path) }}" 
-                                        alt="{{ $product->name }}" 
+                                    <img src="{{ asset('storage/' . $product->image_path) }}"
+                                        alt="{{ $product->name }}"
                                         class="h-full w-full object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-2xl">
                                 @else
                                     <div class="flex flex-col items-center text-gray-700">
@@ -148,19 +148,19 @@
                                     <p class="text-[10px] font-bold uppercase tracking-widest text-[#D4AF37]">{{ $product->category }}</p>
                                     <p class="text-[10px] text-gray-500 font-medium">{{ $product->volume ?? '' }}</p>
                                 </div>
-                                
+
                                 <h3 class="text-base font-bold text-white leading-tight mb-1 line-clamp-2 group-hover:text-[#D4AF37] transition-colors min-h-[2.5rem]">
                                     <a href="{{ route('product.detail', $product->id) }}">{{ $product->name }}</a>
                                 </h3>
                                 <p class="text-xs text-gray-500 mb-4">{{ $product->brand }}</p>
-                                
+
                                 <div class="mt-auto flex items-center justify-between">
                                     <div class="flex flex-col">
                                         <span class="text-xl font-black text-white tracking-tight">${{ number_format($product->price, 0, ',', '.') }}</span>
                                     </div>
-                                    
-                                    <button 
-                                        wire:click="addToCart({{ $product->id }})" 
+
+                                    <button
+                                        wire:click="addToCart({{ $product->id }})"
                                         wire:loading.attr="disabled"
                                         wire:target="addToCart({{ $product->id }})"
                                         class="h-10 w-10 rounded-full bg-[#D4AF37] text-[#121212] flex items-center justify-center hover:bg-white transition-all hover:scale-110 shadow-lg shadow-yellow-900/20 focus:outline-none group/btn disabled:opacity-50 disabled:cursor-not-allowed"

@@ -1,7 +1,7 @@
 @section('title', $product->name . ' | Estanquillo Fry')
 
 <main class="flex-grow bg-background-dark min-h-screen py-12 px-4 sm:px-6 lg:px-8 flex items-center font-display">
-    
+
     <div class="fixed inset-0 z-0 pointer-events-none">
         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2"></div>
         <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-900/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
@@ -21,14 +21,14 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
 
             <div class="relative w-full aspect-[4/5] lg:aspect-square bg-[#121212] border border-white/5 rounded-3xl flex items-center justify-center p-8 shadow-2xl overflow-hidden group hover:border-[#D4AF37]/20 transition-all duration-500">
-                
+
                 <div class="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-black/60 pointer-events-none"></div>
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                
+
                 @if($product->image_path)
-                    <img 
-                        src="{{ asset('storage/' . $product->image_path) }}" 
-                        alt="{{ $product->name }}" 
+                    <img
+                        src="{{ asset('storage/' . $product->image_path) }}"
+                        alt="{{ $product->name }}"
                         class="relative z-10 h-full w-full object-contain drop-shadow-2xl transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-2"
                     >
                 @else
@@ -44,7 +44,7 @@
             </div>
 
             <div class="flex flex-col h-full justify-center space-y-8">
-                
+
                 <div>
                     <p class="text-[#D4AF37] font-bold text-sm tracking-[0.2em] uppercase mb-3 pl-1 flex items-center gap-2">
                         <span class="w-8 h-[2px] bg-[#D4AF37]"></span>
@@ -68,7 +68,7 @@
                         Nota de Cata
                     </h3>
                     <p class="text-gray-400 leading-relaxed text-lg font-light">
-                        {{ $product->description ?? 'Una selección exclusiva para paladares exigentes. Este producto representa la calidad y tradición que caracteriza a nuestra colección.' }}
+                        {{ $product->description ?? 'Un buen trago para quienes saben qué es lo bueno. Este producto es de los que más nos gustan del estanquillo.' }}
                     </p>
                 </div>
 
@@ -99,7 +99,7 @@
 
 
                             <!-- secccion a modificar -->
-                            <button 
+                            <button
                                 wire:click="addToCart"
                                 wire:loading.attr="disabled"
                                 wire:target="addToCart"

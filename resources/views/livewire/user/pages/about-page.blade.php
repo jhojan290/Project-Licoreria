@@ -5,8 +5,8 @@
 
     <section class="relative w-full h-[70vh] flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=2069&auto=format&fit=crop" 
-                class="w-full h-full object-cover opacity-40" 
+            <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=2069&auto=format&fit=crop"
+                class="w-full h-full object-cover opacity-40"
                 alt="Bodega de Licores">
             <div class="absolute inset-0 bg-gradient-to-b from-[#121212] via-[#121212]/60 to-[#121212]"></div>
         </div>
@@ -16,23 +16,23 @@
                 Desde 2015
             </span>
             <h1 class="text-5xl md:text-7xl font-black text-white tracking-tight mb-6 leading-tight animate-fade-in-up">
-                Guardianes del <br/>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-yellow-200">Buen Gusto</span>
+                Los Guardianes <br/>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-yellow-200">del Buen Trago</span>
             </h1>
             <p class="text-lg md:text-xl text-gray-300 font-light leading-relaxed animate-fade-in-up delay-200">
-                No somos solo una tienda de licores. Somos el puente entre las destilerías más antiguas del mundo y tu copa.
+                No somos solo una tienda. Somos el estanquillo que conecta los mejores licores del mundo con tu mesa y tus amigos.
             </p>
         </div>
     </section>
 
     <section class="py-20 container mx-auto px-4 md:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            
+
             <div class="relative group order-2 lg:order-1">
                 <div class="absolute top-4 -left-4 w-full h-full border-2 border-[#D4AF37]/30 rounded-2xl transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 duration-500"></div>
                 <div class="relative rounded-2xl overflow-hidden shadow-2xl">
-                    <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000&auto=format&fit=crop" 
-                        class="w-full h-[500px] object-cover grayscale group-hover:grayscale-0 transition-all duration-700" 
+                    <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1000&auto=format&fit=crop"
+                        class="w-full h-[500px] object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                         alt="Historia">
                 </div>
             </div>
@@ -71,7 +71,7 @@
                     </div>
                     <h3 class="text-xl font-bold text-white mb-3">Autenticidad Absoluta</h3>
                     <p class="text-gray-400 leading-relaxed">
-                        En un mundo de falsificaciones, somos tu refugio seguro. Cada botella proviene directamente del importador oficial o la destilería. Sin intermediarios dudosos.
+                        En un mundo de trago falso, aquí encuentra licor de verdad. Cada botella viene directo del fabricante o importador oficial. Sin vueltas ni segundas manos.
                     </p>
                 </div>
 
@@ -79,9 +79,9 @@
                     <div class="w-16 h-16 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-[#D4AF37] transition-colors">
                         <span class="material-symbols-outlined text-3xl text-[#D4AF37] group-hover:text-black">wine_bar</span>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Curaduría Experta</h3>
+                    <h3 class="text-xl font-bold text-white mb-3">Buena Selección</h3>
                     <p class="text-gray-400 leading-relaxed">
-                        No vendemos todo lo que existe. Vendemos lo que vale la pena probar. Nuestro equipo de sommeliers cata y aprueba cada referencia antes de listarla.
+                        No vendemos de todo, vendemos lo bueno. Aquí cada botella la probamos antes de ponerla en venta. Así de simple.
                     </p>
                 </div>
 
@@ -89,9 +89,9 @@
                     <div class="w-16 h-16 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-[#D4AF37] transition-colors">
                         <span class="material-symbols-outlined text-3xl text-[#D4AF37] group-hover:text-black">rocket_launch</span>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Entrega Impecable</h3>
+                    <h3 class="text-xl font-bold text-white mb-3">Llega Bien y Rápido</h3>
                     <p class="text-gray-400 leading-relaxed">
-                        Entendemos la ansiedad de esperar algo especial. Usamos empaques blindados y logística express para que tu pedido llegue intacto y a tiempo.
+                        Sabemos que quiere su pedido rápido y sin daños. Empaques que aguantan y entregas express para que disfrute sin esperar.
                     </p>
                 </div>
             </div>
@@ -116,13 +116,13 @@
 
         <div class="container mx-auto px-4 relative z-10 text-center">
             <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tight mb-6">
-                ¿Listo para Brindar?
+                ¿Le Falta su Trago?
             </h2>
             <p class="text-xl font-bold mb-10 max-w-2xl mx-auto opacity-80 leading-relaxed">
-                Tu próxima botella favorita te está esperando en nuestra cava. <br>
-                No dejes para mañana lo que puedes descorchar hoy.
+                Su próxima botella favorita la encuentra acá. <br>
+                No deje para mañana lo que puede disfrutar hoy.
             </p>
-            
+
             <div class="flex justify-center">
                 <a href="{{ route('catalog') }}" class="inline-flex h-16 px-12 items-center justify-center rounded-full bg-black text-white font-bold text-xl hover:bg-white hover:text-black transition-all shadow-2xl hover:scale-105 hover:shadow-black/20 gap-3">
                     <span class="material-symbols-outlined text-2xl">storefront</span>
